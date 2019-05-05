@@ -1,11 +1,18 @@
 import React from "react";
 import { Link } from '@reach/router';
-import { Store } from './Store';
+import { Store } from '../../Store';
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import './App.css';
-import ReceiptLifecycle from './ReceiptLifecycle';
+import './ScanPage.css';
+import ReceiptLifecycle from '../../ReceiptLifecycle';
 import axios, { post } from 'axios';
+import Button from '@material-ui/core/Button';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import Fab from '@material-ui/core/Fab';
+import VerticalStepper from '../FlowStepper'
+
 
 function ScanPage(props) {
 
@@ -105,21 +112,8 @@ function ScanPage(props) {
 
 	return (
 		<React.Fragment>
-            <div>
-                <input type="file" onChange={onSelectFile} />
-            </div>
-            <p>{errorMessage ? errorMessage : preMessage}</p>
-            {src && (<ReactCrop 
-                src={src} 
-                crop={crop}
-                onComplete={onCropChange}
-                onImageLoaded={onImageLoaded}
-                onChange={onCropChange}
-                />
-            )}
-            <form onSubmit={onFormSubmit}>
-                <button type="submit">Finish!</button>
-            </form>
+            
+            <VerticalStepper/>
 		</React.Fragment>
 	);
 }

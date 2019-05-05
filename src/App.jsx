@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from '@reach/router';
 import { Store } from './Store';
-import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import logo from './logo.png';
 import './App.css';
 import {
-	BrowserRouter as Router,
+	BrowserRouter,
 	Route,
-	Link,
+	Redirect,
 	Switch
   } from 'react-router-dom';
 import { css } from '@emotion/core';
 import { SyncLoader } from 'react-spinners';
-import ScanPage from "./ScanPage";
+import ScanPage from "./components/ScanPage";
 import itemsList from './ItemsList';
 import NotFoundComponent from './NotFoundComponent';
+import LoginPage from './LoginPage'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faStroopwafel)
 
 const override = css`
 	display: block;
@@ -26,12 +30,24 @@ const override = css`
 function App(props) {
 
 	const { state, dispatch } = React.useContext(Store);
-	const [loading, setLoading] = useState(0);
+	const [shouldAuthenticate, setShouldAuthenticate] = useState(false)
   
-    React.useEffect(() => {
-		console.log(state);
-	},[loading]);
-	
+    useEffect(() => {
+		if (!state.userLoggedIn) {
+			if (!window.location.href.includes('/login')) {
+				console.log("going to /login...")
+				// setShouldAuthenticate(true);
+				// this.history.pushState(null, 'login');
+			}
+			else {
+				console.log("already in /login...")
+			}
+		} else {
+			console.log("user is already logged in...")
+		}
+	}, [state.userLoggedIn]);
+
+
 //   const getReceiptCoordinates = () => {
 // 	if (state.hasReceiptInPhoto && !state.receiptCoordinates) {
 // 	  console.log("Searching for coordinates..")
@@ -51,9 +67,11 @@ function App(props) {
 
 	return (
 		<React.Fragment>
-			<Router>
+			<BrowserRouter>
+			{
+				console.log(window.location.href)
+			}
 				<div className="App">
-					<Link to='/'>Home</Link>{' '}
 					<img src={logo} className="App-logo" alt="Spleat Logo"/>
 					<div className='sweet-loading' style={{margin: 20}}>
 						<SyncLoader
@@ -64,14 +82,20 @@ function App(props) {
 							loading={state.loading}
 						/>
 					</div>
-					<button onClick={() => dispatch({type: 'TOGGLE_LOADING'})}>Push me</button>
+					{ 
+						// shouldAuthenticate && <Redirect to="/login"/>
+					}
 					<Switch>
 						<Route exact path='/' component={ScanPage}></Route>
-						<Route exact path='/itemsList' component={itemsList}></Route>
+						<Route path='/login' component={LoginPage}></Route>
+						<Route path='/logout' render={() => {
+							return <LoginPage isLogOut={true}/>
+						}}></Route>
+						<Route path='/itemsList' component={itemsList}></Route>
 						<Route component={NotFoundComponent}></Route>
 					</Switch>
 				</div>
-			</Router>
+			</BrowserRouter>
 		</React.Fragment>
 	);
 }
