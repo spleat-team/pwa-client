@@ -28,7 +28,7 @@ function VerticalLinearStepper(props) {
     const [sharersCount, setSharersCount ] = React.useState(0);
     const [sharersCountDirty, setSharersCountDirty ] = React.useState(false);
     
-    let imageRef = null;
+    // let imageRef = null;
 
     React.useEffect(() => {
       console.log("Status changed to : ", state)
@@ -48,6 +48,12 @@ function VerticalLinearStepper(props) {
           default: 
               console.log("Not an interesting status...");
       }
+       // const imageFlowHandler = {
+    //     CHECK_RECEIPT: (img) => state.doesLoadedImage? handleFlowChange(img, ReceiptLifecycle.CHECK_RECEIPT): non,
+    //     FIND_EDGES: (img) => state.hasReceiptInPhoto ? handleFlowChange(img, ReceiptLifecycle.FIND_EDGES):non,
+    //     EXTRACT_ITEMS: (img) => state.doesLoadedImage && state.hasReceiptInPhoto? handleFlowChange(img, ReceiptLifecycle.EXTRACT_ITEMS): non,
+    // }
+
       // console.log("status: ", state.status);
       // const nextStatus = state.status.shouldStartFlow? 0 : state.status.id? state.status.id + 1: '';
       // console.log("next status is : ", nextStatus);
@@ -90,9 +96,9 @@ function VerticalLinearStepper(props) {
       }
     });
 
-    const onImageLoaded = (image, crop) => {
-      imageRef = image;
-  };
+    // const onImageLoaded = (image, crop) => {
+      // imageRef = image;
+  // };
   
   const onCropChange = crop => dispatch({type: 'NEW_CROP', payload: crop});
 
@@ -107,7 +113,7 @@ function VerticalLinearStepper(props) {
           src={src} 
           crop={crop}
           onComplete={onCropChange}
-          onImageLoaded={onImageLoaded}
+          // onImageLoaded={onImageLoaded}
           onChange={onCropChange}
           />
         )}
@@ -201,19 +207,6 @@ function VerticalLinearStepper(props) {
       {title: 'הכנסת פרטי שולחן', func: getInput},
       {title: 'שיתוף עם חברים', func: () => <p>Yay me!!!</p>},
     ];
-
-  // function getStepContent(step) {
-  //     switch (step) {
-  //         case 0:
-  //             return getForm();
-  //         case 1:
-  //             return getInput();
-  //         case 2:
-  //             return getReceiptCanvas();
-  //         default:
-  //             return 'אופס..אנא נסה לטעון את האתר בשנית.  ';
-  //     }
-  // }
 
     const onFormSubmit = e => {
         // TODO : Navigate to sanduri's page with the router
