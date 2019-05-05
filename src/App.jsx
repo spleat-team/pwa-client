@@ -6,20 +6,14 @@ import './App.css';
 import {
 	BrowserRouter,
 	Route,
-	Redirect,
 	Switch
   } from 'react-router-dom';
 import { css } from '@emotion/core';
 import { SyncLoader } from 'react-spinners';
 import ScanPage from "./components/ScanPage";
 import itemsList from './ItemsList';
-import NotFoundComponent from './NotFoundComponent';
+import NotFoundComponent from './components/NotFoundComponent';
 import LoginPage from './LoginPage'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
-
-library.add(faStroopwafel)
 
 const override = css`
 	display: block;

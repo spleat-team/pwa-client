@@ -5,7 +5,7 @@ import VerticalStepper from '../FlowStepper'
 function ScanPage(props) {
 	return (
 		<React.Fragment>
-            <VerticalStepper/>
+		    <VerticalStepper/>
 		</React.Fragment>
 	);
 }
