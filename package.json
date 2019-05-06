@@ -3,9 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.10",
+    "@fortawesome/fontawesome-svg-core": "^1.2.17",
+    "@fortawesome/free-solid-svg-icons": "^5.8.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "@material-ui/core": "^3.9.3",
+    "@reach/router": "^1.2.1",
+    "axios": "^0.18.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0"
+    "react-image-crop": "^7.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.0",
+    "react-spinners": "^0.5.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,5 +37,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

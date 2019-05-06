@@ -1,4 +1,5 @@
 import React from 'react';
+import SelectingItem from './components/SelectingItem'
 import { Store } from './Store';
 
 export default function ItemsPage() {
@@ -9,7 +10,7 @@ export default function ItemsPage() {
   };
 
 // In this component you will have the items list that come back from the ML server, 
-// because i take them in the main window to validate the receipt (for example - if there are 0 items its an error)
+// because i take th em in the main window to validate the receipt (for example - if there are 0 items its an error)
 
 // This is how to take items from the state
 // state.WhatEverYouWant
@@ -22,7 +23,10 @@ export default function ItemsPage() {
 
   return (
       <div>
-        <p>Hello world</p>
+          <SelectingItem
+              // item={this.props.items}
+              name={"beer"}/>
+          <SelectingItem name={"pizza"}/>
       </div>
   );
 }
