@@ -20,13 +20,6 @@ const LoginPage = props => {
     if (props.isLogOut) {
       console.log('logged out...');
       setUsersCookie('');
-      // try {
-      //   // Save to local storage
-      //   window.localStorage.setItem('spleat-user-details', '');
-      // } catch (error) {
-      //   // A more advanced implementation would handle the error case
-      //   console.log(error);
-      // }
       dispatch({
         type: 'USER_LOGOUT',
       });

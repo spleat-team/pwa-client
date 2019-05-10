@@ -11,7 +11,11 @@ export function useCookie(key, initialValue) {
     Cookies.set(key, value, options);
   };
 
-  return [item, setValue];
+  const removeCookie = () => {
+    Cookies.remove(key);
+  };
+
+  return [item, setValue, removeCookie];
 }
 
 export default useCookie;
