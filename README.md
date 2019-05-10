@@ -2,9 +2,11 @@
 
 ## Technology Review
 
-Servers : NodeJS & Firebase
-Client : ReactJS v16.8 (With hooks and context api)
-Package Manager : NPM
+**Servers** : NodeJS & Firebase
+
+**Client** : ReactJS v16.8 (With hooks and context api)
+
+**Package Manager** : NPM
 
 ## NOTE : 
 #### This application runs only in mobile mode, if you enter from your computer's browser, activate mobile mode via developer options.
@@ -20,6 +22,7 @@ Package Manager : NPM
 In the project directory, you can run:
 
 #### `npm run start-dev`
+#### Facebook's integration will not work in this mode because you have to work with https.
 
 Runs the app in development mode with hot-reloading using react-scripts.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
