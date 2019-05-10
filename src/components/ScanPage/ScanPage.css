@@ -1,0 +1,23 @@
+input {
+    display: none;
+}
+
+button {
+	width: 200px;
+	padding: 25px 30px 25px 30px;
+	font-family: sans-serif;
+	font-size: 400%;
+	border-radius: 25px;
+	border: none;
+	background-color: #9b59b6;
+	color: white;
+}
+
+button:hover{
+	cursor: pointer;
+	background-color: #8e44ad;
+}
+
+button:active{
+	background: #8e44ad;
+}

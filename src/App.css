@@ -1,13 +1,24 @@
 .App {
   text-align: center;
   background-image: url("background.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   /* background-color: #cccccc; */
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+	
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  margin-top: 10%;
   height: 100%;
-  width: 100%;
+  width: 90%;
   pointer-events: none;
 }
 
@@ -25,3 +36,4 @@
 .App-link {
   color: #61dafb;
 }
+
