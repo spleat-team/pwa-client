@@ -1,3 +1,20 @@
+# Contribution Guide : 
+
+## Technology Review
+
+Servers : NodeJS & Firebase
+Client : ReactJS v16.8 (With hooks and context api)
+Package Manager : NPM
+
+## NOTE : 
+#### This application runs only in mobile mode, if you enter from your computer's browser, activate mobile mode via developer options.
+
+## Getting Started : 
+ 1. Clone the repository
+ 2. Navigate to the cloned folder
+ 3. Run `npm install`
+ 4. start the application using the following scripts :
+
 ## Available Scripts
 
 In the project directory, you can run:
