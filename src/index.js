@@ -7,7 +7,12 @@ import { StoreProvider } from './Store';
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 import JssProvider from 'react-jss/lib/JssProvider';
-import { createGenerateClassName, jssPreset, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {
+  createGenerateClassName,
+  jssPreset,
+  MuiThemeProvider,
+  createMuiTheme,
+} from '@material-ui/core/styles';
 
 // Configure JSS //for rtl support
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -19,12 +24,11 @@ const theme = createMuiTheme({
 // Custom Material-UI class name generator. //for rtl support
 const generateClassName = createGenerateClassName();
 
-ReactDOM.render(  
+ReactDOM.render(
   <StoreProvider>
     <JssProvider jss={jss} generateClassName={generateClassName}>
       <MuiThemeProvider theme={theme}>
-        <App path='/'>
-        </App>
+        <App path="/" />
       </MuiThemeProvider>
     </JssProvider>
   </StoreProvider>,

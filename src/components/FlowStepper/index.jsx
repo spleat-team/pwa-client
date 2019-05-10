@@ -19,7 +19,7 @@ function VerticalLinearStepper(props) {
   const { state, dispatch } = React.useContext(Store);
   const [activeStep, setActiveStep] = React.useState(0);
 
-  useLogger('VerticalLinearStepper', 'stepper');
+  useLogger('VerticalLinearStepper');
 
   // This controls the logic of when to send the photo and where
   React.useEffect(() => {

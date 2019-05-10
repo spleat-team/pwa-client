@@ -8,7 +8,11 @@ function LoginPage(props) {
   const { state, dispatch } = React.useContext(Store);
   const previousValues = usePrevious({ state, props });
 
-  useLogger('LoginPage', 'kaki');
+  useLogger('LoginPage');
+
+  React.useEffect(() => {
+    console.log('login page first effect');
+  }, []);
 
   React.useEffect(() => {
     console.log('effect in LoginPage with props: ', props);
@@ -18,14 +22,15 @@ function LoginPage(props) {
         type: 'USER_LOGOUT',
       });
     }
-  });
+  }, [props.isLogOut]);
 
   React.useEffect(() => {
-    if (previousValues) {
-      if (previousValues.state && previousValues.state != state)
+    if (previousValues && previousValues.state) {
+      if (JSON.stringify(previousValues.state) != JSON.stringify(state)) {
         console.log('state changed :', previousValues.state, state);
+      }
     }
-  });
+  }, [previousValues]);
 
   const responseFacebook = response => {
     console.log('back from facebook with : ', response);
@@ -40,6 +45,7 @@ function LoginPage(props) {
   return (
     <div>
       {console.log('kakiiiiiiiiiiiiiiiiiiii', state)}
+      {console.log('propssssssssssss', props)}
       {(!state.user || !state.userLoggedIn) && (
         <div style={{ marginTop: '30%' }}>
           <p style={{ marginLeft: '7%', marginRight: '7%', direction: 'rtl' }}>
