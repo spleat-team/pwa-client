@@ -22,7 +22,8 @@
     "react-jss": "^8.6.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
-    "react-spinners": "^0.5.4"
+    "react-spinners": "^0.5.4",
+    "react-use": "^8.4.0"
   },
   "scripts": {
     "start": "node server.js",
@@ -45,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.17.0"
   }
 }
