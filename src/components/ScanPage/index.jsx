@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useContext } from 'react';
 import './ScanPage.css';
-import VerticalStepper from '../FlowStepper'
+import VerticalStepper from '../FlowStepper/index';
+import { Store } from '../../Store';
+import useLogger from '../../Utils/useLogger';
 
-function ScanPage(props) {
-	return (
-		<React.Fragment>
-		    <VerticalStepper/>
-		</React.Fragment>
-	);
-}
+const ScanPage = props => {
+  const { state, dispatch } = useContext(Store);
+  useLogger('ScanPage');
+
+  console.log(`Rendering ScanPage with user : ${state.user}`);
+
+  return (
+    <React.Fragment>
+      <p>היי {state.user.name} !</p>
+      <VerticalStepper />
+    </React.Fragment>
+  );
+};
 
 export default ScanPage;

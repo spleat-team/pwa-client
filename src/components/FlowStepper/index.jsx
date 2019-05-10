@@ -15,7 +15,7 @@ import ReceiptCropper from './Steps/ReceiptCropper';
 import SharersCountForm from './Steps/SharersCountForm';
 import useLogger from '../../Utils/useLogger';
 
-function VerticalLinearStepper(props) {
+const VerticalLinearStepper = props => {
   const { state, dispatch } = React.useContext(Store);
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -95,7 +95,7 @@ function VerticalLinearStepper(props) {
   };
 
   const handleReset = () => {
-    setActiveStep(0)
+    setActiveStep(0);
   };
 
   const stepsVector = [
@@ -130,7 +130,7 @@ function VerticalLinearStepper(props) {
       type: 'TOGGLE_LOADING'
     });
     return await post(url, formData, config);
-  }
+  };
 
   const handleFlowChange = async (photo, newStage) => {
     const ans = await sendPhoto(photo, newStage.url);
@@ -171,7 +171,7 @@ function VerticalLinearStepper(props) {
       )}
     </div>
   );
-}
+};
 
 export default VerticalLinearStepper;
 
@@ -189,4 +189,4 @@ export default VerticalLinearStepper;
 // if (nextStatus) {
 //     console.log("goind to state : ", Object.keys(imageFlowHandler)[nextStatus]);
 //     imageFlowHandler[Object.keys(imageFlowHandler)[nextStatus]](state.photo)
-// }
+// };

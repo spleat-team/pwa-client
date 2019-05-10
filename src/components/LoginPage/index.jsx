@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FacebookLoginWithButton from 'react-facebook-login';
-import { Store } from './Store';
-import useLogger from './Utils/useLogger';
-import usePrevious from './Utils/usePrevious';
+import { Store } from '../../Store';
+import useLogger from '../../Utils/useLogger';
+import useCookie from '../../Utils/useCookie';
+import usePrevious from '../../Utils/usePrevious';
+import '../../App.css';
+import logo from '../../logo.png';
 
-function LoginPage(props) {
+const LoginPage = props => {
   const { state, dispatch } = React.useContext(Store);
   const previousValues = usePrevious({ state, props });
+  const [usersCookie, setUsersCookie] = useCookie('spleat-user-details', '');
+  const [error, setError] = React.useState(false);
 
   useLogger('LoginPage');
-
-  React.useEffect(() => {
-    console.log('login page first effect');
-  }, []);
 
   React.useEffect(() => {
     console.log('effect in LoginPage with props: ', props);
     if (props.isLogOut) {
       console.log('logged out...');
+      setUsersCookie('');
+      // try {
+      //   // Save to local storage
+      //   window.localStorage.setItem('spleat-user-details', '');
+      // } catch (error) {
+      //   // A more advanced implementation would handle the error case
+      //   console.log(error);
+      // }
       dispatch({
         type: 'USER_LOGOUT',
       });
@@ -34,18 +43,28 @@ function LoginPage(props) {
 
   const responseFacebook = response => {
     console.log('back from facebook with : ', response);
-    dispatch({
-      type: 'USER_LOGIN',
-      payload: response,
-    });
+
+    if (response && response.name) {
+      console.log('Got the user from facebook, setting it locally..');
+      setUsersCookie(JSON.stringify(response));
+      dispatch({
+        type: 'USER_LOGIN',
+        payload: response,
+      });
+    } else {
+      console.log('Error while retriving the user from facebook..');
+      setError(true);
+    }
   };
 
   const componentClicked = () => console.log('clicked');
 
   return (
-    <div>
+    <div className="App">
+      <img src={logo} className="App-logo" alt="Spleat Logo" />
       {console.log('kakiiiiiiiiiiiiiiiiiiii', state)}
       {console.log('propssssssssssss', props)}
+      {error ? <p>אופס.. משהו השתבש, נסו שנית!</p> : null}
       {(!state.user || !state.userLoggedIn) && (
         <div style={{ marginTop: '30%' }}>
           <p style={{ marginLeft: '7%', marginRight: '7%', direction: 'rtl' }}>
@@ -69,13 +88,11 @@ function LoginPage(props) {
 
 export default LoginPage;
 
-// import { useLocalStorage } from 'react-use/lib/useLocalStorage';
 // import { useLocation } from 'react-use/lib/useLocation';
 // import useQrCode from "react-qrcode-hook";
 
 // const location = useLocation();
 // const getLocation = loc => <pre>{JSON.stringify(loc, null, 2)}</pre>;
-// const [user, setUser] = useLocalStorage('spleat-user-details', 'dam');
 
 //const qrCode = useQrCode("Hello There");
 // return (

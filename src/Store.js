@@ -16,7 +16,7 @@ const receiptInfoInitialState = {
 
 const initialState = {
   loading: false,
-  username: null,
+  user: '',
   userLoggedIn: false,
   src: null,
   crop: {

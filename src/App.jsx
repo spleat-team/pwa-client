@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Store } from './Store';
 import 'react-image-crop/dist/ReactCrop.css';
 import logo from './logo.png';
@@ -7,9 +7,8 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { css } from '@emotion/core';
 import { SyncLoader } from 'react-spinners';
 import ScanPage from './components/ScanPage';
-import itemsList from './ItemsList';
 import NotFoundComponent from './components/NotFoundComponent';
-import LoginPage from './LoginPage';
+import LoginPage from './components/LoginPage';
 import usePrevious from './Utils/usePrevious';
 import useLogger from './Utils/useLogger';
 
@@ -19,7 +18,7 @@ const override = css`
   border-color: red;
 `;
 
-function App(props) {
+const App = props => {
   const { state, dispatch } = React.useContext(Store);
   const [shouldAuthenticate, setShouldAuthenticate] = useState(false);
   const previousValues = usePrevious({ state, shouldAuthenticate });
@@ -60,7 +59,9 @@ function App(props) {
   return (
     <React.Fragment>
       <BrowserRouter>
-        {!state.userLoggedIn && <Redirect to="/login" />}
+        {
+          // !state.userLoggedIn && <Redirect to="/login" />
+        }
         {console.log(window.location.href)}
         <div className="App">
           <img src={logo} className="App-logo" alt="Spleat Logo" />
@@ -73,24 +74,25 @@ function App(props) {
               loading={state.loading}
             />
           </div>
-          {console.log('Appppppppppppppppppppppp')}
+          {console.log('AuthManagerrrrrrrrr')}
 
           <Switch>
             <Route exact path="/" component={ScanPage} />
-            <Route path="/login" component={LoginPage} />
             <Route
               path="/logout"
               render={() => {
                 return <LoginPage isLogOut={true} />;
               }}
             />
-            <Route path="/itemsList" component={itemsList} />
+            {
+              //<Route path="/itemsList" component={itemsList} />
+            }
             <Route component={NotFoundComponent} />
           </Switch>
         </div>
       </BrowserRouter>
     </React.Fragment>
   );
-}
+};
 
 export default App;
