@@ -68,38 +68,6 @@ const App = props => {
 
 export default App;
 
-// import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyA4uCgHWUewD5XHo05GrRNmd5diYaUN9n4',
-//   authDomain: 'spleat-4629b.firebaseapp.com',
-//   databaseURL: 'https://spleat-4629b.firebaseio.com',
-//   projectId: 'spleat-4629b',
-//   storageBucket: 'spleat-4629b.appspot.com',
-//   messagingSenderId: '761349823555',
-//   appId: '1:761349823555:web:ba956c9f71eedae5',
-// };
-
-// <StyledFirebaseAuth
-//   uiConfig={uiConfig}
-//   firebaseAuth={firebase
-//     .auth()
-//     .setPersistence(firebase.auth.Auth.Persistence.NONE)
-//     .then(function () {
-//       // Existing and future Auth states are now persisted in the current
-//       // session only. Closing the window would clear any existing state even
-//       // if a user forgets to sign out.
-//       // ...
-//       // New sign-in will be persisted with session persistence.
-//       return firebase.auth().signInWithPopup(provider);
-//     })
-//     .catch(function (error) {
-//       // Handle Errors here.
-//       var errorCode = error.code;
-//       var errorMessage = error.message;
-//     })}
-// />
-
 // const previousValues = usePrevious({ state, isSignedIn });
 
 // useEffect(() => {
