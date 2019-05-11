@@ -44,8 +44,6 @@ const App = props => {
               loading={state.loading}
             />
           </div>
-          {}
-          {console.log('Apppppppppppppppppppp')}
           {
             <Switch>
               <PrivateRoute exact path="/" component={ScanPage} />

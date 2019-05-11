@@ -1,34 +1,22 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import { Store } from '../../Store';
 
-const PrivateRoute = ({ component, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   const { state, dispatch } = React.useContext(Store);
 
   return (
-    <Router>
-      <Route
-        exact={rest.exact}
-        {...rest}
-        render={props => {
-          console.log('tried to get to a private route from : ', props);
-          return state.userLoggedIn ? (
-            <component {...props} />
-          ) : (
-              <div>
-                {props.history.push('/login')}
-                <p>DAMMM</p>
-              </div>
-              // <Redirect
-              //   to={{
-              //     pathname: '/login',
-              //     state: { from: props.location },
-              //   }}
-              // />
-            );
-        }}
-      />
-    </Router>
+    <Route
+      {...rest}
+      exact={rest.exact}
+      render={props =>
+        state.userLoggedIn ? (
+          <Component {...props} />
+        ) : (
+            props.history.push('/login')
+          )
+      }
+    />
   );
 };
 

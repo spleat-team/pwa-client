@@ -1,26 +1,66 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FacebookLoginWithButton from 'react-facebook-login';
 import { Store } from '../../Store';
 import useLogger from '../../Utils/useLogger';
 import useCookie from '../../Utils/useCookie';
-import usePrevious from '../../Utils/usePrevious';
 import '../../App.css';
 import logo from '../../logo.png';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import firebase from 'firebase';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyA4uCgHWUewD5XHo05GrRNmd5diYaUN9n4',
+  authDomain: 'spleat-4629b.firebaseapp.com',
+  databaseURL: 'https://spleat-4629b.firebaseio.com',
+  projectId: 'spleat-4629b',
+  storageBucket: 'spleat-4629b.appspot.com',
+  messagingSenderId: '761349823555',
+  appId: '1:761349823555:web:ba956c9f71eedae5',
+};
+
+firebase.initializeApp(firebaseConfig);
+var provider = new firebase.auth.FacebookAuthProvider();
 
 const LoginPage = props => {
   const { state, dispatch } = React.useContext(Store);
-  const previousValues = usePrevious({ state, props });
   const [usersCookie, setUsersCookie, removeUsersCookie] = useCookie(
     'spleat-user-details',
     ''
   );
   const [error, setError] = React.useState(false);
   const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
+  const [isSignedIn, setIsSignedIn] = React.useState(false);
+
+  const uiConfig = {
+    signInFlow: 'popup',
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+      firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    ],
+    callbacks: {
+      signInSuccess: () => false,
+    },
+  };
 
   useLogger('LoginPage');
 
-  React.useEffect(() => console.log('LOGINNNNNNN'));
+  React.useState(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user != null) {
+        console.log('back from facebook with : ', user);
+        setIsSignedIn(!!user);
+        setUsersCookie(JSON.stringify(user), { expired: 7 }); // TODO : Take the expiry date from the response
+        dispatch({
+          type: 'USER_LOGIN',
+          payload: user,
+        });
+      }
+    });
+  });
 
   React.useEffect(() => {
     console.log('effect in LoginPage with props: ', props);
@@ -50,13 +90,10 @@ const LoginPage = props => {
   };
 
   const componentClicked = () => console.log('clicked');
-  // let from = props.location.state || { from: { pathname: '/' } };
+  let from = props.location.state || { from: { pathname: '/' } };
 
   return (
     <div className="App">
-      {
-        // redirectToReferrer && <Redirect to={from} />
-      }
       <img src={logo} className="App-logo" alt="Spleat Logo" />
       {error ? <p>אופס.. משהו השתבש, נסו שנית!</p> : null}
       {!state.user || !state.userLoggedIn ? (
@@ -66,18 +103,30 @@ const LoginPage = props => {
             את הפייסבוק?
           </p>
           <div style={{ marginTop: '30%' }}>
-            <FacebookLoginWithButton
-              appId="339944453372114"
-              autoLoad={false}
-              fields="name,email,picture"
-              onClick={componentClicked}
-              callback={facebookLoginCallback}
+            {
+              // <FacebookLoginWithButton
+              //     appId="339944453372114"
+              //     autoLoad={false}
+              //     fields="name,email,picture"
+              //     onClick={componentClicked}
+              //     callback={facebookLoginCallback}
+              //   />
+            }
+            <StyledFirebaseAuth
+              uiConfig={uiConfig}
+              firebaseAuth={firebase
+                .auth()
+                .signInWithPopup(provider)
+                .then(result => {
+                  console.log(result);
+                })
+                .catch(error => console.log('kaki ', error))}
             />
           </div>
         </div>
       ) : (
           // TODO : Redirect to where the user came from
-          <p>hi go to /shoot please..</p>
+          <p>kaki</p>
         )}
     </div>
   );
@@ -105,6 +154,9 @@ export default LoginPage;
 //     <img alt="qr code" src={qrCode} />
 //   </div>
 // );
+
+//  import usePrevious from '../../Utils/usePrevious';
+//  const previousValues = usePrevious({ state, props });
 
 // React.useEffect(() => {
 //   if (previousValues && previousValues.state) {
