@@ -20,6 +20,8 @@ const LoginPage = props => {
 
   useLogger('LoginPage');
 
+  React.useEffect(() => console.log('LOGINNNNNNN'));
+
   React.useEffect(() => {
     console.log('effect in LoginPage with props: ', props);
     if (props.isLogOut) {
@@ -48,11 +50,13 @@ const LoginPage = props => {
   };
 
   const componentClicked = () => console.log('clicked');
-  let from = props.location.state || { from: { pathname: '/' } };
+  // let from = props.location.state || { from: { pathname: '/' } };
 
   return (
     <div className="App">
-      {redirectToReferrer && <Redirect to={from} />}
+      {
+        // redirectToReferrer && <Redirect to={from} />
+      }
       <img src={logo} className="App-logo" alt="Spleat Logo" />
       {error ? <p>אופס.. משהו השתבש, נסו שנית!</p> : null}
       {!state.user || !state.userLoggedIn ? (
@@ -72,13 +76,14 @@ const LoginPage = props => {
           </div>
         </div>
       ) : (
-          props.history.push('/shoot')
+          // TODO : Redirect to where the user came from
+          <p>hi go to /shoot please..</p>
         )}
     </div>
   );
 };
 
-export default withRouter(LoginPage);
+export default LoginPage;
 
 // import {useLocation} from 'react-use/lib/useLocation';
 // import useQrCode from "react-qrcode-hook";

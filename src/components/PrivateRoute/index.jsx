@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Store } from '../../Store';
 
 const PrivateRoute = ({ component, ...rest }) => {
@@ -14,22 +8,23 @@ const PrivateRoute = ({ component, ...rest }) => {
   return (
     <Router>
       <Route
-        exact
+        exact={rest.exact}
         {...rest}
         render={props => {
-          console.log(
-            'tried to get to a private route from : ',
-            props.location
-          );
+          console.log('tried to get to a private route from : ', props);
           return state.userLoggedIn ? (
             <component {...props} />
           ) : (
-              <Redirect
-                to={{
-                  pathname: '/login',
-                  state: { from: props.location },
-                }}
-              />
+              <div>
+                {props.history.push('/login')}
+                <p>DAMMM</p>
+              </div>
+              // <Redirect
+              //   to={{
+              //     pathname: '/login',
+              //     state: { from: props.location },
+              //   }}
+              // />
             );
         }}
       />

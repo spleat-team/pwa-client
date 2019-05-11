@@ -12,7 +12,6 @@ import {
   MuiThemeProvider,
   createMuiTheme,
 } from '@material-ui/core/styles';
-import AuthManager from './components/AuthManager';
 import App from './App';
 
 // Configure JSS //for rtl support
