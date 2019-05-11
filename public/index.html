@@ -21,11 +21,28 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>Spleat</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="Application for splitting the check and paying with ease!" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="Spleat" />
+  <link rel="apple-touch-icon" href="./images/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="./images/icons/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./images/icons/favicon-16x16.png" sizes="16x16" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,700" />
+  <link rel="stylesheet" href="./css/styles.css" />
+
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+  <div class="share__container">
+    <button class="share">Share</button>
+  </div>
+  <!-- Toast msg -->
+  <div class="toast__msg"></div>
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

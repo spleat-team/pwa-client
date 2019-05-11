@@ -6,12 +6,17 @@ import useCookie from '../../Utils/useCookie';
 import usePrevious from '../../Utils/usePrevious';
 import '../../App.css';
 import logo from '../../logo.png';
+import { Redirect, withRouter } from 'react-router-dom';
 
 const LoginPage = props => {
   const { state, dispatch } = React.useContext(Store);
   const previousValues = usePrevious({ state, props });
-  const [usersCookie, setUsersCookie] = useCookie('spleat-user-details', '');
+  const [usersCookie, setUsersCookie, removeUsersCookie] = useCookie(
+    'spleat-user-details',
+    ''
+  );
   const [error, setError] = React.useState(false);
+  const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
 
   useLogger('LoginPage');
 
@@ -19,31 +24,23 @@ const LoginPage = props => {
     console.log('effect in LoginPage with props: ', props);
     if (props.isLogOut) {
       console.log('logged out...');
-      setUsersCookie('');
+      removeUsersCookie();
       dispatch({
         type: 'USER_LOGOUT',
       });
     }
   }, [props.isLogOut]);
 
-  React.useEffect(() => {
-    if (previousValues && previousValues.state) {
-      if (JSON.stringify(previousValues.state) != JSON.stringify(state)) {
-        console.log('state changed :', previousValues.state, state);
-      }
-    }
-  }, [previousValues]);
-
-  const responseFacebook = response => {
+  const facebookLoginCallback = response => {
     console.log('back from facebook with : ', response);
 
     if (response && response.name) {
-      console.log('Got the user from facebook, setting it locally..');
-      setUsersCookie(JSON.stringify(response));
+      setUsersCookie(JSON.stringify(response), { expired: 7 }); // TODO : Take the expiry date from the response
       dispatch({
         type: 'USER_LOGIN',
         payload: response,
       });
+      setRedirectToReferrer(true); // Used to return the user to the wanted page before redirected to /login
     } else {
       console.log('Error while retriving the user from facebook..');
       setError(true);
@@ -51,14 +48,14 @@ const LoginPage = props => {
   };
 
   const componentClicked = () => console.log('clicked');
+  let from = props.location.state || { from: { pathname: '/' } };
 
   return (
     <div className="App">
+      {redirectToReferrer && <Redirect to={from} />}
       <img src={logo} className="App-logo" alt="Spleat Logo" />
-      {console.log('kakiiiiiiiiiiiiiiiiiiii', state)}
-      {console.log('propssssssssssss', props)}
       {error ? <p>אופס.. משהו השתבש, נסו שנית!</p> : null}
-      {(!state.user || !state.userLoggedIn) && (
+      {!state.user || !state.userLoggedIn ? (
         <div style={{ marginTop: '30%' }}>
           <p style={{ marginLeft: '7%', marginRight: '7%', direction: 'rtl' }}>
             לפני שנתחיל - היינו רוצים להכיר אותך קצת יותר טוב, מה דעתך על לחבר
@@ -70,18 +67,20 @@ const LoginPage = props => {
               autoLoad={false}
               fields="name,email,picture"
               onClick={componentClicked}
-              callback={responseFacebook}
+              callback={facebookLoginCallback}
             />
           </div>
         </div>
-      )}
+      ) : (
+          props.history.push('/shoot')
+        )}
     </div>
   );
-}
+};
 
-export default LoginPage;
+export default withRouter(LoginPage);
 
-// import { useLocation } from 'react-use/lib/useLocation';
+// import {useLocation} from 'react-use/lib/useLocation';
 // import useQrCode from "react-qrcode-hook";
 
 // const location = useLocation();
@@ -101,3 +100,11 @@ export default LoginPage;
 //     <img alt="qr code" src={qrCode} />
 //   </div>
 // );
+
+// React.useEffect(() => {
+//   if (previousValues && previousValues.state) {
+//     if (JSON.stringify(previousValues.state) != JSON.stringify(state)) {
+//       console.log('state changed :', previousValues.state, state);
+//     }
+//   }
+// }, [previousValues]);

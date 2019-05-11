@@ -3,7 +3,12 @@ import { Store } from './Store';
 import 'react-image-crop/dist/ReactCrop.css';
 import logo from './logo.png';
 import './App.css';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import { css } from '@emotion/core';
 import { SyncLoader } from 'react-spinners';
 import ScanPage from './components/ScanPage';
@@ -11,6 +16,8 @@ import NotFoundComponent from './components/NotFoundComponent';
 import LoginPage from './components/LoginPage';
 import usePrevious from './Utils/usePrevious';
 import useLogger from './Utils/useLogger';
+import AuthManager from './components/AuthManager';
+import PrivateRoute from './components/PrivateRoute';
 
 const override = css`
   display: block;
@@ -24,6 +31,48 @@ const App = props => {
   const previousValues = usePrevious({ state, shouldAuthenticate });
 
   useLogger('App');
+
+  return (
+    <React.Fragment>
+      <Router>
+        {
+          // !state.userLoggedIn && <Redirect to="/login" />
+        }
+        {console.log(window.location.href)}
+        <div className="App">
+          <img src={logo} className="App-logo" alt="Spleat Logo" />
+          <div className="sweet-loading" style={{ margin: 20 }}>
+            <SyncLoader
+              css={override}
+              sizeUnit={'px'}
+              size={8}
+              color={'#123abc'}
+              loading={state.loading}
+            />
+          </div>
+          {console.log('Apppppppppppppppppppp')}
+
+          <Switch>
+            <PrivateRoute path="/" component={ScanPage} />
+            <Route path="/login" component={LoginPage} />
+            <Route
+              path="/logout"
+              render={() => {
+                return <LoginPage isLogOut={true} />;
+              }}
+            />
+            {
+              //<Route path="/itemsList" component={itemsList} />
+            }
+            <Route component={NotFoundComponent} />
+          </Switch>
+        </div>
+      </Router>
+    </React.Fragment>
+  );
+};
+
+export default App;
 
   // useEffect(() => {
   //   if (previousValues && previousValues.state) {
@@ -55,44 +104,3 @@ const App = props => {
   //     console.log('user is already logged in...');
   //   }
   // }, [shouldAuthenticate, state.userLoggedIn]);
-
-  return (
-    <React.Fragment>
-      <BrowserRouter>
-        {
-          // !state.userLoggedIn && <Redirect to="/login" />
-        }
-        {console.log(window.location.href)}
-        <div className="App">
-          <img src={logo} className="App-logo" alt="Spleat Logo" />
-          <div className="sweet-loading" style={{ margin: 20 }}>
-            <SyncLoader
-              css={override}
-              sizeUnit={'px'}
-              size={8}
-              color={'#123abc'}
-              loading={state.loading}
-            />
-          </div>
-          {console.log('AuthManagerrrrrrrrr')}
-
-          <Switch>
-            <Route exact path="/" component={ScanPage} />
-            <Route
-              path="/logout"
-              render={() => {
-                return <LoginPage isLogOut={true} />;
-              }}
-            />
-            {
-              //<Route path="/itemsList" component={itemsList} />
-            }
-            <Route component={NotFoundComponent} />
-          </Switch>
-        </div>
-      </BrowserRouter>
-    </React.Fragment>
-  );
-};
-
-export default App;

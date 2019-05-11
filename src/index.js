@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
 import { StoreProvider } from './Store';
 import { create } from 'jss';
@@ -14,6 +13,7 @@ import {
   createMuiTheme,
 } from '@material-ui/core/styles';
 import AuthManager from './components/AuthManager';
+import App from './App';
 
 // Configure JSS //for rtl support
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -30,7 +30,7 @@ const RootComp = props => {
     <StoreProvider>
       <JssProvider jss={jss} generateClassName={generateClassName}>
         <MuiThemeProvider theme={theme}>
-          <AuthManager />
+          <App />
         </MuiThemeProvider>
       </JssProvider>
     </StoreProvider>
