@@ -26,6 +26,7 @@
     "react-phone-number-input": "^2.3.11",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
+    "react-share-simplified": "^2.1.1",
     "react-spinners": "^0.5.4",
     "react-use": "^8.4.0",
     "react-with-firebase-auth": "^1.0.3"

@@ -81,6 +81,7 @@ function reducer(state, action) {
         preMessage: 'מנתח את הקבלה...',
       };
     case ReceiptLifecycle.EXTRACT_ITEMS:
+      debugger;
       return {
         ...state,
         status: ReceiptLifecycle.EXTRACT_ITEMS,

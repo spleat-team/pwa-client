@@ -1,38 +1,48 @@
 .App {
-    text-align: center;
-    background-image: url("background.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    /* background-color: #cccccc; */
-    position: fixed;
-    top: 0;
-    left: 0;
+  text-align: center;
+  background-image: url('background.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* background-color: #cccccc; */
+  position: fixed;
+  top: 0;
+  left: 0;
 
-    /* Preserve aspet ratio */
-    min-width: 100%;
-    min-height: 100%;
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .App-logo {
-    margin-top: 20%;
-    height: 100%;
-    width: 90%;
-    pointer-events: none;
+  margin-top: 20%;
+  height: 100%;
+  width: 90%;
+  pointer-events: none;
 }
 
 .App-header {
-    /* background-color: #282c34; */
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+  /* background-color: #282c34; */
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
 .App-link {
-    color: #61dafb;
+  color: #61dafb;
+}
+
+.shareInline {
+  display: inline-flex;
+  margin-bottom: 10px;
+}
+
+.iconStyle {
+  margin: 0 5px 5px;
+  cursor: pointer;
 }
