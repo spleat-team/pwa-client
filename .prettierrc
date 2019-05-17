@@ -1,0 +1,11 @@
+{
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "dot-location": false,
+  "operator-linebreak": false,
+  "no-mixed-operators": false,
+  "object-curly-newline": false,
+  "object-property-newline" : false,
+  "allowShortCircuit": false, 
+  "allowTernary": false
+}

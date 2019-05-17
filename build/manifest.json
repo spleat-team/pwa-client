@@ -1,6 +1,10 @@
 {
-  "short_name": "Spleat",
+
   "name": "Spleat",
+  "short_name": "Spleat",
+  "description": "Application for splitting the check and paying with ease!",
+  "display": "standalone",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "favicon.ico",
@@ -13,3 +17,4 @@
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
+

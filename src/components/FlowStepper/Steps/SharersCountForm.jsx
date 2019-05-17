@@ -8,6 +8,7 @@ var classNames = require('classnames');
 
 function SharersCountForm(classes, backCallback, nextCallback) {
     const { state, dispatch } = React.useContext(Store);
+
     const sharersCount = state.sharersCount;
     const [sharersCountDirty, setSharersCountDirty ] = React.useState(false);
     const onSharersCountChange = sharersCount => dispatch({type: 'SHARERS_COUNT', count: sharersCount});
