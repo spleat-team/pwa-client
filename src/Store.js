@@ -9,6 +9,7 @@ const receiptInfoInitialState = {
   receiptCoordinates: [],
   receiptEdges: '',
   receiptItems: '',
+  receiptNumOfPeople: '',
   preMessage: 'סה"כ 2 שלבים פשוטים וסיימתם!',
   errorMessage: '',
   photo: null,
@@ -91,6 +92,8 @@ function reducer(state, action) {
       };
     case 'NEW_CROP':
       return { ...state, crop: action.payload };
+    case 'SET_NUM_OF_PEOPLE':
+      return { ...state, receiptNumOfPeople: action.payload };
     case 'USER_LOGIN':
       return { ...state, userLoggedIn: true, user: action.payload };
     case 'USER_LOGOUT':

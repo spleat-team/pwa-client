@@ -8,22 +8,25 @@ import logo from '../../logo.png';
 import { Redirect } from 'react-router-dom';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { FirebaseContext } from '../../Firebase';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyA4uCgHWUewD5XHo05GrRNmd5diYaUN9n4',
-  authDomain: 'spleat-4629b.firebaseapp.com',
-  databaseURL: 'https://spleat-4629b.firebaseio.com',
-  projectId: 'spleat-4629b',
-  storageBucket: 'spleat-4629b.appspot.com',
-  messagingSenderId: '761349823555',
-  appId: '1:761349823555:web:ba956c9f71eedae5',
-};
+// const firebaseConfig = {
+//   apiKey: 'AIzaSyA4uCgHWUewD5XHo05GrRNmd5diYaUN9n4',
+//   authDomain: 'spleat-4629b.firebaseapp.com',
+//   databaseURL: 'https://spleat-4629b.firebaseio.com',
+//   projectId: 'spleat-4629b',
+//   storageBucket: 'spleat-4629b.appspot.com',
+//   messagingSenderId: '761349823555',
+//   appId: '1:761349823555:web:ba956c9f71eedae5',
+// };
 
-firebase.initializeApp(firebaseConfig);
-var provider = new firebase.auth.FacebookAuthProvider();
+// firebase.initializeApp(firebaseConfig);
+// var provider = new firebase.auth.FacebookAuthProvider();
 
 const LoginPage = props => {
   const { state, dispatch } = React.useContext(Store);
+  const firebase = React.useContext(FirebaseContext);
+
   const [usersCookie, setUsersCookie, removeUsersCookie] = useCookie(
     'spleat-user-details',
     ''
@@ -33,7 +36,7 @@ const LoginPage = props => {
   const [isSignedIn, setIsSignedIn] = React.useState(false);
 
   const uiConfig = {
-    signInOptions: [firebase.auth.FacebookAuthProvider.PROVIDER_ID],
+    signInOptions: [firebase.app.auth.FacebookAuthProvider.PROVIDER_ID],
     callbacks: {
       signInSuccess: () => false,
     },
@@ -43,7 +46,7 @@ const LoginPage = props => {
 
   React.useState(() => {
     //firebase.auth().signOut();
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.app.auth().onAuthStateChanged(user => {
       if (user != null) {
         console.log('back from facebook with : ', user);
         setIsSignedIn(!!user);
@@ -92,7 +95,9 @@ const LoginPage = props => {
     <div className="App">
       <img src={logo} className="App-logo" alt="Spleat Logo" />
       {error ? <p>אופס.. משהו השתבש, נסו שנית!</p> : null}
-      {!state.user || !state.userLoggedIn || !firebase.auth().currentUser ? (
+      {!state.user ||
+      !state.userLoggedIn ||
+      !firebase.app.auth().currentUser ? (
         <div style={{ marginTop: '30%' }}>
           <p style={{ marginLeft: '7%', marginRight: '7%', direction: 'rtl' }}>
             לפני שנתחיל - היינו רוצים להכיר אותך קצת יותר טוב, מה דעתך על לחבר
@@ -110,7 +115,7 @@ const LoginPage = props => {
             }
             <StyledFirebaseAuth
               uiConfig={uiConfig}
-              firebaseAuth={firebase.auth()}
+              firebaseAuth={firebase.app.auth()}
               // .signInWithPopup(provider)
               // .then(result => {
               //   console.log(result);
