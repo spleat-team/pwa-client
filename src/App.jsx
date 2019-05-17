@@ -14,6 +14,7 @@ import ScanPage from "./components/ScanPage";
 import itemsList from './ItemsList';
 import NotFoundComponent from './components/NotFoundComponent';
 import LoginPage from './LoginPage'
+import PaymentPage from "./components/PaymentPage";
 
 const override = css`
 	display: block;
@@ -81,7 +82,7 @@ function App(props) {
 					}
 					<Switch>
 						<Route exact path='/' component={ScanPage}></Route>
-						<Route path='/login' component={LoginPage}></Route>
+						<Route path='/payment' component={PaymentPage}></Route>
 						<Route path='/logout' render={() => {
 							return <LoginPage isLogOut={true}/>
 						}}></Route>

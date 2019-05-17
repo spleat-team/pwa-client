@@ -26,19 +26,17 @@ function SelectingItem (props) {
                     <Checkbox
                         id={props.item._id}
                         color="primary"
-                        onChange={props.handle(props.item._id)}
+                        onClick={()=>props.handle(props.item._id)}
                         checked={props.checked !== -1}
                     />
                     <ListItemAvatar>
                         <Dish data={props.item.dish} />
                     </ListItemAvatar>
-                        <ListItemText >{props.item.price}
-                            <ListItemIcon style={{marginRight: 7 + 'px'}}>
-                                <FontAwesomeIcon icon="shekel-sign" />
-                            </ListItemIcon>
-                        </ListItemText>
-
-
+                    <ListItemText>{props.item.price}
+                        <ListItemIcon style={{marginRight: 7 + 'px'}}>
+                            <FontAwesomeIcon icon="shekel-sign" />
+                        </ListItemIcon>
+                    </ListItemText>
                 </ListItem>
             </div>
 

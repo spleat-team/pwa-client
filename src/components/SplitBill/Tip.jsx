@@ -13,25 +13,21 @@ function SelectTip () {
     return (
 
         <Grid container dir={"rtl"}>
-        {/*<div dir={"rtl"}>*/}
-            <Grid item xs={5}>
-            כמה טיפ תרצה לשלם?
-            </Grid>
-            <Grid item xs={2} dir={"ltr"}>
-            <Input
+            <Grid item xs={5} >
+            <TextField
+                autoFocus
+                style={{marginTop: '15px', marginRight: '30px'}}
                 id="tip"
-                label="טיפ"
                 value={tip}
                 onChange={(event) => setTip(event.target.value)}
                 type="number"
                 min={0}
-                inputProps={{min: 0}}
-                //style={{textAlign: 'right'}}
-               // style={{width: 40 + 'px', marginRight: 10 + 'px'}}
-                endAdornment={<InputAdornment position="start">%</InputAdornment>}
+                InputProps={{min: 0, startAdornment: <InputAdornment position="start">%</InputAdornment>}}
+                variant="outlined"
+                label="כמה טיפ תרצה לשלם?"
+
             />
             </Grid>
-        {/*</div>*/}
         </Grid>
 
     );
