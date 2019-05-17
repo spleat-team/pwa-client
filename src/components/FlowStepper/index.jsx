@@ -79,8 +79,8 @@ const VerticalLinearStepper = props => {
       padding: theme.spacing.unit,
     },
     doneLabel: {
-      color: '#80bdff'
-    }
+      color: '#80bdff',
+    },
   });
 
   const handleNext = event => {
@@ -101,7 +101,7 @@ const VerticalLinearStepper = props => {
   const stepsVector = [
     {
       title: 'צילום הקבלה',
-      func: () => ReceiptShootForm(classes, handleNext)
+      func: () => ReceiptShootForm(classes, handleNext),
     },
     {
       title: 'וידוא המנות',
@@ -113,7 +113,7 @@ const VerticalLinearStepper = props => {
     },
     {
       title: 'שיתוף עם חברים',
-      func: () => <p>Yay me!!!</p>
+      func: () => <p>Yay me!!!</p>,
     },
   ];
 
@@ -122,12 +122,12 @@ const VerticalLinearStepper = props => {
       headers: {
         'content-type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*',
-      }
-    }
+      },
+    };
     const formData = new FormData();
-    formData.append('photo', photo)
+    formData.append('photo', photo);
     dispatch({
-      type: 'TOGGLE_LOADING'
+      type: 'TOGGLE_LOADING',
     });
     return await post(url, formData, config);
   };

@@ -3,7 +3,12 @@ import { Store } from './Store';
 import 'react-image-crop/dist/ReactCrop.css';
 import logo from './logo.png';
 import './App.css';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import { css } from '@emotion/core';
 import { SyncLoader } from 'react-spinners';
 import ScanPage from './components/ScanPage';
@@ -11,6 +16,8 @@ import NotFoundComponent from './components/NotFoundComponent';
 import LoginPage from './components/LoginPage';
 import usePrevious from './Utils/usePrevious';
 import useLogger from './Utils/useLogger';
+import AuthManager from './components/AuthManager';
+import PrivateRoute from './components/PrivateRoute';
 
 const override = css`
   display: block;
@@ -20,49 +27,12 @@ const override = css`
 
 const App = props => {
   const { state, dispatch } = React.useContext(Store);
-  const [shouldAuthenticate, setShouldAuthenticate] = useState(false);
-  const previousValues = usePrevious({ state, shouldAuthenticate });
 
   useLogger('App');
 
-  // useEffect(() => {
-  //   if (previousValues && previousValues.state) {
-  //     if (JSON.stringify(previousValues.state) != JSON.stringify(state)) {
-  //       console.log('state changed :', previousValues.state, state);
-  //       if (
-  //         previousValues.shouldAuthenticate &&
-  //         previousValues.shouldAuthenticate != shouldAuthenticate
-  //       ) {
-  //         console.log(
-  //           'shouldAuthenticate changed :',
-  //           previousValues.shouldAuthenticate,
-  //           shouldAuthenticate
-  //         );
-  //       }
-  //     }
-  //   }
-  // });
-
-  // useEffect(() => {
-  //   if (!state.userLoggedIn && shouldAuthenticate) {
-  //     if (!window.location.href.includes('/login')) {
-  //       console.log('going to /login...');
-  //       setShouldAuthenticate(true);
-  //     } else {
-  //       console.log('already in /login...');
-  //     }
-  //   } else {
-  //     console.log('user is already logged in...');
-  //   }
-  // }, [shouldAuthenticate, state.userLoggedIn]);
-
   return (
     <React.Fragment>
-      <BrowserRouter>
-        {
-          // !state.userLoggedIn && <Redirect to="/login" />
-        }
-        {console.log(window.location.href)}
+      <Router>
         <div className="App">
           <img src={logo} className="App-logo" alt="Spleat Logo" />
           <div className="sweet-loading" style={{ margin: 20 }}>
@@ -74,25 +44,59 @@ const App = props => {
               loading={state.loading}
             />
           </div>
-          {console.log('AuthManagerrrrrrrrr')}
-
-          <Switch>
-            <Route exact path="/" component={ScanPage} />
-            <Route
-              path="/logout"
-              render={() => {
-                return <LoginPage isLogOut={true} />;
-              }}
-            />
-            {
-              //<Route path="/itemsList" component={itemsList} />
-            }
-            <Route component={NotFoundComponent} />
-          </Switch>
+          {
+            <Switch>
+              <PrivateRoute exact path="/" component={ScanPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route
+                path="/logout"
+                render={() => {
+                  return <LoginPage isLogOut={true} />;
+                }}
+              />
+              {
+                //<Route path="/itemsList" component={itemsList} />
+              }
+              <Route component={NotFoundComponent} />
+            </Switch>
+          }
         </div>
-      </BrowserRouter>
+      </Router>
     </React.Fragment>
   );
 };
 
 export default App;
+
+// const previousValues = usePrevious({ state, isSignedIn });
+
+// useEffect(() => {
+//   if (previousValues && previousValues.state) {
+//     if (JSON.stringify(previousValues.state) != JSON.stringify(state)) {
+//       console.log('state changed :', previousValues.state, state);
+//       if (
+//         previousValues.shouldAuthenticate &&
+//         previousValues.shouldAuthenticate != shouldAuthenticate
+//       ) {
+//         console.log(
+//           'shouldAuthenticate changed :',
+//           previousValues.shouldAuthenticate,
+//           shouldAuthenticate
+//         );
+//       }
+//     }
+//   }
+// });
+
+// useEffect(() => {
+//   if (!state.userLoggedIn && shouldAuthenticate) {
+//     if (!window.location.href.includes('/login')) {
+//       console.log('going to /login...');
+//       setShouldAuthenticate(true);
+//     } else {
+//       console.log('already in /login...');
+//     }
+//   } else {
+//     console.log('user is already logged in...');
+//   }
+// }, [shouldAuthenticate, state.userLoggedIn]);
