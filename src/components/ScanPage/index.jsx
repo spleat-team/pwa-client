@@ -12,7 +12,7 @@ const ScanPage = props => {
 
   return (
     <React.Fragment>
-      <p>היי {state.user.name} !</p>
+      <p>היי {state.user.displayName} !</p>
       <VerticalStepper />
     </React.Fragment>
   );

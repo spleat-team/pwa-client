@@ -42,6 +42,7 @@ const LoginPage = props => {
   useLogger('LoginPage');
 
   React.useState(() => {
+    //firebase.auth().signOut();
     firebase.auth().onAuthStateChanged(user => {
       if (user != null) {
         console.log('back from facebook with : ', user);
@@ -83,13 +84,15 @@ const LoginPage = props => {
   };
 
   const componentClicked = () => console.log('clicked');
-  let from = props.location.state || { from: { pathname: '/' } };
+
+  // TODO: set the previos page to go back (if exists)
+  let from = { from: { pathname: '/' } }; // props.location.state || { from: { pathname: '/' } };
 
   return (
     <div className="App">
       <img src={logo} className="App-logo" alt="Spleat Logo" />
       {error ? <p>אופס.. משהו השתבש, נסו שנית!</p> : null}
-      {!state.user || !state.userLoggedIn ? (
+      {!state.user || !state.userLoggedIn || !firebase.auth().currentUser ? (
         <div style={{ marginTop: '30%' }}>
           <p style={{ marginLeft: '7%', marginRight: '7%', direction: 'rtl' }}>
             לפני שנתחיל - היינו רוצים להכיר אותך קצת יותר טוב, מה דעתך על לחבר
@@ -107,20 +110,19 @@ const LoginPage = props => {
             }
             <StyledFirebaseAuth
               uiConfig={uiConfig}
-              firebaseAuth={firebase
-                .auth()
-                .signInWithPopup(provider)
-                .then(result => {
-                  console.log(result);
-                })
-                .catch(error => console.log('kaki ', error))}
+              firebaseAuth={firebase.auth()}
+              // .signInWithPopup(provider)
+              // .then(result => {
+              //   console.log(result);
+              // })
+              // .catch(error => console.log('kaki ', error))}
             />
           </div>
         </div>
       ) : (
-          // TODO : Redirect to where the user came from
-          <p>kaki</p>
-        )}
+        // TODO : Redirect to where the user came from
+        <Redirect to={from} />
+      )}
     </div>
   );
 };
