@@ -2,40 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="113ebb13-4639-49f3-869c-e92bb5bd3d10" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/precache-manifest.31243553ae73867fbc530ba938744dd4.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/static/css/main.25fc9ac7.chunk.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/static/js/2.8e2540b5.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/static/js/main.f7c02373.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Utils/useCookie.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Utils/useLocalStorage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Utils/useLogger.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Utils/usePrevious.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/AuthManager/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/LoginPage/Login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/LoginPage/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PrivateRoute/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FlowStepper/Steps/SharersCountForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FlowStepper/Steps/SharersCountForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FlowStepper/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FlowStepper/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NotFoundComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NotFoundComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ScanPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ScanPage/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SplitBill/AlreadyFinishedStatus.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SplitBill/AlreadyFinishedStatus.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ItemsList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ItemsList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PaymentPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PaymentPage.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -48,11 +18,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="506">
+              <caret line="57" column="16" lean-forward="true" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/SplitBill/AlreadyFinishedStatus.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="184">
+              <caret line="8" column="48" lean-forward="true" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/SplitBill/SelectingItem.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ItemsList.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="83" column="42" lean-forward="true" selection-start-line="83" selection-start-column="42" selection-end-line="83" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/PaymentPage.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -72,9 +90,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>font</find>
-      <find>USER_LOGOUT</find>
-      <find>logout</find>
       <find>ScanPage</find>
       <find>TOGGLE_LOADING</find>
       <find>ReceiptLifecycle.NO_FILE</find>
@@ -102,6 +117,9 @@
       <find>setActiveStep</find>
       <find>=====</find>
       <find>sha</find>
+      <find>props2</find>
+      <find>items</find>
+      <find>Route</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\adi\programming\finalProject\pwa-client\node_modules</dir>
@@ -125,10 +143,8 @@
         <option value="$PROJECT_DIR$/src/components/SplitBill/AlreadyFinished.jsx" />
         <option value="$PROJECT_DIR$/src/components/SplitBill/FinishForm.jsx" />
         <option value="$PROJECT_DIR$/src/components/SplitBill/Tip.jsx" />
-        <option value="$PROJECT_DIR$/src/ItemsList.jsx" />
         <option value="$PROJECT_DIR$/src/components/PayPage.jsx" />
         <option value="$PROJECT_DIR$/src/components/SplitBill/SelectingItem.jsx" />
-        <option value="$PROJECT_DIR$/src/components/PaymentPage.jsx" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/build/service-worker.js" />
         <option value="$PROJECT_DIR$/src/components/ScanPage/index.jsx" />
@@ -138,9 +154,11 @@
         <option value="$PROJECT_DIR$/src/components/FlowStepper/Steps/SharersCountForm.jsx" />
         <option value="$PROJECT_DIR$/build/index.html" />
         <option value="$PROJECT_DIR$/src/components/FlowStepper/index.jsx" />
-        <option value="$PROJECT_DIR$/src/App.jsx" />
         <option value="$PROJECT_DIR$/src/Store.js" />
         <option value="$PROJECT_DIR$/src/components/SplitBill/AlreadyFinishedStatus.jsx" />
+        <option value="$PROJECT_DIR$/src/App.jsx" />
+        <option value="$PROJECT_DIR$/src/ItemsList.jsx" />
+        <option value="$PROJECT_DIR$/src/components/PaymentPage.jsx" />
       </list>
     </option>
   </component>
@@ -226,12 +244,12 @@
       <workItem from="1557292477456" duration="42017000" />
       <workItem from="1557932902686" duration="2342000" />
       <workItem from="1558088787055" duration="3185000" />
-      <workItem from="1558094870107" duration="1125000" />
+      <workItem from="1558094870107" duration="6862000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77276000" />
+    <option name="totallyTimeSpent" value="83013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
@@ -407,31 +425,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ItemsList.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/manifest.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/PaymentPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="713">
-          <caret line="36" column="31" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -515,13 +513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Store.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -531,7 +522,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/SplitBill/SelectingItem.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-115">
+        <state relative-caret-position="23">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
@@ -541,8 +532,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/SplitBill/AlreadyFinishedStatus.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="184">
+          <caret line="8" column="48" lean-forward="true" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="57" column="16" lean-forward="true" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ItemsList.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="83" column="42" lean-forward="true" selection-start-line="83" selection-start-column="42" selection-end-line="83" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/PaymentPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

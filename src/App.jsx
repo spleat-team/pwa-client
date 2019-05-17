@@ -57,7 +57,7 @@ const App = props => {
                 }}
               />
 				<Route path='/payment' component={PaymentPage}></Route>
-				<Route path='/itemsList' component={ItemsList}></Route>
+				<Route path='/itemsList/:groupId?' component={ItemsList}></Route>
               <Route component={NotFoundComponent} />
             </Switch>
           }

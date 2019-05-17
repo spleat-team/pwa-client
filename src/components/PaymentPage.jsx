@@ -19,10 +19,10 @@ function PaymentPage () {
     };
     //const [tip, setTip ] = React.useState(10);
 
-    var currentUserID = '1111';// get the id from firebase
-    var otherUser = props.items.find((currItem) => {
-            return (currItem._id != currentUserID)
-        });
+    var currentUserID = {_id: '1111', price: 11};// get the id from firebase
+    var otherUser = props.items.slice();
+
+    otherUser.splice(currentUserID, 1)
     return (
 
         <div>
@@ -30,14 +30,17 @@ function PaymentPage () {
             <h1 dir={"rtl"}>
 
                 {props.items.find((currItem) => {
-                    return (currItem._id == currentUserID)
+                    return (currItem._id == currentUserID._id)
                 }).price}
                 <ListItemIcon style={{marginRight: 7 + 'px'}}>
                     <FontAwesomeIcon icon="shekel-sign" />
                 </ListItemIcon>
             </h1>
             <h3 dir={"rtl"}>
-                {otherUser._id} - {otherUser.price}
+                {otherUser.map((curr) => {
+                    console.log(curr._id + "-" + curr.price)
+                })}
+
                 <ListItemIcon style={{marginRight: 7 + 'px'}}>
                     <FontAwesomeIcon icon="shekel-sign" />
                 </ListItemIcon>
