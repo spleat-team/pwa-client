@@ -36,16 +36,17 @@ function PaymentPage () {
                     <FontAwesomeIcon icon="shekel-sign" />
                 </ListItemIcon>
             </h1>
-            <h3 dir={"rtl"}>
+
                 {otherUser.map((curr) => {
-                    console.log(curr._id + "-" + curr.price)
+                    return  <h3 dir={"rtl"}>
+                        {curr.price + "-" + curr._id}
+                        <ListItemIcon style={{marginRight: 7 + 'px'}}>
+                            <FontAwesomeIcon icon="shekel-sign" />
+                        </ListItemIcon>
+                    </h3>
                 })}
 
-                <ListItemIcon style={{marginRight: 7 + 'px'}}>
-                    <FontAwesomeIcon icon="shekel-sign" />
-                </ListItemIcon>
 
-            </h3>
         </div>
     );
 }
