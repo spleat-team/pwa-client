@@ -39,8 +39,9 @@ function SharersCountForm(classes, backCallback, nextCallback) {
     dispatch({ type: 'SET_NUM_OF_PEOPLE', payload: sharersCount });
     // Generate pin code
     const pincode = generatePinCode();
-    const items = state.receiptItems.map(item => {
+    const items = state.receiptItems.map((item, index) => {
       return {
+        _id: index,
         image: item.dish,
         price: item.price,
         users: [],
@@ -51,7 +52,11 @@ function SharersCountForm(classes, backCallback, nextCallback) {
     receiptService
       .createReceipt(
         { pincode, items, numberOfPeople: sharersCount },
-        state.user.email
+        {
+          email: state.user.email,
+          name: state.user.displayName,
+          isFinished: false,
+        }
       )
       .then(() => {
         nextCallback();
