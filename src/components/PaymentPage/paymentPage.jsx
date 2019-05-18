@@ -1,5 +1,5 @@
 import React from 'react';
-import {Store} from "../Store";
+import {Store} from "../../Store";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
@@ -38,7 +38,7 @@ function PaymentPage () {
             </h1>
 
                 {otherUser.map((curr) => {
-                    return  <h3 dir={"rtl"}>
+                    return  <h3 dir={"rtl"} key={curr._id}>
                         {curr.price + "-" + curr._id}
                         <ListItemIcon style={{marginRight: 7 + 'px'}}>
                             <FontAwesomeIcon icon="shekel-sign" />

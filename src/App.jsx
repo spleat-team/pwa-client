@@ -18,7 +18,7 @@ import usePrevious from './Utils/usePrevious';
 import useLogger from './Utils/useLogger';
 import AuthManager from './components/AuthManager';
 import PrivateRoute from './components/PrivateRoute';
-import PaymentPage from "./components/PaymentPage";
+import PaymentPage from "./components/PaymentPage/paymentPage";
 import ItemsList from "./ItemsList";
 
 const override = css`
