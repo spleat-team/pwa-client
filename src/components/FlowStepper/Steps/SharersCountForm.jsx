@@ -44,6 +44,8 @@ function SharersCountForm(classes, backCallback, nextCallback) {
     dispatch({ type: 'SET_NUM_OF_PEOPLE', payload: sharersCount });
     // Generate pin code
     const pincode = generatePinCode();
+    dispatch({ type: 'SET_PINCODE', payload: pincode });
+
     const items = state.receiptItems.map((item, index) => {
       return {
         _id: index,
@@ -95,7 +97,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
           variant="contained"
           color="primary"
           style={{ width: '90px', marginTop: '15px' }}
-          onClick={nextCallback}
+          onClick={onFinished}
           className={classes.button}
         >
           סיימתי!

@@ -13,6 +13,7 @@ import { pink } from '@material-ui/core/colors';
 import ReceiptShootForm from './Steps/ReceiptShoot';
 import ReceiptCropper from './Steps/ReceiptCropper';
 import SharersCountForm from './Steps/SharersCountForm';
+import SharePinCode from './Steps/PinCode';
 import useLogger from '../../Utils/useLogger';
 
 const VerticalLinearStepper = props => {
@@ -81,6 +82,15 @@ const VerticalLinearStepper = props => {
     doneLabel: {
       color: '#80bdff',
     },
+    shareInline: {
+      display: 'flex',
+      flex: 1,
+      flexDirection: 'row',
+    },
+    iconStyle: {
+      margin: '0 5px 5px',
+      cursor: 'pointer',
+    },
   });
 
   const handleNext = event => {
@@ -113,7 +123,7 @@ const VerticalLinearStepper = props => {
     },
     {
       title: 'שיתוף עם חברים',
-      func: () => <p>Yay me!!!</p>,
+      func: () => SharePinCode(classes),
     },
   ];
 

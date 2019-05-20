@@ -18,8 +18,8 @@ import usePrevious from './Utils/usePrevious';
 import useLogger from './Utils/useLogger';
 import AuthManager from './components/AuthManager';
 import PrivateRoute from './components/PrivateRoute';
-import PaymentPage from "./components/PaymentPage/paymentPage";
-import ItemsList from "./ItemsList";
+import PaymentPage from './components/PaymentPage/paymentPage';
+import ItemsList from './ItemsList';
 
 const override = css`
   display: block;
@@ -56,8 +56,8 @@ const App = props => {
                   return <LoginPage isLogOut={true} />;
                 }}
               />
-				<Route path='/payment' component={PaymentPage}></Route>
-				<Route path='/itemsList/:groupId?' component={ItemsList}></Route>
+              <Route path="/payment" component={PaymentPage} />
+              <Route path="/itemsList/:groupId?" component={ItemsList} />
               <Route component={NotFoundComponent} />
             </Switch>
           }
