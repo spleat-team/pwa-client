@@ -7,7 +7,7 @@ const firebase = Firebase.initialize();
 
 var db = firebase.app.firestore();
 
-const createReceipt = (receipt, currentUser) => {
+    const createReceipt = (receipt, currentUser) => {
   return new Promise((resolve, reject) => {
     db.collection(collectionName)
       .doc(receipt.pincode)

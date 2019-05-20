@@ -10,13 +10,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faShekelSign}  from '@fortawesome/free-solid-svg-icons'
 import {Store} from "../../Store";
+import {calculateService} from "../../Services/receipt.service";
 
 function SelectingItem (props) {
 
     library.add(faShekelSign);
     const { dispatch } = React.useContext(Store);
     const [checked, setChecked ] = React.useState(false);
-
 
     const Dish = ({ data }) => <img style={{height: 40+ 'px'}} src={`data:image/jpeg;base64,${data}`} />
         return (

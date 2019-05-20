@@ -6,14 +6,18 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faHandPointLeft} from "@fortawesome/free-solid-svg-icons";
+import CalculateService from '../../Services/calculate.service';
 
-function FinishedForm () {
+function FinishedForm (props) {
     library.add(faHandPointLeft);
 
     const { state, dispatch } = React.useContext(Store);
-    const finishedCount = state.finishedCount;
+    const { finishedCount } = state;
 
-    const onSomeoneFinished = finishedCount => dispatch({type: 'FINISHED_SELECT_ITEMS', finishedCount: finishedCount});
+    const onSomeoneFinished = finishedCount => {
+        dispatch({type: 'FINISHED_SELECT_ITEMS', finishedCount: finishedCount});
+        CalculateService(props).finishSelectItems("l32u",state.user.email, state.checkedItems);
+    }
 
     return (
 
@@ -21,6 +25,8 @@ function FinishedForm () {
             <Fab variant="extended" color="primary" onClick={()=>onSomeoneFinished(finishedCount+1)}>
                 <FontAwesomeIcon icon="hand-point-left" style={{marginRight: 5+"px"}}/>
                 סיימתי
+                {/*state.user.email*/}
+
             </Fab>
         </div>
     );

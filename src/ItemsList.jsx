@@ -7,12 +7,45 @@ import FinishedForm from "./components/SplitBill/FinishForm";
 import Grid from "@material-ui/core/Grid";
 import LoginPage from "./components/LoginPage";
 import { Route } from 'react-router-dom';
+import CalculateService from "./Services/calculate.service.js";
+import {Firebase} from "./Firebase/firebase";
 
 function ItemsList (props){
     const { state, dispatch } = React.useContext(Store);
+    const {checkedItems} = state;
+
     var handleToggle = {};
     var hasGroupNumber = true;
-    const [checkedItems, setItemsChecked] = React.useState([]);
+    const firebase = Firebase.initialize();
+    var db = firebase.app.firestore();
+    const collectionName = 'receipts';
+    // const [checkedItems, setItemsChecked] = React.useState([]);
+    const onDocumentUpdated = (groupId) => {
+
+
+
+        db.collection(collectionName).doc(groupId)
+            .onSnapshot(function (doc) {
+                if (!doc.exists)
+                    throw "The receipt doesn't exist";
+                if (CalculateService(props).isAllUserFinished(doc.data().users)) {
+                    var paymentPerUser = CalculateService(props).calculateBill(doc.data());
+                    console.log(paymentPerUser);
+
+
+                    dispatch({
+                        type: "FINISHED_CALC",
+                        paymentPerUser: paymentPerUser
+                    });
+                    props.history.push('/payment');
+                }
+            });
+    }
+    React.useEffect(() => {
+        //CalculateService(props).onDocumentUpdated(props.match.params.groupId);
+        onDocumentUpdated(props.match.params.groupId);
+
+    }, [props.match.params.groupId]);
 
     if (!props.match.params.groupId) {
         hasGroupNumber = false;
@@ -22,6 +55,7 @@ function ItemsList (props){
     }
     // Continue
     else {
+
         var items =
             [{
                 _id: '1',
@@ -57,7 +91,8 @@ function ItemsList (props){
             } else {
                 newChecked.splice(currentIndex, 1);
             }
-            setItemsChecked(newChecked);
+//            setItemsChecked(newChecked);
+            dispatch({type: 'CHECKED_ITEMS', checkedItems: newChecked});
         };
     }
 

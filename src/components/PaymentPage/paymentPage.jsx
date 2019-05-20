@@ -8,30 +8,29 @@ import {faShekelSign} from "@fortawesome/free-solid-svg-icons";
 function PaymentPage () {
     library.add(faShekelSign);
 
-    const { dispatch } = React.useContext(Store);
-    const props = {
-        items:
-            [{_id: '1111', price: 11},
-                {_id: '2222', price: 15},
-                {_id: '3333', price: 22},
-                {_id: '4444', price: 17}]
-        //state.paymentDetails
-    };
+    const { state, dispatch } = React.useContext(Store);
+    const { paymentPerUser } = state;
+
+    const currentUserId = "nave.coheng@gmail.com";
+        //todo: state.user.email;
+
     //const [tip, setTip ] = React.useState(10);
 
-    var currentUserID = {_id: '1111', price: 11};// get the id from firebase
-    var otherUser = props.items.slice();
+    var currentUserObject = paymentPerUser.find((user) => {
+        return user.email == currentUserId
+    });
+    var otherUser = paymentPerUser.slice();
 
-    otherUser.splice(currentUserID, 1)
+    otherUser.splice(currentUserObject, 1);
     return (
 
         <div>
             <h1>החשבון שלך </h1>
             <h1 dir={"rtl"}>
 
-                {props.items.find((currItem) => {
-                    return (currItem._id == currentUserID._id)
-                }).price}
+                {paymentPerUser.find((currItem) => {
+                    return (currItem.email == currentUserId)
+                }).sum}
                 <ListItemIcon style={{marginRight: 7 + 'px'}}>
                     <FontAwesomeIcon icon="shekel-sign" />
                 </ListItemIcon>
