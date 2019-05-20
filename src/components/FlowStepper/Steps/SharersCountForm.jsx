@@ -10,8 +10,13 @@ var classNames = require('classnames');
 function SharersCountForm(classes, backCallback, nextCallback) {
   const { state, dispatch } = React.useContext(Store);
 
-  const [sharersCount, setSharersCount] = React.useState(0);
+  const sharersCount = state.sharersCount;
   const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
+  const onSharersCountChange = sharersCount =>
+    dispatch({ type: 'SHARERS_COUNT', count: sharersCount });
+
+  // const [sharersCount, setSharersCount] = React.useState(0);
+  // const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
 
   let inputProps =
     sharersCount > 1
@@ -79,7 +84,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
         InputProps={inputProps}
         onChange={event => {
           setSharersCountDirty(true);
-          setSharersCount(event.target.value);
+          onSharersCountChange(event.target.value);
         }}
         value={sharersCountDirty ? sharersCount : ''}
         helperText={sharersCountDirty && sharersCount == 0 ? 'אחי.....' : ''}
@@ -90,7 +95,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
           variant="contained"
           color="primary"
           style={{ width: '90px', marginTop: '15px' }}
-          onClick={onFinished}
+          onClick={nextCallback}
           className={classes.button}
         >
           סיימתי!

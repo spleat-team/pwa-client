@@ -190,3 +190,4 @@ export default VerticalLinearStepper;
 //     console.log("goind to state : ", Object.keys(imageFlowHandler)[nextStatus]);
 //     imageFlowHandler[Object.keys(imageFlowHandler)[nextStatus]](state.photo)
 // };
+

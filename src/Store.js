@@ -26,6 +26,10 @@ const initialState = {
     y: 0,
   },
   status: ReceiptLifecycle.NO_FILE,
+  sharersCount: 0,
+  finishedCount: 0,
+  checkedItems: [],
+  paymentPerUser: [],
   ...receiptInfoInitialState,
 };
 
@@ -98,6 +102,18 @@ function reducer(state, action) {
       return { ...state, userLoggedIn: true, user: action.payload };
     case 'USER_LOGOUT':
       return { ...state, userLoggedIn: false, user: null };
+    case "SHARERS_COUNT":
+      return {...state, sharersCount: action.count};
+
+      //todo: think if it's necessary
+    case "FINISHED_SELECT_ITEMS":
+      return {...state, finishedCount: action.finishedCount};
+    case "CHECKED_ITEMS":
+      return {...state, checkedItems: action.checkedItems};
+    case "FINISHED_CALC":
+      return {...state, paymentPerUser: action.paymentPerUser};
+
+
     default:
       return state;
   }
