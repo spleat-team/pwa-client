@@ -93,9 +93,8 @@ const CalculateService = (props) => {
 
     function finishSelectItems(receiptPinCode, currentUserId, checkedItems) {
 
-        currentUserId = "nave.coheng@gmail.com";
-        //   state.user.email;
-        // todo: remove
+        //currentUserId = state.user.email;
+            //"nave.coheng@gmail.com";
 
         // Create reference to the receipt doc
         var receiptDocRef = db.collection(collectionName).doc(receiptPinCode);
@@ -110,11 +109,9 @@ const CalculateService = (props) => {
 
                             const cloneResponse = {...doc.data()};
 
-                            // todo: switch with currentUserId variable
                             cloneResponse.items = associateItemsPerUser(cloneResponse.items, currentUserId, checkedItems);
 
                             // Change the status of user to 'finished'
-                            // todo: switch with currentUserId variable
                             var userIndex = findIndex(cloneResponse.users, currentUserId, 'email');
                             cloneResponse.users[userIndex].isFinished = true;
                             transaction.update(receiptDocRef, cloneResponse);

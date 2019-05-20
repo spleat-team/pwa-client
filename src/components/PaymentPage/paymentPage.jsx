@@ -11,10 +11,11 @@ function PaymentPage () {
     const { state, dispatch } = React.useContext(Store);
     const { paymentPerUser } = state;
 
-    const currentUserId = "nave.coheng@gmail.com";
-        //todo: state.user.email;
+    const currentUserId = state.user.email;
+        //"nave.coheng@gmail.com";
+        //
 
-    //const [tip, setTip ] = React.useState(10);
+    //const [tip, setTip] = React.useState(10);
 
     var currentUserObject = paymentPerUser.find((user) => {
         return user.email == currentUserId
@@ -44,8 +45,6 @@ function PaymentPage () {
                         </ListItemIcon>
                     </h3>
                 })}
-
-
         </div>
     );
 }

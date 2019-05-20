@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="113ebb13-4639-49f3-869c-e92bb5bd3d10" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Services/calculate.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ItemsList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ItemsList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/receipt.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/receipt.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/calculate.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/calculate.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SplitBill/FinishForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SplitBill/FinishForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SplitBill/SelectingItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SplitBill/SelectingItem.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Store.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="31" column="16" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="16" />
+            <state relative-caret-position="173">
+              <caret line="104" column="25" lean-forward="true" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -46,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Services/calculate.service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+            <state relative-caret-position="69">
+              <caret line="95" column="10" selection-start-line="95" selection-start-column="10" selection-end-line="95" selection-end-column="10" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -70,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
+            <state>
+              <caret lean-forward="true" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -85,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/SplitBill/FinishForm.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="17" column="80" lean-forward="true" selection-start-line="17" selection-start-column="80" selection-end-line="17" selection-end-column="80" />
+            <state relative-caret-position="414">
+              <caret line="18" column="95" lean-forward="true" selection-start-line="18" selection-start-column="95" selection-end-line="18" selection-end-column="95" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -97,33 +91,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/SplitBill/AlreadyFinishedStatus.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+            <state relative-caret-position="322">
+              <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/LoginPage.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Firebase/firebase.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,12 +121,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setSharersCountDirty</find>
-      <find>receiptInfoInitialState</find>
-      <find>even</find>
-      <find>sharersCount</find>
-      <find>setActiveStep</find>
-      <find>=====</find>
       <find>sha</find>
       <find>props2</find>
       <find>items</find>
@@ -175,11 +140,17 @@
       <find>fireb</find>
       <find>dispa</find>
       <find>user</find>
-      <find>finishedCount</find>
       <find>state</find>
       <find>stat</find>
       <find>onDocumentUpdated</find>
       <find>state.user.email</find>
+      <find>currentUserID</find>
+      <find>todo</find>
+      <find>FINISHED_SELECT_ITEMS</find>
+      <find>currentUserId</find>
+      <find>finishedCount</find>
+      <find>SHARERS_COUNT</find>
+      <find>sharersCount</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\adi\programming\finalProject\pwa-client\node_modules</dir>
@@ -223,9 +194,9 @@
         <option value="$PROJECT_DIR$/src/serviceWorker.js" />
         <option value="$PROJECT_DIR$/src/Store.js" />
         <option value="$PROJECT_DIR$/src/components/SplitBill/FinishForm.jsx" />
-        <option value="$PROJECT_DIR$/src/Services/calculate.service.js" />
         <option value="$PROJECT_DIR$/src/ItemsList.jsx" />
         <option value="$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx" />
+        <option value="$PROJECT_DIR$/src/Services/calculate.service.js" />
       </list>
     </option>
   </component>
@@ -329,12 +300,12 @@
       <workItem from="1558197755087" duration="12578000" />
       <workItem from="1558217114224" duration="24452000" />
       <workItem from="1558338644149" duration="4403000" />
-      <workItem from="1558344014901" duration="2443000" />
+      <workItem from="1558344014901" duration="4903000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128589000" />
+    <option name="totallyTimeSpent" value="131049000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
@@ -610,26 +581,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/SplitBill/FinishForm.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="17" column="80" lean-forward="true" selection-start-line="17" selection-start-column="80" selection-end-line="17" selection-end-column="80" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/SplitBill/AlreadyFinishedStatus.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LoginPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -656,16 +607,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/calculate.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Services/receipt.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="644">
@@ -686,10 +627,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/SplitBill/FinishForm.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="18" column="95" lean-forward="true" selection-start-line="18" selection-start-column="95" selection-end-line="18" selection-end-column="95" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/SplitBill/AlreadyFinishedStatus.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Store.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="31" column="16" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="16" />
+        <state relative-caret-position="173">
+          <caret line="104" column="25" lean-forward="true" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -698,10 +659,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
+        <state>
+          <caret lean-forward="true" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/calculate.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="95" column="10" selection-start-line="95" selection-start-column="10" selection-end-line="95" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
