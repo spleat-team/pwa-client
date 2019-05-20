@@ -2,39 +2,14 @@ import {React, useEffect } from 'react';
 import { Firebase } from '../Firebase/firebase';
 import {Store} from "../Store";
 
-const CalculateService = (props) => {
+const CalculateService = () => {
 
        // const { state, dispatch } = React.useContext(Store);
       //  const {checkedItems} = state;
 
-
-
-        const collectionName = 'receipts';
-        const firebase = Firebase.initialize();
-        var db = firebase.app.firestore();
-
-
-
-    // function onDocumentUpdated(groupId) {
-    //     db.collection(collectionName).doc(groupId)
-    //         .onSnapshot(function (doc) {
-    //             if (!doc.exists)
-    //                 throw "The receipt doesn't exist";
-    //             if (isAllUserFinished(doc.data().users)) {
-    //                 var paymentPerUser = calculateBill(doc.data());
-    //                 console.log(paymentPerUser);
-    //
-    //                 useEffect(()=>{
-    //
-    //                 });
-    //                 // dispatch({
-    //                 //     type: "FINISHED_CALC",
-    //                 //     paymentPerUser: paymentPerUser
-    //                 // });
-    //                 props.history.push('/payment');
-    //             }
-    //         });
-    // }
+    const collectionName = 'receipts';
+    const firebase = Firebase.initialize();
+    var db = firebase.app.firestore();
 
     const calculateBill = (receipt) => {
         var users = receipt.users.map((user) => {
@@ -71,7 +46,7 @@ const CalculateService = (props) => {
 
     const findIndex = (items, itemId, field) => {
         return items.findIndex(item => {
-            return item[field] == itemId
+            return item[field].toString() == itemId
         })
     }
 
@@ -108,7 +83,6 @@ const CalculateService = (props) => {
                         if (!isAllUserFinished(doc.data().users)) {
 
                             const cloneResponse = {...doc.data()};
-
                             cloneResponse.items = associateItemsPerUser(cloneResponse.items, currentUserId, checkedItems);
 
                             // Change the status of user to 'finished'

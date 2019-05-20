@@ -4,16 +4,15 @@ import { Firebase } from '../Firebase/firebase';
 const collectionName = 'receipts';
 // const firebase = React.useContext(FirebaseContext);
 const firebase = Firebase.initialize();
-
 var db = firebase.app.firestore();
 
-    const createReceipt = (receipt, currentUser) => {
+const createReceipt = (receipt, user) => {
   return new Promise((resolve, reject) => {
     db.collection(collectionName)
       .doc(receipt.pincode)
       .set({
         numberOfPeople: parseInt(receipt.numberOfPeople),
-        users: [currentUser],
+        users: [user],
         items: receipt.items,
       })
       .then(() => {

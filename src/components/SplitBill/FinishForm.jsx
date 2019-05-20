@@ -16,7 +16,9 @@ function FinishedForm (props) {
 
     const onSomeoneFinished = finishedCount => {
         dispatch({type: 'FINISHED_SELECT_ITEMS', finishedCount: finishedCount});
-        CalculateService(props).finishSelectItems("l32u",state.user.email, state.checkedItems);
+        // todo: change
+        //state.user.email
+        CalculateService(props).finishSelectItems(props.groupId , "nave.coheng@gmail.com", state.checkedItems);
     }
 
     return (

@@ -11,7 +11,8 @@ function PaymentPage () {
     const { state, dispatch } = React.useContext(Store);
     const { paymentPerUser } = state;
 
-    const currentUserId = state.user.email;
+    const currentUserId ="nave.coheng@gmail.com";
+        //todo: state.user.email;
         //"nave.coheng@gmail.com";
         //
 

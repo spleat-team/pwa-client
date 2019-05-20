@@ -18,19 +18,19 @@ function SelectingItem (props) {
     const { dispatch } = React.useContext(Store);
     const [checked, setChecked ] = React.useState(false);
 
-    const Dish = ({ data }) => <img style={{height: 40+ 'px'}} src={`data:image/jpeg;base64,${data}`} />
+    const Dish = ({ data }) => <img style={{height: 25+ 'px', width: 200+'px'}} src={`data:image/jpeg;base64,${data}`} />
         return (
 
             <div>
                 <ListItem dir={"rtl"}>
                     <Checkbox
-                        id={props.item._id}
+                        id={props.item._id.toString()}
                         color="primary"
-                        onClick={()=>props.handle(props.item._id)}
+                        onClick={()=>props.handle(props.item._id.toString())}
                         checked={props.checked !== -1}
                     />
                     <ListItemAvatar>
-                        <Dish data={props.item.dish} />
+                        <Dish data={props.item.image} />
                     </ListItemAvatar>
                     <ListItemText>{props.item.price}
                         <ListItemIcon style={{marginRight: 7 + 'px'}}>
