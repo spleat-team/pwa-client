@@ -25,11 +25,40 @@ function ItemsList (props){
     const firebase = Firebase.initialize();
     var db = firebase.app.firestore();
     const collectionName = 'receipts';
+    //
+    // const isCurrentUserAlreadyFinished = (users, userId) => {
+    //     return CalculateService(props).getUserDetails(users, userId).isFinished;
+    // }
 
-    const isCurrentUserAlreadyFinished = (users, userId) => {
-        return CalculateService(props).getUserDetails(users, userId).isFinished;
+    // const isUserExistInReceipt = (users, userId) => {
+    //     return CalculateService(props).getUserDetails(users, userId);
+    // }
+
+    const addUserIfDoesntExist = (usersInReceipt ) => {
+        // If the user doesn't exist in users array in receipt add it
+        if (usersInReceipt != undefined &&
+            CalculateService(props).getUserDetails(usersInReceipt, state.user.email) == undefined) {
+
+            var userToInsert = {
+                email: state.user.email,
+                name: state.user.displayName,
+                isFinished: false,
+                tip: 10
+            };
+            usersInReceipt.push(userToInsert);
+
+            // Update the user in receipt
+            db.collection(collectionName).doc(props.match.params.groupId)
+                .update({users: usersInReceipt})
+                .then(function() {
+                    console.log("Users successfully updated!");
+                })
+                .catch(function(error) {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                })
+        }
     }
-
     // const [checkedItems, setItemsChecked] = React.useState([]);
     const onDocumentUpdated = (groupId) => {
 
@@ -69,6 +98,7 @@ function ItemsList (props){
             type: 'TOGGLE_LOADING',
         });
 
+        var usersInReceipt;
         // When the user get in at the first time - set the variables
         db.collection(collectionName).doc(props.match.params.groupId)
             .get()
@@ -77,16 +107,21 @@ function ItemsList (props){
                 setItems(doc.data().items);
                 dispatch({type: 'SHARERS_COUNT', sharersCount: doc.data().numberOfPeople});
 
-                if (isCurrentUserAlreadyFinished(doc.data().users, state.user.email)) {
-                    props.history.push('/waiting');
-                }
+                addUserIfDoesntExist(doc.data().users);
 
+                //  Check if the user already finished
+                var useDetails = CalculateService(props).getUserDetails(doc.data().users, state.user.email);
+                if (useDetails != undefined && useDetails.isFinished) {
+                    props.history.push('/waiting');
+
+                }
                 dispatch({type: 'TOGGLE_LOADING'});
             })
             .catch(err => {
                 console.error('firebase:error saving receipt', err);
                 reject(err);
             });
+
 
         onDocumentUpdated(props.match.params.groupId);
     }, [props.match.params.groupId]);

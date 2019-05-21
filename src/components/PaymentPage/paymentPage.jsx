@@ -35,7 +35,7 @@ function PaymentPage () {
         <div>
             <h1>החשבון שלך </h1>
             <h1 dir={"rtl"}>
-                {currentUserObject.sum}
+                {currentUserObject.sum.toFixed(2)}
                 <ListItemIcon style={{marginRight: 7 + 'px'}}>
                     <FontAwesomeIcon icon="shekel-sign" />
                 </ListItemIcon>
@@ -44,7 +44,7 @@ function PaymentPage () {
             <div style={{marginTop: 20 + 'px', marginBottom: 40 + 'px'}}>
                 {otherUsers.map((curr) => {
                     return  <h3 key={curr.email}>
-                        {curr.name + " - " + curr.sum}
+                        {curr.name + " - " + curr.sum.toFixed(2)}
                         <ListItemIcon style={{marginRight: 7 + 'px'}}>
                             <FontAwesomeIcon icon="shekel-sign" />
                         </ListItemIcon>
