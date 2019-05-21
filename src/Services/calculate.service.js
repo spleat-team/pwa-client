@@ -41,10 +41,10 @@ const CalculateService = () => {
 
     const areAllUsersFinished = (users, numberOfPeople) => {
 
-        return (getUserFinishedAmount(users)==numberOfPeople);
+        return (getFinishedUsersAmount(users)==numberOfPeople);
     }
 
-    const getUserFinishedAmount = (users) => {
+    const getFinishedUsersAmount = (users) => {
 
         var count = 0;
 
@@ -54,6 +54,10 @@ const CalculateService = () => {
         }
 
         return count;
+    }
+
+    const getUserDetails = (users, userId) => {
+            return users[findIndex(users, userId, 'email')];
     }
 
     const findIndex = (items, itemId, field) => {
@@ -125,9 +129,10 @@ const CalculateService = () => {
     return {
         finishSelectItems,
         //onDocumentUpdated,
-        getUserFinishedAmount,
+        getUserFinishedAmount: getFinishedUsersAmount,
         calculateBill,
-        areAllUsersFinished
+        areAllUsersFinished,
+        getUserDetails
     }
 };
 

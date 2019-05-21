@@ -26,6 +26,10 @@ function ItemsList (props){
     var db = firebase.app.firestore();
     const collectionName = 'receipts';
 
+    const isCurrentUserAlreadyFinished = (users, userId) => {
+        return CalculateService(props).getUserDetails(users, userId).isFinished;
+    }
+
     // const [checkedItems, setItemsChecked] = React.useState([]);
     const onDocumentUpdated = (groupId) => {
 
@@ -51,8 +55,10 @@ function ItemsList (props){
                         paymentPerUser: paymentPerUser
                     });
 
+                    dispatch({type: 'TOGGLE_LOADING'});
+
                     // move to payment page
-                   // props.history.push('/payment');
+                    props.history.push('/payment');
                 }
             });
     };
@@ -69,10 +75,12 @@ function ItemsList (props){
             .then((doc)=>{
 
                 setItems(doc.data().items);
-                dispatch({ type: 'SHARERS_COUNT', sharersCount: doc.data().numberOfPeople });
-                // setSharersCount(doc.data().numberOfPeople);
+                dispatch({type: 'SHARERS_COUNT', sharersCount: doc.data().numberOfPeople});
 
-                //setIsLoaded(true);
+                if (isCurrentUserAlreadyFinished(doc.data().users, state.user.email)) {
+                    props.history.push('/waiting');
+                }
+
                 dispatch({type: 'TOGGLE_LOADING'});
             })
             .catch(err => {

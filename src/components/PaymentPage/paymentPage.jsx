@@ -13,8 +13,8 @@ function PaymentPage () {
     const { paymentPerUser } = state;
 
     var currentUserId =
-        //todo: state.user.email;
-        "nave.coheng@gmail.com";
+         state.user.email;
+       // "nave.coheng@gmail.com";
         //
 
     //const [tip, setTip] = React.useState(10);
@@ -40,7 +40,8 @@ function PaymentPage () {
                     <FontAwesomeIcon icon="shekel-sign" />
                 </ListItemIcon>
             </h1>
-
+            <h5>(כולל טיפ)</h5>
+            <div style={{marginTop: 20 + 'px', marginBottom: 40 + 'px'}}>
                 {otherUsers.map((curr) => {
                     return  <h3 key={curr.email}>
                         {curr.name + " - " + curr.sum}
@@ -49,6 +50,7 @@ function PaymentPage () {
                         </ListItemIcon>
                     </h3>
                 })}
+            </div>
                 <Pay/>
         </div>
     );

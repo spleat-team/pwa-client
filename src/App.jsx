@@ -20,7 +20,7 @@ import AuthManager from './components/AuthManager';
 import PrivateRoute from './components/PrivateRoute';
 import PaymentPage from './components/PaymentPage/paymentPage';
 import ItemsList from './ItemsList';
-import WaitingPage from "./components/WaitingPage";
+import WaitingPage from './components/WaitingPage';
 
 const override = css`
   display: block;
@@ -50,6 +50,11 @@ const App = props => {
           {
             <Switch>
               <PrivateRoute exact path="/" component={ScanPage} />
+              <PrivateRoute
+                exact
+                path="/itemsList/:groupId?"
+                component={ItemsList}
+              />
               <Route path="/login" component={LoginPage} />
               <Route
                 path="/logout"
@@ -59,7 +64,7 @@ const App = props => {
               />
               <Route path="/payment" component={PaymentPage} />
               <Route path="/waiting" component={WaitingPage} />
-              <Route path="/itemsList/:groupId?" component={ItemsList} />
+              {/*<Route path="/itemsList/:groupId?" component={ItemsList} />*/}
               <Route component={NotFoundComponent} />
             </Switch>
           }
