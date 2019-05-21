@@ -13,7 +13,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
   const sharersCount = state.sharersCount;
   const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
   const onSharersCountChange = sharersCount =>
-    dispatch({ type: 'SHARERS_COUNT', count: sharersCount });
+    dispatch({ type: 'SHARERS_COUNT', sharersCount: sharersCount });
 
   // const [sharersCount, setSharersCount] = React.useState(0);
   // const [sharersCountDirty, setSharersCountDirty] = React.useState(false);

@@ -6,17 +6,23 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faHandPointLeft} from "@fortawesome/free-solid-svg-icons";
+import AlreadyFinishedStatus from "../SplitBill/AlreadyFinishedStatus";
 
 function WaitingPage (props) {
 
     const { state, dispatch } = React.useContext(Store);
+    const {sharersCount}=state;
   //  const { finishedCount,tip } = state;
-
+    React.useEffect(() => {
+        dispatch({type: 'TOGGLE_LOADING'});
+     }
+    , sharersCount);
 
     return (
 
         <div>
-            מסך המתנה יפה יפה
+          מחכים לשאר החבר'ה
+            <AlreadyFinishedStatus sharersCount={sharersCount} message={"סיימו"}/>
         </div>
     );
 }

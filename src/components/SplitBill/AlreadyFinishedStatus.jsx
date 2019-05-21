@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 function AlreadyFinishedStatus (props) {
 
     const { state, dispatch } = React.useContext(Store);
-    const {finishedCount} = state;
+    const {finishedCount,sharersCount} = state;
 
     const collectionName = 'receipts';
     const firebase = Firebase.initialize();
@@ -20,8 +20,8 @@ function AlreadyFinishedStatus (props) {
     return (
 
         <div>
-            <h3> { finishedCount } / {props.sharersCount}</h3>
-            <h4>מחכים לך</h4>
+            <h3> { finishedCount } / {sharersCount}</h3>
+            <h4>{props.message}</h4>
         </div>
 
     );

@@ -39,17 +39,21 @@ const CalculateService = () => {
         return (item.price / item.users.length)
     }
 
-    const isAllUserFinished = (users, numberOfPeople) => {
+    const areAllUsersFinished = (users, numberOfPeople) => {
 
-        var isEveryoneFinised = true;
-        var count=0;
+        return (getUserFinishedAmount(users)==numberOfPeople);
+    }
+
+    const getUserFinishedAmount = (users) => {
+
+        var count = 0;
+
         for (const currentUser of users) {
-            if (!currentUser.isFinished)
-                isEveryoneFinised = false;
-            else
+            if (currentUser.isFinished)
                 count++;
         }
-        return (isEveryoneFinised && count==numberOfPeople);
+
+        return count;
     }
 
     const findIndex = (items, itemId, field) => {
@@ -90,7 +94,7 @@ const CalculateService = () => {
                     .then((doc) => {
                         if (!doc.exists)
                             throw "The receipt doesn't exist";
-                        if (!isAllUserFinished(doc.data().users, doc.data().numberOfPeople)) {
+                        if (!areAllUsersFinished(doc.data().users, doc.data().numberOfPeople)) {
 
                             const cloneResponse = {...doc.data()};
                             cloneResponse.items = associateItemsPerUser(cloneResponse.items, currentUserId, checkedItems);
@@ -121,8 +125,9 @@ const CalculateService = () => {
     return {
         finishSelectItems,
         //onDocumentUpdated,
+        getUserFinishedAmount,
         calculateBill,
-        isAllUserFinished
+        areAllUsersFinished
     }
 };
 

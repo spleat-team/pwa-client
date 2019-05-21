@@ -10,21 +10,22 @@ import { Route } from 'react-router-dom';
 import CalculateService from "./Services/calculate.service.js";
 import {Firebase} from "./Firebase/firebase";
 import {Promise as reject} from "q";
+import {SyncLoader} from "react-spinners";
 
 function ItemsList (props){
     const { state, dispatch } = React.useContext(Store);
     const {checkedItems} = state;
-    const [isLoaded, setIsLoaded ] = React.useState(false);
+    //const [isLoaded, setIsLoaded ] = React.useState(false);
     const [items, setItems] = React.useState([]);
-    const [sharersCount, setSharersCount] = React.useState(0);
+    //const [sharersCount, setSharersCount] = React.useState(0);
 
     var handleToggle = {};
     var hasGroupNumber = true;
 
-
     const firebase = Firebase.initialize();
     var db = firebase.app.firestore();
     const collectionName = 'receipts';
+
     // const [checkedItems, setItemsChecked] = React.useState([]);
     const onDocumentUpdated = (groupId) => {
 
@@ -32,31 +33,47 @@ function ItemsList (props){
             .onSnapshot(function (doc) {
                 if (!doc.exists)
                     throw "The receipt doesn't exist";
-                if (CalculateService(props).isAllUserFinished(doc.data().users, doc.data().numberOfPeople)) {
+
+                // Set amount of users who finished selected items
+                dispatch({
+                    type: "FINISHED_SELECT_ITEMS",
+                    finishedCount: CalculateService(props).getUserFinishedAmount(doc.data().users)
+                });
+
+                // If all the users are done
+                if (CalculateService(props).areAllUsersFinished(doc.data().users, doc.data().numberOfPeople)) {
                     var paymentPerUser = CalculateService(props).calculateBill(doc.data());
                     console.log(paymentPerUser);
 
+                    // set the payment per user
                     dispatch({
                         type: "FINISHED_CALC",
                         paymentPerUser: paymentPerUser
                     });
-                    props.history.push('/payment');
+
+                    // move to payment page
+                   // props.history.push('/payment');
                 }
             });
     };
 
     React.useEffect(() => {
-        //CalculateService(props).onDocumentUpdated(props.match.params.groupId);
 
+        dispatch({
+            type: 'TOGGLE_LOADING',
+        });
 
+        // When the user get in at the first time - set the variables
         db.collection(collectionName).doc(props.match.params.groupId)
             .get()
             .then((doc)=>{
 
                 setItems(doc.data().items);
-                setSharersCount(doc.data().numberOfPeople);
-                console.log(items);
-                setIsLoaded(true);
+                dispatch({ type: 'SHARERS_COUNT', sharersCount: doc.data().numberOfPeople });
+                // setSharersCount(doc.data().numberOfPeople);
+
+                //setIsLoaded(true);
+                dispatch({type: 'TOGGLE_LOADING'});
             })
             .catch(err => {
                 console.error('firebase:error saving receipt', err);
@@ -108,9 +125,9 @@ function ItemsList (props){
               // TODO: Change url to pin code page
               <Route path="/login" component={LoginPage}/>
               :
-              (!isLoaded ?
-                  <Grid>טוען את פרטי הקבלה</Grid> :
-              <Grid style={{ overflowY: 'scroll'}}>
+              (state.loading ?
+                  <Grid> טוען את פרטי הקבלה</Grid> :
+              <Grid>
                   בחר את הפריטים שהזמנת
                   {items.map(currItem => (
                       <SelectingItem key={currItem._id.toString()}
@@ -119,10 +136,10 @@ function ItemsList (props){
                                          handleToggle(value)
                                      }}
                                      checked={checkedItems.indexOf(currItem._id.toString())}/>
-                  ))};
+                  ))}
                   <div>
                       <SelectTip/>
-                      <AlreadyFinishedStatus sharersCount={sharersCount}/>
+                      <AlreadyFinishedStatus message={"מחכים לך"}/>
                   </div>
                   <FinishedForm props={props}/>
               </Grid>)

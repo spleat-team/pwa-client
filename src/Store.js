@@ -104,7 +104,7 @@ function reducer(state, action) {
     case 'USER_LOGOUT':
       return { ...state, userLoggedIn: false, user: null };
     case 'SHARERS_COUNT':
-      return { ...state, sharersCount: action.count };
+      return { ...state, sharersCount: action.sharersCount };
     case 'SET_PINCODE':
       return { ...state, pincode: action.payload };
     //todo: think if it's necessary
