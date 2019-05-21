@@ -12,13 +12,13 @@ function FinishedForm (props) {
     library.add(faHandPointLeft);
 
     const { state, dispatch } = React.useContext(Store);
-    const { finishedCount } = state;
+    const { finishedCount,tip } = state;
 
     const onSomeoneFinished = finishedCount => {
         dispatch({type: 'FINISHED_SELECT_ITEMS', finishedCount: finishedCount});
-        // todo: change
-        //state.user.email
-        CalculateService(props).finishSelectItems(props.groupId , "nave.coheng@gmail.com", state.checkedItems);
+        //"nave.coheng@gmail.com"
+        CalculateService(props).finishSelectItems(props.props.match.params.groupId , state.user.email, state.checkedItems, tip);
+        props.props.history.push('/waiting');
     }
 
     return (

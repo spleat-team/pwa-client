@@ -7,8 +7,10 @@ import Grid from "@material-ui/core/Grid";
 
 function SelectTip () {
 
-    const { dispatch } = React.useContext(Store);
-    const [tip, setTip ] = React.useState(10);
+    const { state, dispatch } = React.useContext(Store);
+    //const [tip, setTip ] = React.useState(10);
+    const {tip} = state;
+    const onTipSelected = tip => dispatch({type: 'TIP_SELECTED', tip: tip});
 
     return (
 
@@ -19,7 +21,8 @@ function SelectTip () {
                 style={{marginTop: '15px', marginRight: '30px'}}
                 id="tip"
                 value={tip}
-                onChange={(event) => setTip(event.target.value)}
+                //onChange={(event) => setTip(event.target.value)}
+                onChange={(event) => onTipSelected(event.target.value)}
                 type="number"
                 min={0}
                 InputProps={{min: 0, startAdornment: <InputAdornment position="start">%</InputAdornment>}}

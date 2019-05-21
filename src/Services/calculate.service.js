@@ -13,7 +13,7 @@ const CalculateService = () => {
 
     const calculateBill = (receipt) => {
         var users = receipt.users.map((user) => {
-            return {'email': user.email, 'sum': 0};
+            return {'email': user.email, 'sum': 0, name: user.name};
         })
 
         receipt.items.forEach((item) => {
@@ -22,26 +22,34 @@ const CalculateService = () => {
             // Add the price item for each user
             item.users.forEach((user) => {
                 var userIndex = findIndex(users, user, 'email');
-                users[userIndex].sum += pricePerItem;
+                var userTip = getUserTip(receipt.users, user);
+                users[userIndex].sum += (pricePerItem + pricePerItem*(userTip/100));
             })
         })
 
         return users;
     }
 
+    const getUserTip = (users, userId) => {
+        var index = findIndex(users, userId, 'email');
+        return users[index].tip;
+    }
+
     const getPriceAfterSplit = (item) => {
         return (item.price / item.users.length)
     }
 
-    const isAllUserFinished = (users) => {
+    const isAllUserFinished = (users, numberOfPeople) => {
 
         var isEveryoneFinised = true;
-
+        var count=0;
         for (const currentUser of users) {
             if (!currentUser.isFinished)
                 isEveryoneFinised = false;
+            else
+                count++;
         }
-        return isEveryoneFinised;
+        return (isEveryoneFinised && count==numberOfPeople);
     }
 
     const findIndex = (items, itemId, field) => {
@@ -58,18 +66,20 @@ const CalculateService = () => {
             // If the item exists
             if (itemIndex !== -1) {
 
-                // Add the user to users array of the current item
-                allItems[itemIndex].users.push(currentUserId);
+                var isExist = allItems[itemIndex].users.find((user)=>{
+                   return user == currentUserId
+                });
+
+                // Add the user to users array of the current item if it doesn't exist
+                if (!isExist)
+                    allItems[itemIndex].users.push(currentUserId);
             }
         });
 
         return allItems;
     }
 
-    function finishSelectItems(receiptPinCode, currentUserId, checkedItems) {
-
-        //currentUserId = state.user.email;
-            //"nave.coheng@gmail.com";
+    function finishSelectItems(receiptPinCode, currentUserId, checkedItems, tip) {
 
         // Create reference to the receipt doc
         var receiptDocRef = db.collection(collectionName).doc(receiptPinCode);
@@ -80,7 +90,7 @@ const CalculateService = () => {
                     .then((doc) => {
                         if (!doc.exists)
                             throw "The receipt doesn't exist";
-                        if (!isAllUserFinished(doc.data().users)) {
+                        if (!isAllUserFinished(doc.data().users, doc.data().numberOfPeople)) {
 
                             const cloneResponse = {...doc.data()};
                             cloneResponse.items = associateItemsPerUser(cloneResponse.items, currentUserId, checkedItems);
@@ -88,6 +98,7 @@ const CalculateService = () => {
                             // Change the status of user to 'finished'
                             var userIndex = findIndex(cloneResponse.users, currentUserId, 'email');
                             cloneResponse.users[userIndex].isFinished = true;
+                            cloneResponse.users[userIndex].tip = parseInt(tip);
                             transaction.update(receiptDocRef, cloneResponse);
                         }
                     })

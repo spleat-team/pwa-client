@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faShekelSign}  from '@fortawesome/free-solid-svg-icons'
 import {Store} from "../../Store";
-import {calculateService} from "../../Services/receipt.service";
 
 function SelectingItem (props) {
 

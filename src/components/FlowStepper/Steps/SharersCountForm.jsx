@@ -10,14 +10,13 @@ var classNames = require('classnames');
 function SharersCountForm(classes, backCallback, nextCallback) {
   const { state, dispatch } = React.useContext(Store);
 
-
-    const sharersCount = state.sharersCount;
-    const [sharersCountDirty, setSharersCountDirty ] = React.useState(false);
-    const onSharersCountChange = sharersCount => dispatch({type: 'SHARERS_COUNT', count: sharersCount});
+  const sharersCount = state.sharersCount;
+  const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
+  const onSharersCountChange = sharersCount =>
+    dispatch({ type: 'SHARERS_COUNT', count: sharersCount });
 
   // const [sharersCount, setSharersCount] = React.useState(0);
   // const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
-
 
   let inputProps =
     sharersCount > 1
@@ -45,6 +44,8 @@ function SharersCountForm(classes, backCallback, nextCallback) {
     dispatch({ type: 'SET_NUM_OF_PEOPLE', payload: sharersCount });
     // Generate pin code
     const pincode = generatePinCode();
+    dispatch({ type: 'SET_PINCODE', payload: pincode });
+
     const items = state.receiptItems.map((item, index) => {
       return {
         _id: index,
@@ -72,38 +73,38 @@ function SharersCountForm(classes, backCallback, nextCallback) {
       });
   };
 
-    return (
-      <form onSubmit={nextCallback}>
-        <TextField
-          autoFocus
-          style={{marginTop: '15px'}}
-          id="outlined-simple-start-adornment"
-          className={inputState}
-          variant="outlined"
-          label="כמות סועדים בארוחה"
-          type="number"
-          InputProps={inputProps}
-          onChange={(event) => {
-            setSharersCountDirty(true)
-            onSharersCountChange(event.target.value) }
-          }
-          value={sharersCountDirty ? sharersCount: ''}
-          helperText={sharersCountDirty && sharersCount == 0 ? 'אחי.....':'' }
-          error={sharersCountDirty && sharersCount == 0}
-        />
-        { (sharersCountDirty && sharersCount > 0) &&
-          (<Button
-            type='submit'
-            variant="contained"
-            color="primary"
-            style={{width: '90px', marginTop: '15px'}}
-            onClick={ nextCallback }
-            className={classes.button}>
-            סיימתי!
-          </Button>)
-        }
-      </form>
-    );
+  return (
+    <form>
+      <TextField
+        autoFocus
+        style={{ marginTop: '15px' }}
+        id="outlined-simple-start-adornment"
+        className={inputState}
+        variant="outlined"
+        label="כמות סועדים בארוחה"
+        type="number"
+        InputProps={inputProps}
+        onChange={event => {
+          setSharersCountDirty(true);
+          onSharersCountChange(event.target.value);
+        }}
+        value={sharersCountDirty ? sharersCount : ''}
+        helperText={sharersCountDirty && sharersCount == 0 ? 'אחי.....' : ''}
+        error={sharersCountDirty && sharersCount == 0}
+      />
+      {sharersCountDirty && sharersCount > 0 && (
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ width: '90px', marginTop: '15px' }}
+          onClick={onFinished}
+          className={classes.button}
+        >
+          סיימתי!
+        </Button>
+      )}
+    </form>
+  );
 }
 
 export default SharersCountForm;
