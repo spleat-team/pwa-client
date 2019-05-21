@@ -88,46 +88,45 @@ const LoginPage = props => {
 
   const componentClicked = () => console.log('clicked');
 
-  // TODO: set the previos page to go back (if exists)
-  let from = { from: { pathname: '/' } }; // props.location.state || { from: { pathname: '/' } };
+  let from =
+    props.location && props.location.state
+      ? props.location.state
+      : { from: { pathname: '/' } };
+
+  if (state.user && state.userLoggedIn && firebase.app.auth().currentUser) {
+    return <Redirect to={from.from} />;
+  }
 
   return (
     <div className="App">
       <img src={logo} className="App-logo" alt="Spleat Logo" />
       {error ? <p>אופס.. משהו השתבש, נסו שנית!</p> : null}
-      {!state.user ||
-      !state.userLoggedIn ||
-      !firebase.app.auth().currentUser ? (
+      <div style={{ marginTop: '30%' }}>
+        <p style={{ marginLeft: '7%', marginRight: '7%', direction: 'rtl' }}>
+          לפני שנתחיל - היינו רוצים להכיר אותך קצת יותר טוב, מה דעתך על לחבר את
+          הפייסבוק?
+        </p>
         <div style={{ marginTop: '30%' }}>
-          <p style={{ marginLeft: '7%', marginRight: '7%', direction: 'rtl' }}>
-            לפני שנתחיל - היינו רוצים להכיר אותך קצת יותר טוב, מה דעתך על לחבר
-            את הפייסבוק?
-          </p>
-          <div style={{ marginTop: '30%' }}>
-            {
-              // <FacebookLoginWithButton
-              //     appId="339944453372114"
-              //     autoLoad={false}
-              //     fields="name,email,picture"
-              //     onClick={componentClicked}
-              //     callback={facebookLoginCallback}
-              //   />
-            }
-            <StyledFirebaseAuth
-              uiConfig={uiConfig}
-              firebaseAuth={firebase.app.auth()}
-              // .signInWithPopup(provider)
-              // .then(result => {
-              //   console.log(result);
-              // })
-              // .catch(error => console.log('kaki ', error))}
-            />
-          </div>
+          {
+            // <FacebookLoginWithButton
+            //     appId="339944453372114"
+            //     autoLoad={false}
+            //     fields="name,email,picture"
+            //     onClick={componentClicked}
+            //     callback={facebookLoginCallback}
+            //   />
+          }
+          <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={firebase.app.auth()}
+            // .signInWithPopup(provider)
+            // .then(result => {
+            //   console.log(result);
+            // })
+            // .catch(error => console.log('kaki ', error))}
+          />
         </div>
-      ) : (
-        // TODO : Redirect to where the user came from
-        <Redirect to={from} />
-      )}
+      </div>
     </div>
   );
 };
