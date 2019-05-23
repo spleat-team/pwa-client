@@ -1,4 +1,5 @@
 {
+
   "name": "Spleat",
   "short_name": "Spleat",
   "description": "Application for splitting the check and paying with ease!",
@@ -16,3 +17,4 @@
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
+
