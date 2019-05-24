@@ -34,31 +34,64 @@ function ItemsList (props){
     //     return CalculateService(props).getUserDetails(users, userId);
     // }
 
-    const addUserIfDoesntExist = (usersInReceipt ) => {
+    const resetUserSelection = (userId, allItem) => {
+
+        allItem.forEach((item) => {
+            var index = CalculateService(props).findIndex(item.users, userId);
+            if (index != -1)
+                item.users.splice(index, 1)
+        })
+
+        return allItem;
+    }
+
+    const addUserIfDoesntExist = (data) => {
+
+        var usersInReceipt = data.users;
+
+        var userToInsert = {
+            email: state.user.email,
+            name: state.user.displayName,
+            isFinished: false,
+            tip: 10
+        };
+
+        var updateItems = data.items;
+
         // If the user doesn't exist in users array in receipt add it
+        // This is the first time the user enter to this page
         if (usersInReceipt != undefined &&
             CalculateService(props).getUserDetails(usersInReceipt, state.user.email) == undefined) {
 
-            var userToInsert = {
-                email: state.user.email,
-                name: state.user.displayName,
-                isFinished: false,
-                tip: 10
-            };
+            // If the user exist or not, we need to reset his details
             usersInReceipt.push(userToInsert);
-
-            // Update the user in receipt
-            db.collection(collectionName).doc(props.match.params.groupId)
-                .update({users: usersInReceipt})
-                .then(function() {
-                    console.log("Users successfully updated!");
-                })
-                .catch(function(error) {
-                    // The document probably doesn't exist.
-                    console.error("Error updating document: ", error);
-                })
         }
+        // The user is exist
+        // The user came back from waiting page (he finished to select items, and than regret)
+        else {
+            var index = CalculateService(props).findIndex(usersInReceipt, state.user.email, 'email');
+
+            // Reset the user details
+            usersInReceipt[index] = userToInsert;
+
+            // Reset the user selection items
+            updateItems = resetUserSelection(state.user.email, data.items)
+        }
+
+        // Update the user in receipt
+        db.collection(collectionName).doc(props.match.params.groupId)
+            .update({users: usersInReceipt, items: updateItems})
+            .then(function() {
+                console.log("Users successfully updated!");
+            })
+            .catch(function(error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+
+         return {usersInReceipt};
     }
+
     // const [checkedItems, setItemsChecked] = React.useState([]);
     const onDocumentUpdated = (groupId) => {
 
@@ -92,13 +125,15 @@ function ItemsList (props){
             });
     };
 
+    // When page is created - the user can get in to this page in two cases:
+    // 1. The user got a link with a pincode
+    // 2. The user came back from waiting page( he finished to select items, and than regret)
     React.useEffect(() => {
 
         dispatch({
             type: 'TOGGLE_LOADING',
         });
 
-        var usersInReceipt;
         // When the user get in at the first time - set the variables
         db.collection(collectionName).doc(props.match.params.groupId)
             .get()
@@ -107,13 +142,13 @@ function ItemsList (props){
                 setItems(doc.data().items);
                 dispatch({type: 'SHARERS_COUNT', sharersCount: doc.data().numberOfPeople});
 
-                addUserIfDoesntExist(doc.data().users);
+                // ?????
+                var {usersInReceipt} = addUserIfDoesntExist(doc.data());
 
                 //  Check if the user already finished
-                var useDetails = CalculateService(props).getUserDetails(doc.data().users, state.user.email);
+                var useDetails = CalculateService(props).getUserDetails(usersInReceipt, state.user.email);
                 if (useDetails != undefined && useDetails.isFinished) {
                     props.history.push('/waiting');
-
                 }
                 dispatch({type: 'TOGGLE_LOADING'});
             })
