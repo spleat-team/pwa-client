@@ -45,6 +45,8 @@ function ItemsList (props){
         return allItem;
     }
 
+    // Add the user to users array and reset his selections
+    // If all users are finished - move to payment page
     const addUserIfDoesntExist = (data) => {
 
         var usersInReceipt = data.users;
@@ -83,6 +85,8 @@ function ItemsList (props){
             .update({users: usersInReceipt, items: updateItems})
             .then(function() {
                 console.log("Users successfully updated!");
+
+                onDocumentUpdated(props.match.params.groupId);
             })
             .catch(function(error) {
                 // The document probably doesn't exist.
@@ -142,10 +146,11 @@ function ItemsList (props){
                 setItems(doc.data().items);
                 dispatch({type: 'SHARERS_COUNT', sharersCount: doc.data().numberOfPeople});
 
-                // ?????
+                // Add the user to users array and reset his selections
                 var {usersInReceipt} = addUserIfDoesntExist(doc.data());
 
-                //  Check if the user already finished
+                // If we are here, not all users are finished
+                //  Check if the current user is already finished
                 var useDetails = CalculateService(props).getUserDetails(usersInReceipt, state.user.email);
                 if (useDetails != undefined && useDetails.isFinished) {
                     props.history.push('/waiting');
@@ -157,8 +162,6 @@ function ItemsList (props){
                 reject(err);
             });
 
-
-        onDocumentUpdated(props.match.params.groupId);
     }, [props.match.params.groupId]);
 
     if (!props.match.params.groupId) {
