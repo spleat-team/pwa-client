@@ -60,8 +60,9 @@ const CalculateService = () => {
         var count = 0;
 
         for (const currentUser of users) {
-            if (currentUser.isFinished)
+            if (currentUser.isFinished) {
                 count++;
+            }
         }
 
         return count;
