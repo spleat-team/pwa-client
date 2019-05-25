@@ -11,6 +11,17 @@ const CalculateService = () => {
     const firebase = Firebase.initialize();
     var db = firebase.app.firestore();
 
+
+    const findIndex = (items, itemId, ...field) => {
+        return items.findIndex(item => {
+
+            if (field.length > 0)
+                return item[field].toString() == itemId
+            else
+                return item.toString() == itemId
+        })
+    }
+
     const calculateBill = (receipt) => {
         var users = receipt.users.map((user) => {
             return {'email': user.email, 'sum': 0, name: user.name};
@@ -22,7 +33,7 @@ const CalculateService = () => {
             // Add the price item for each user
             item.users.forEach((user) => {
                 var userIndex = findIndex(users, user, 'email');
-                var userTip = getUserTip(receipt.users, user);
+                var userTip = getUserDetails(receipt.users, user).tip;
                 users[userIndex].sum += (pricePerItem + pricePerItem*(userTip/100));
             })
         })
@@ -30,10 +41,10 @@ const CalculateService = () => {
         return users;
     }
 
-    const getUserTip = (users, userId) => {
-        var index = findIndex(users, userId, 'email');
-        return users[index].tip;
-    }
+    // const getUserTip = (users, userId) => {
+    //     var index = findIndex(users, userId, 'email');
+    //     return users[index].tip;
+    // }
 
     const getPriceAfterSplit = (item) => {
         return (item.price / item.users.length)
@@ -60,11 +71,6 @@ const CalculateService = () => {
             return users[findIndex(users, userId, 'email')];
     }
 
-    const findIndex = (items, itemId, field) => {
-        return items.findIndex(item => {
-            return item[field].toString() == itemId
-        })
-    }
 
     const associateItemsPerUser = (allItems, currentUserId, checkedItems) => {
 
@@ -127,12 +133,13 @@ const CalculateService = () => {
     };
     //
     return {
+        findIndex,
         finishSelectItems,
-        //onDocumentUpdated,
-        getUserFinishedAmount: getFinishedUsersAmount,
+        getFinishedUsersAmount,
         calculateBill,
         areAllUsersFinished,
         getUserDetails
+
     }
 };
 
