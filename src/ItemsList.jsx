@@ -107,7 +107,7 @@ function ItemsList (props){
                 // Set amount of users who finished selected items
                 dispatch({
                     type: "FINISHED_SELECT_ITEMS",
-                    finishedCount: CalculateService(props).getUserFinishedAmount(doc.data().users)
+                    finishedCount: CalculateService(props).getFinishedUsersAmount(doc.data().users)
                 });
 
                 // If all the users are done

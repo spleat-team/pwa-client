@@ -135,8 +135,7 @@ const CalculateService = () => {
     return {
         findIndex,
         finishSelectItems,
-        //onDocumentUpdated,
-        getUserFinishedAmount: getFinishedUsersAmount,
+        getFinishedUsersAmount,
         calculateBill,
         areAllUsersFinished,
         getUserDetails
