@@ -9,19 +9,13 @@ import Pay from "./pay";
 function PaymentPage () {
     library.add(faShekelSign);
 
-    const { state, dispatch } = React.useContext(Store);
+    const { state } = React.useContext(Store);
     const { paymentPerUser } = state;
 
     var currentUserId =
          state.user.email;
-       // "nave.coheng@gmail.com";
-        //
 
-    //const [tip, setTip] = React.useState(10);
 
-    // var currentUserObject = paymentPerUser.find((user) => {
-    //     return user.email == currentUserId
-    // });
     var userIndex = paymentPerUser.findIndex((user)=>{
         return user.email==currentUserId
     });
@@ -31,7 +25,6 @@ function PaymentPage () {
 
     otherUsers.splice(userIndex, 1);
     return (
-
         <div>
             <h1>החשבון שלך </h1>
             <h1 dir={"rtl"}>

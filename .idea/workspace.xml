@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="113ebb13-4639-49f3-869c-e92bb5bd3d10" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ItemsList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ItemsList.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Services/calculate.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/calculate.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PrivateRoute/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PrivateRoute/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/WaitingPage/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/WaitingPage/index.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,7 +23,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Store.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
+            <state relative-caret-position="2530">
               <caret line="110" column="31" selection-start-line="110" selection-start-column="10" selection-end-line="110" selection-end-column="31" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -41,17 +45,36 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Services/calculate.service.js">
+        <entry file="file://$PROJECT_DIR$/src/components/FlowStepper/Steps/ReceiptShoot.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="137" column="31" lean-forward="true" selection-start-line="137" selection-start-column="31" selection-end-line="137" selection-end-column="31" />
+            <state relative-caret-position="92">
+              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
               <folding>
-                <element signature="e#0#40#0" expanded="true" />
-                <element signature="e#1196#1251#0" />
-                <element signature="e#1312#1384#0" />
-                <element signature="e#1432#1605#0" />
-                <element signature="e#1653#1721#0" />
-                <element signature="e#1961#2528#0" />
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/AuthManager/index.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-23">
+              <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/PrivateRoute/index.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,8 +83,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/WaitingPage/index.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="92">
+              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -72,22 +95,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="39" column="58" lean-forward="true" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
+            <state relative-caret-position="253">
+              <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/ScanPage/index.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
-              <folding>
-                <element signature="e#1#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,32 +107,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ItemsList.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
+            <state relative-caret-position="253">
+              <caret line="189" column="34" lean-forward="true" selection-start-line="189" selection-start-column="34" selection-end-line="189" selection-end-column="34" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#1480#1487#0" />
+                <element signature="e#1484#2558#0" />
+                <element signature="e#2543#3689#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/SplitBill/AlreadyFinishedStatus.jsx">
+        <entry file="file://$PROJECT_DIR$/src/components/FlowStepper/Steps/PinCode.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/SplitBill/FinishForm.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
+            <state relative-caret-position="598">
+              <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -132,8 +134,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
+            <state relative-caret-position="184">
+              <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -153,10 +155,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isAllUserFinished</find>
-      <find>toggle</find>
-      <find>loading</find>
-      <find>isLoaded</find>
       <find>pay</find>
       <find>SHARERS_COUNT</find>
       <find>sharersCount</find>
@@ -171,8 +169,6 @@
       <find>setUserDetails</find>
       <find>map</find>
       <find>finish</find>
-      <find>finishedCount</find>
-      <find>count</find>
       <find>splice</find>
       <find>FINISHED_SELECT_ITEMS</find>
       <find>findIndex</find>
@@ -183,6 +179,12 @@
       <find>getuser</find>
       <find>getuserfin</find>
       <find>getFinishedUsersAmount</find>
+      <find>count</find>
+      <find>isfinis</find>
+      <find>finishedCount</find>
+      <find>Redirect</find>
+      <find>useEffect</find>
+      <find>has</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\adi\programming\finalProject\pwa-client\node_modules</dir>
@@ -228,11 +230,12 @@
         <option value="$PROJECT_DIR$/src/components/SplitBill/AlreadyFinishedStatus.jsx" />
         <option value="$PROJECT_DIR$/src/components/FlowStepper/Steps/SharersCountForm.jsx" />
         <option value="$PROJECT_DIR$/src/Store.js" />
-        <option value="$PROJECT_DIR$/src/components/WaitingPage/index.jsx" />
-        <option value="$PROJECT_DIR$/src/App.jsx" />
-        <option value="$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx" />
-        <option value="$PROJECT_DIR$/src/ItemsList.jsx" />
         <option value="$PROJECT_DIR$/src/Services/calculate.service.js" />
+        <option value="$PROJECT_DIR$/src/App.jsx" />
+        <option value="$PROJECT_DIR$/src/ItemsList.jsx" />
+        <option value="$PROJECT_DIR$/src/components/WaitingPage/index.jsx" />
+        <option value="$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx" />
+        <option value="$PROJECT_DIR$/src/components/PrivateRoute/index.jsx" />
       </list>
     </option>
   </component>
@@ -275,7 +278,15 @@
               <item name="pwa-client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="PaymentPage" type="462c0819:PsiDirectoryNode" />
+              <item name="FlowStepper" type="462c0819:PsiDirectoryNode" />
+              <item name="Steps" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pwa-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pwa-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="PrivateRoute" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pwa-client" type="b2602c69:ProjectViewProjectNode" />
@@ -353,12 +364,12 @@
       <workItem from="1558338644149" duration="4403000" />
       <workItem from="1558344014901" duration="4903000" />
       <workItem from="1558364594160" duration="43864000" />
-      <workItem from="1558636004328" duration="10641000" />
+      <workItem from="1558636004328" duration="18253000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185554000" />
+    <option name="totallyTimeSpent" value="193166000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
@@ -467,16 +478,6 @@
             <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/FlowStepper/Steps/ReceiptShoot.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="25" column="14" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -616,16 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/FlowStepper/Steps/PinCode.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/PaymentPage/pay.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -666,26 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/WaitingPage/index.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ScanPage/index.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#1#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/SplitBill/FinishForm.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
@@ -706,20 +677,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/Services/calculate.service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="39" column="58" lean-forward="true" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
+        <state relative-caret-position="242">
+          <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#1196#1251#0" />
+            <element signature="e#1312#1384#0" />
+            <element signature="e#1653#1721#0" />
+            <element signature="e#1961#2528#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Store.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
+        <state relative-caret-position="2530">
           <caret line="110" column="31" selection-start-line="110" selection-start-column="10" selection-end-line="110" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ScanPage/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#1#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/AuthManager/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-23">
+          <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -728,10 +723,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
+        <state relative-caret-position="184">
+          <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/FlowStepper/Steps/PinCode.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -746,27 +751,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/calculate.service.js">
+    <entry file="file://$PROJECT_DIR$/src/components/FlowStepper/Steps/ReceiptShoot.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="137" column="31" lean-forward="true" selection-start-line="137" selection-start-column="31" selection-end-line="137" selection-end-column="31" />
+        <state relative-caret-position="92">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
-            <element signature="e#1196#1251#0" />
-            <element signature="e#1312#1384#0" />
-            <element signature="e#1432#1605#0" />
-            <element signature="e#1653#1721#0" />
-            <element signature="e#1961#2528#0" />
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/WaitingPage/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/PrivateRoute/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/PaymentPage/paymentPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ItemsList.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
+        <state relative-caret-position="253">
+          <caret line="189" column="34" lean-forward="true" selection-start-line="189" selection-start-column="34" selection-end-line="189" selection-end-column="34" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#1480#1487#0" />
+            <element signature="e#1484#2558#0" />
+            <element signature="e#2543#3689#0" />
           </folding>
         </state>
       </provider>
