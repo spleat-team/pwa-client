@@ -1,12 +1,15 @@
 import React from 'react';
 import Fab from '@material-ui/core/Fab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import ReceiptLifecycle from '../../../ReceiptLifecycle';
 import { Store } from '../../../Store';
+import { Typography, TextField } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 function ReceiptShootForm(classes, nextCallback) {
   const { state, dispatch } = React.useContext(Store);
+  const [pincodeText, setPincodeText] = React.useState('');
 
   const onFormSubmit = e => {
     // TODO : Navigate to sanduri's page with the router
@@ -54,6 +57,30 @@ function ReceiptShootForm(classes, nextCallback) {
           <FontAwesomeIcon icon={faCamera} />
         </Fab>
       </label>
+      <div style={{ marginTop: '5px' }}>
+        <Typography>או</Typography>
+      </div>
+      <div style={{ marginTop: '5px', display: 'inline-flex' }}>
+        <TextField
+          id="pincode_text"
+          variant="outlined"
+          label="מספר קבוצה"
+          type="text"
+          value={pincodeText}
+          onChange={e => setPincodeText(e.target.value)}
+        />
+        <Link to={`/itemsList/${pincodeText}`}>
+          <Fab
+            color="primary"
+            aria-label="צלם"
+            type="file"
+            component="span"
+            style={{ marginRight: '5px', backgroundColor: '#4caf50' }}
+          >
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </Fab>
+        </Link>
+      </div>
     </form>
   );
 }

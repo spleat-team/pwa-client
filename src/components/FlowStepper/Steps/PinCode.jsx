@@ -4,7 +4,7 @@ import ReactShare from 'react-share-simplified';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import '../../../App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 var classNames = require('classnames');
 
