@@ -58,9 +58,8 @@ const App = props => {
                   return <LoginPage isLogOut={true} />;
                 }}
               />
-              <Route path="/payment" component={PaymentPage} />
-              <Route path="/waiting" component={WaitingPage} />
-              {/*<Route path="/itemsList/:groupId?" component={ItemsList} />*/}
+              <PrivateRoute path="/payment" component={PaymentPage}/>
+              <PrivateRoute path="/waiting" component={WaitingPage} />
               <Route component={NotFoundComponent} />
             </Switch>
           }

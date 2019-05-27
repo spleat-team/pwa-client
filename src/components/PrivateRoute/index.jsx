@@ -11,6 +11,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       exact={rest.exact}
       render={props =>
         state.userLoggedIn ? (
+
+            // When the page is loaded at the first time:
+            // If the user arrive to this page from the regular flow - show it, if he enter a url - redirect to home page
+            (props.history.action != 'PUSH' &&
+                (props.match.url == '/payment' ||
+                props.match.url == '/waiting' ||
+                props.match.url == '/itemsList')) ?
+                <Redirect to={{pathname: '/'}}/> :
           <Component {...props} />
         ) : (
           <Redirect

@@ -2,10 +2,10 @@ import React from 'react';
 import { Store } from '../../Store';
 import AlreadyFinishedStatus from '../SplitBill/AlreadyFinishedStatus';
 
-function WaitingPage(props) {
+function WaitingPage() {
   const { state, dispatch } = React.useContext(Store);
   const { sharersCount } = state;
-  //  const { finishedCount,tip } = state;
+
   React.useEffect(() => {
     dispatch({ type: 'TOGGLE_LOADING' });
   }, sharersCount);

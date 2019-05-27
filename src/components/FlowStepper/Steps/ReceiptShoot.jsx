@@ -38,17 +38,17 @@ function ReceiptShootForm(classes, nextCallback) {
         accept="image/*"
         className={classes.input}
         id="raised-button-file"
-        multiple
         type="file"
         onChange={onSelectFile}
       />
       <label htmlFor="raised-button-file">
         <Fab
-          color="primary"
+          color='secondary'
           aria-label="צלם"
           type="file"
           component="span"
           className={classes.button}
+          
         >
           <FontAwesomeIcon icon={faCamera} />
         </Fab>

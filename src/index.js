@@ -12,6 +12,8 @@ import {
   MuiThemeProvider,
   createMuiTheme,
 } from '@material-ui/core/styles';
+import { blue, yellow } from '@material-ui/core/colors';
+
 import App from './App';
 import Firebase, { FirebaseContext } from './Firebase';
 
@@ -20,6 +22,16 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const theme = createMuiTheme({
   direction: 'rtl', // Both here and <body dir="rtl">
+  palette: {
+    primary: {
+      main: '#4197ED',
+      contrastText: '#fff',
+    },
+    secondary: {
+      main: '#ffea00',
+      contrastText: '#1f5488',
+    },
+  },
 });
 
 // Custom Material-UI class name generator. //for rtl support

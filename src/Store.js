@@ -82,7 +82,7 @@ function reducer(state, action) {
     case ReceiptLifecycle.RECEIPT_CHECKED: {
       let errorMessage =
         action.payload === 1
-          ? null
+          ? ''
           : 'לא מצאנו קבלה בתמונה, נסו להעלות תמונה טובה יותר או להתמקד על אזור המנות בקבלה בבקשה';
       return {
         ...state,

@@ -74,7 +74,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
   };
 
   return (
-    <form>
+    <form onSubmit={nextCallback}>
       <TextField
         autoFocus
         style={{ marginTop: '15px' }}
@@ -103,10 +103,10 @@ function SharersCountForm(classes, backCallback, nextCallback) {
         </Button>
         {sharersCountDirty && sharersCount > 0 && (
           <Button
-            variant="contained"
             color="primary"
+            variant="contained"
             style={{ width: '90px', marginRight: '15px', marginTop: '10px' }}
-            onClick={onFinished}
+            onClick={nextCallback}
             className={classes.button}
           >
             סיימתי!

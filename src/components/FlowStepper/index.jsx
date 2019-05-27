@@ -73,6 +73,8 @@ const VerticalLinearStepper = props => {
     button: {
       marginTop: theme.spacing.unit * 2,
       marginRight: theme.spacing.unit,
+      backgroundColor: '#4197ED',
+      color: '#4197ED',
     },
     backButton: {
       marginTop: theme.spacing.unit * 2,
@@ -183,7 +185,7 @@ const VerticalLinearStepper = props => {
     },
     active: {
       fontSize: '20px',
-      color: 'rgb(63, 81, 181)!important',
+      color: '#4197ED!important',
     },
   })(StepLabel);
 
