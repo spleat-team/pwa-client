@@ -48,7 +48,6 @@ const LoginPage = props => {
     //firebase.auth().signOut();
     firebase.app.auth().onAuthStateChanged(user => {
       if (user != null) {
-        console.log('back from facebook with : ', user);
         setIsSignedIn(!!user);
         setUsersCookie(JSON.stringify(user), { expired: 7 }); // TODO : Take the expiry date from the response
         dispatch({
@@ -60,9 +59,7 @@ const LoginPage = props => {
   });
 
   React.useEffect(() => {
-    console.log('effect in LoginPage with props: ', props);
     if (props.isLogOut) {
-      console.log('logged out...');
       removeUsersCookie();
       dispatch({
         type: 'USER_LOGOUT',
@@ -71,8 +68,6 @@ const LoginPage = props => {
   }, [props.isLogOut]);
 
   const facebookLoginCallback = response => {
-    console.log('back from facebook with : ', response);
-
     if (response && response.name) {
       setUsersCookie(JSON.stringify(response), { expired: 7 }); // TODO : Take the expiry date from the response
       dispatch({
@@ -102,20 +97,7 @@ const LoginPage = props => {
       <img src={logo} className="App-logo" alt="Spleat Logo" />
       {error ? <p>אופס.. משהו השתבש, נסו שנית!</p> : null}
       <div style={{ marginTop: '30%' }}>
-        <p style={{ marginLeft: '7%', marginRight: '7%', direction: 'rtl' }}>
-          לפני שנתחיל - היינו רוצים להכיר אותך קצת יותר טוב, מה דעתך על לחבר את
-          הפייסבוק?
-        </p>
         <div style={{ marginTop: '30%' }}>
-          {
-            // <FacebookLoginWithButton
-            //     appId="339944453372114"
-            //     autoLoad={false}
-            //     fields="name,email,picture"
-            //     onClick={componentClicked}
-            //     callback={facebookLoginCallback}
-            //   />
-          }
           <StyledFirebaseAuth
             uiConfig={uiConfig}
             firebaseAuth={firebase.app.auth()}

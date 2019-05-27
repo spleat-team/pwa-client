@@ -89,20 +89,30 @@ function SharersCountForm(classes, backCallback, nextCallback) {
           onSharersCountChange(event.target.value);
         }}
         value={sharersCountDirty ? sharersCount : ''}
-        helperText={sharersCountDirty && sharersCount == 0 ? 'אחי.....' : ''}
-        error={sharersCountDirty && sharersCount == 0}
+        helperText={sharersCountDirty && sharersCount === 0 ? 'אחי.....' : ''}
+        error={sharersCountDirty && sharersCount === 0}
       />
-      {sharersCountDirty && sharersCount > 0 && (
+      <div>
         <Button
-          variant="contained"
-          color="primary"
-          style={{ width: '90px', marginTop: '15px' }}
-          onClick={onFinished}
-          className={classes.button}
+          variant="outlined"
+          onClick={backCallback}
+          style={{ width: '20px', marginTop: '10px' }}
+          className={classes.backButton}
         >
-          סיימתי!
+          חזרה
         </Button>
-      )}
+        {sharersCountDirty && sharersCount > 0 && (
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ width: '90px', marginRight: '15px', marginTop: '10px' }}
+            onClick={onFinished}
+            className={classes.button}
+          >
+            סיימתי!
+          </Button>
+        )}
+      </div>
     </form>
   );
 }

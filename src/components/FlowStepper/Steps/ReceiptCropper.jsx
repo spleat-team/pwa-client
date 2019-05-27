@@ -4,16 +4,18 @@ import { Store } from '../../../Store';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
-function ReceiptCropper(classes, backCallback, nextCallback) {
+function ReceiptCropper(classes, backCallback, nextCallback, message) {
   const { state, dispatch } = React.useContext(Store);
-  const { crop, src, preMessage, errorMessage } = state;
+  const { loading, crop, src, errorMessage } = state;
 
   const onCropChange = crop => dispatch({ type: 'NEW_CROP', payload: crop });
 
   return (
     <div>
       <p style={{ direction: 'rtl', marginLeft: '10%', marginRight: '10%' }}>
-        {errorMessage ? errorMessage : preMessage}
+        {
+          //errorMessage ? errorMessage : preMessage ? preMessage : postMessage
+        }
       </p>
       {src && (
         <ReactCrop
@@ -38,6 +40,7 @@ function ReceiptCropper(classes, backCallback, nextCallback) {
           style={{ width: '60px', marginRight: '10px' }}
           color="primary"
           className={classes.button}
+          disabled={loading || errorMessage != ''}
         >
           הבא
         </Button>

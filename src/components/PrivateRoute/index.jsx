@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Store } from '../../Store';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { state, dispatch } = React.useContext(Store);
+  const { state } = React.useContext(Store);
 
   return (
     <Route

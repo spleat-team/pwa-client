@@ -6,10 +6,12 @@ const SERVER_URL = 'http://193.106.55.179:8888/';
 // }
 
 export default {
-    NO_FILE: 'NO_FILE',
-    FILE_CHOOSED: 'FILE_CHOOSED',
-    FILE_LOADED: {souldStartFlow: true},
-    CHECK_RECEIPT: {id:0, url: `${SERVER_URL}isReceipt`},
-    FIND_EDGES: {id: 1, url: `${SERVER_URL}detectReceipt`},
-    EXTRACT_ITEMS: {id: 2, url: `${SERVER_URL}extractReceiptItems`},
-}
+  NO_FILE: 'NO_FILE',
+  FILE_CHOOSED: 'FILE_CHOOSED',
+  FILE_LOADED: { souldStartFlow: true },
+  CHECK_RECEIPT: { id: 0, url: `${SERVER_URL}isReceipt` },
+  RECEIPT_CHECKED: { id: 1 },
+  FIND_EDGES: { id: 2, url: `${SERVER_URL}detectReceipt` },
+  EDGES_FOUND: { id: 3 },
+  EXTRACT_ITEMS: { id: 4, url: `${SERVER_URL}extractReceiptItems` },
+};

@@ -17,9 +17,8 @@ function ReceiptShootForm(classes, nextCallback) {
   const onSelectFile = e => {
     nextCallback();
 
-    console.log('file loaded......', e.target);
     if (e.target.files && e.target.files.length > 0) {
-      dispatch({ type: ReceiptLifecycle.NO_FILE });
+      // dispatch({ type: ReceiptLifecycle.NO_FILE });
       const img = e.target.files[0];
       dispatch({ type: ReceiptLifecycle.FILE_CHOOSED, payload: img });
       const reader = new FileReader();

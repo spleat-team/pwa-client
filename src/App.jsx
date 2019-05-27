@@ -3,20 +3,13 @@ import { Store } from './Store';
 import 'react-image-crop/dist/ReactCrop.css';
 import logo from './logo.png';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { css } from '@emotion/core';
 import { SyncLoader } from 'react-spinners';
 import ScanPage from './components/ScanPage';
 import NotFoundComponent from './components/NotFoundComponent';
 import LoginPage from './components/LoginPage';
-import usePrevious from './Utils/usePrevious';
 import useLogger from './Utils/useLogger';
-import AuthManager from './components/AuthManager';
 import PrivateRoute from './components/PrivateRoute';
 import PaymentPage from './components/PaymentPage/paymentPage';
 import ItemsList from './ItemsList';
@@ -30,6 +23,7 @@ const override = css`
 
 const App = props => {
   const { state, dispatch } = React.useContext(Store);
+  const { errorMessage, cropperMessage } = state;
 
   useLogger('App');
 
@@ -46,7 +40,9 @@ const App = props => {
               color={'#123abc'}
               loading={state.loading}
             />
+            <p>{cropperMessage}</p>
           </div>
+          <p style={{ color: 'red' }}>{errorMessage}</p>
           {
             <Switch>
               <PrivateRoute exact path="/" component={ScanPage} />

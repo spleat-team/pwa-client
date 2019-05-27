@@ -17,8 +17,18 @@ var Firebase = {
     if (!this.isInitialized) {
       this.isInitialized = true;
       firebase.initializeApp(firebaseConfig);
+      firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(
+            `Error while trying to save the session.. CODE : ${errorCode}, MESSAGE : ${errorMessage}`
+          );
+        });
       this.app = firebase;
-      this.auth = firebase.auth();
     }
 
     return this;

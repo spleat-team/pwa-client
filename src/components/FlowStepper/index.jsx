@@ -15,6 +15,7 @@ import ReceiptCropper from './Steps/ReceiptCropper';
 import SharersCountForm from './Steps/SharersCountForm';
 import SharePinCode from './Steps/PinCode';
 import useLogger from '../../Utils/useLogger';
+import { withStyles } from '@material-ui/core/styles';
 
 const VerticalLinearStepper = props => {
   const { state, dispatch } = React.useContext(Store);
@@ -27,29 +28,33 @@ const VerticalLinearStepper = props => {
     console.log('status changed to : ', state);
     switch (state.status) {
       case ReceiptLifecycle.FILE_LOADED:
-        console.log('Changing to check...');
+        console.log('Changing to check...', state.photo);
         state.doesLoadedImage &&
-          handleFlowChange(state.photo, ReceiptLifecycle.CHECK_RECEIPT);
+          handleFlowChange(
+            state.photo,
+            ReceiptLifecycle.CHECK_RECEIPT,
+            ReceiptLifecycle.RECEIPT_CHECKED
+          );
         break;
       case ReceiptLifecycle.CHECK_RECEIPT:
         console.log('Changing to find_edges...');
         state.hasReceiptInPhoto &&
-          handleFlowChange(state.photo, ReceiptLifecycle.FIND_EDGES);
+          handleFlowChange(
+            state.photo,
+            ReceiptLifecycle.FIND_EDGES,
+            ReceiptLifecycle.EDGES_FOUND
+          );
         break;
-      case ReceiptLifecycle.FIND_EDGES:
-        console.log('Changing to extract...');
-        state.doesLoadedImage &&
-          state.hasReceiptInPhoto &&
-          handleFlowChange(state.photo, ReceiptLifecycle.EXTRACT_ITEMS);
-        break;
+      // case ReceiptLifecycle.EDGES_FOUND:
+      //   console.log('Yay!');
+      //   // state.doesLoadedImage &&
+      //   //   state.hasReceiptInPhoto &&
+      //   //   handleFlowChange(state.photo, ReceiptLifecycle.EXTRACT_ITEMS);
+      //   break;
       default:
         console.log('Not an interesting status...');
     }
   }, [state.status]);
-
-  React.useEffect(() => {
-    console.log('DAM');
-  });
 
   const classes = theme => ({
     root: {
@@ -70,6 +75,10 @@ const VerticalLinearStepper = props => {
       marginRight: theme.spacing.unit,
     },
     backButton: {
+      marginTop: theme.spacing.unit * 2,
+      width: '20px',
+    },
+    disabledButton: {
       marginTop: theme.spacing.unit * 2,
       width: '20px',
     },
@@ -142,35 +151,54 @@ const VerticalLinearStepper = props => {
     return await post(url, formData, config);
   };
 
-  const handleFlowChange = async (photo, newStage) => {
-    const ans = await sendPhoto(photo, newStage.url);
+  const handleFlowChange = async (photo, actionStage, postActionStage) => {
     dispatch({
-      type: newStage,
-      payload: ans.data,
+      type: actionStage,
     });
+    const ans = await sendPhoto(photo, actionStage.url);
+    if (postActionStage != null) {
+      dispatch({
+        type: postActionStage,
+        payload: ans.data,
+      });
+    }
   };
+
+  const StyledStepper = withStyles({
+    root: {
+      direction: 'rtl',
+      margin: '5%',
+      background: 'rgba(255, 255, 255, 0.49)',
+      borderRadius: '10px',
+    },
+  })(Stepper);
+
+  const StyledStepLabel = withStyles({
+    label: {
+      fontFamily: 'Assistant, sans-serif',
+      fontSize: '16px',
+    },
+    completed: {
+      fontSize: '16px',
+    },
+    active: {
+      fontSize: '20px',
+      color: 'rgb(63, 81, 181)!important',
+    },
+  })(StepLabel);
 
   return (
     <div id="kaki" className={classes.root}>
-      <Stepper
-        activeStep={activeStep}
-        orientation="vertical"
-        style={{
-          direction: 'rtl',
-          margin: '5%',
-          background: 'rgba(255, 255, 255, 0.49)',
-          borderRadius: '10px',
-        }}
-      >
+      <StyledStepper activeStep={activeStep} orientation="vertical">
         {stepsVector.map(({ title, func }, index) => (
           <Step key={title}>
-            <StepLabel style={{ color: pink }}>{title}</StepLabel>
+            <StyledStepLabel> {title} </StyledStepLabel>
             <StepContent>
               <div>{func()}</div>
             </StepContent>
           </Step>
         ))}
-      </Stepper>
+      </StyledStepper>
       {activeStep === stepsVector.length && (
         <Paper square elevation={0} className={classes.resetContainer}>
           <Typography>All steps completed - you&apos;re finished</Typography>
@@ -200,4 +228,3 @@ export default VerticalLinearStepper;
 //     console.log("goind to state : ", Object.keys(imageFlowHandler)[nextStatus]);
 //     imageFlowHandler[Object.keys(imageFlowHandler)[nextStatus]](state.photo)
 // };
-
