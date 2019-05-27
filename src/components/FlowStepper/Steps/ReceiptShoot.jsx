@@ -43,12 +43,11 @@ function ReceiptShootForm(classes, nextCallback) {
       />
       <label htmlFor="raised-button-file">
         <Fab
-          color='secondary'
+          color="secondary"
           aria-label="צלם"
           type="file"
           component="span"
           className={classes.button}
-          
         >
           <FontAwesomeIcon icon={faCamera} />
         </Fab>

@@ -6,16 +6,14 @@ import 'react-image-crop/dist/ReactCrop.css';
 
 function ReceiptCropper(classes, backCallback, nextCallback, message) {
   const { state, dispatch } = React.useContext(Store);
-  const { loading, crop, src, errorMessage } = state;
+  const { loading, crop, src, errorMessage, cropperMessage } = state;
 
   const onCropChange = crop => dispatch({ type: 'NEW_CROP', payload: crop });
 
   return (
-    <div>
+    <form onSubmit={nextCallback}>
       <p style={{ direction: 'rtl', marginLeft: '10%', marginRight: '10%' }}>
-        {
-          //errorMessage ? errorMessage : preMessage ? preMessage : postMessage
-        }
+        {cropperMessage}
       </p>
       {src && (
         <ReactCrop
@@ -25,27 +23,25 @@ function ReceiptCropper(classes, backCallback, nextCallback, message) {
           onChange={onCropChange}
         />
       )}
-      <div>
-        <Button
-          variant="outlined"
-          onClick={backCallback}
-          style={{ width: '20px' }}
-          className={classes.backButton}
-        >
-          חזרה
-        </Button>
-        <Button
-          variant="contained"
-          onClick={nextCallback}
-          style={{ width: '60px', marginRight: '10px' }}
-          color="primary"
-          className={classes.button}
-          disabled={loading || errorMessage != ''}
-        >
-          הבא
-        </Button>
-      </div>
-    </div>
+      <Button
+        variant="outlined"
+        onClick={backCallback}
+        style={{ width: '20px' }}
+        className={classes.backButton}
+      >
+        חזרה
+      </Button>
+      <Button
+        type="submit"
+        variant="contained"
+        style={{ width: '60px', marginRight: '10px' }}
+        color="primary"
+        className={classes.button}
+        disabled={loading || errorMessage != ''}
+      >
+        הבא
+      </Button>
+    </form>
   );
 }
 

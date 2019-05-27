@@ -35,6 +35,7 @@ const initialState = {
 };
 
 function reducer(state, action) {
+  console.log("reducer got : ", action.type);
   switch (action.type) {
     case 'TOGGLE_LOADING':
       return {
@@ -46,7 +47,6 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.NO_FILE,
-        loading: false,
         ...receiptInfoInitialState,
         errorMessage: '',
         preMessage: 'סה"כ 2 שלבים פשוטים וסיימתם!',
@@ -55,7 +55,6 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.FILE_CHOOSED,
-        loading: false,
         doesLoadedImage: true,
         photo: action.payload,
         errorMessage: '',
@@ -66,7 +65,6 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.FILE_LOADED,
-        loading: false,
         doesLoadedImage: true,
         src: action.payload,
         errorMessage: '',
@@ -75,7 +73,6 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.CHECK_RECEIPT,
-        loading: true,
         cropperMessage: 'בודק אם יש קבלה בתמונה..',
       };
     }
@@ -87,7 +84,6 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.RECEIPT_CHECKED,
-        loading: false,
         hasReceiptInPhoto: action.payload,
         errorMessage: errorMessage,
         cropperMessage: '',
@@ -97,7 +93,6 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.FIND_EDGES,
-        loading: true,
         cropperMessage: 'מחפש את הקבלה בתמונה..',
         errorMessage: '',
       };
@@ -105,7 +100,6 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.EDGES_FOUND,
-        loading: false,
         crop: action.payload,
         errorMessage: '',
         cropperMessage:
@@ -115,9 +109,15 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.EXTRACT_ITEMS,
-        loading: false,
+      };
+    case ReceiptLifecycle.RECEIPT_ITEMS_EXTRACTED:
+      return {
+        ...state,
+        status: ReceiptLifecycle.RECEIPT_ITEMS_EXTRACTED,
         receiptItems: action.payload,
-        errorMessage: '',
+        errorMessage: !action.payload
+          ? '...מתנצלים, לא הצלחנו למצוא פריטים בקבלה'
+          : '',
       };
     case 'NEW_CROP':
       return { ...state, crop: action.payload };

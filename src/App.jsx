@@ -14,16 +14,27 @@ import PrivateRoute from './components/PrivateRoute';
 import PaymentPage from './components/PaymentPage/paymentPage';
 import ItemsList from './ItemsList';
 import WaitingPage from './components/WaitingPage';
+import { Dialog, DialogTitle } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 const override = css`
   display: block;
-  margin: 0 auto;
-  border-color: red;
+  margin: 30px auto;
+  background: 'transparent';
+  backgroundColor: 'transparent';
 `;
+
+const styles = {
+  dialogPaper: {
+    direction: 'rtl',
+    // minHeight: '80vh',
+    // maxHeight: '80vh',
+  },
+};
 
 const App = props => {
   const { state, dispatch } = React.useContext(Store);
-  const { errorMessage, cropperMessage } = state;
+  const { errorMessage } = state;
 
   useLogger('App');
 
@@ -33,14 +44,19 @@ const App = props => {
         <div className="App">
           <img src={logo} className="App-logo" alt="Spleat Logo" />
           <div className="sweet-loading" style={{ margin: 20 }}>
-            <SyncLoader
-              css={override}
-              sizeUnit={'px'}
-              size={8}
-              color={'#123abc'}
-              loading={state.loading}
-            />
-            <p>{cropperMessage}</p>
+            <Dialog
+              classes={{ paper: props.classes.dialogPaper }}
+              open={state.loading}
+            >
+            <DialogTitle>טוען...</DialogTitle>
+              <SyncLoader
+                css={override}
+                sizeUnit={'px'}
+                size={8}
+                color="#4197ED"
+                loading={state.loading}
+              />
+            </Dialog>
           </div>
           <p style={{ color: 'red' }}>{errorMessage}</p>
           {
@@ -58,7 +74,7 @@ const App = props => {
                   return <LoginPage isLogOut={true} />;
                 }}
               />
-              <PrivateRoute path="/payment" component={PaymentPage}/>
+              <PrivateRoute path="/payment" component={PaymentPage} />
               <PrivateRoute path="/waiting" component={WaitingPage} />
               <Route component={NotFoundComponent} />
             </Switch>
@@ -69,7 +85,7 @@ const App = props => {
   );
 };
 
-export default App;
+export default withStyles(styles)(App);
 
 // const previousValues = usePrevious({ state, isSignedIn });
 

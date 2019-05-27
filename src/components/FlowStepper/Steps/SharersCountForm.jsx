@@ -4,6 +4,7 @@ import { Store } from '../../../Store';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import receiptService from '../../../Services/receipt.service';
+import ReceiptLifecycle from '../../../ReceiptLifecycle';
 
 var classNames = require('classnames');
 
@@ -65,7 +66,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
           isFinished: false,
         }
       )
-      .then(() => {
+      .then(data => {
         nextCallback();
       })
       .catch(err => {
@@ -74,7 +75,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
   };
 
   return (
-    <form onSubmit={nextCallback}>
+    <form onSubmit={onFinished}>
       <TextField
         autoFocus
         style={{ marginTop: '15px' }}
@@ -103,10 +104,11 @@ function SharersCountForm(classes, backCallback, nextCallback) {
         </Button>
         {sharersCountDirty && sharersCount > 0 && (
           <Button
+            disabled={state.status != ReceiptLifecycle.RECEIPT_ITEMS_EXTRACTED}
             color="primary"
             variant="contained"
             style={{ width: '90px', marginRight: '15px', marginTop: '10px' }}
-            onClick={nextCallback}
+            type="submit"
             className={classes.button}
           >
             סיימתי!

@@ -25,18 +25,22 @@ const VerticalLinearStepper = props => {
 
   // This controls the logic of when to send the photo and where
   React.useEffect(() => {
-    console.log('status changed to : ', state);
+    console.log('status changed, the new state is : ', state);
     switch (state.status) {
       case ReceiptLifecycle.FILE_LOADED:
         console.log('Changing to check...', state.photo);
-        state.doesLoadedImage &&
+        if (state.doesLoadedImage) { 
+          dispatch({
+            type: 'TOGGLE_LOADING',
+          });
           handleFlowChange(
             state.photo,
             ReceiptLifecycle.CHECK_RECEIPT,
             ReceiptLifecycle.RECEIPT_CHECKED
           );
+        }
         break;
-      case ReceiptLifecycle.CHECK_RECEIPT:
+      case ReceiptLifecycle.RECEIPT_CHECKED:
         console.log('Changing to find_edges...');
         state.hasReceiptInPhoto &&
           handleFlowChange(
@@ -45,14 +49,20 @@ const VerticalLinearStepper = props => {
             ReceiptLifecycle.EDGES_FOUND
           );
         break;
-      // case ReceiptLifecycle.EDGES_FOUND:
-      //   console.log('Yay!');
-      //   // state.doesLoadedImage &&
-      //   //   state.hasReceiptInPhoto &&
-      //   //   handleFlowChange(state.photo, ReceiptLifecycle.EXTRACT_ITEMS);
-      //   break;
+      case ReceiptLifecycle.EDGES_FOUND:
+        dispatch({
+          type: 'TOGGLE_LOADING',
+        });
+        state.doesLoadedImage &&
+          state.hasReceiptInPhoto &&
+          handleFlowChange(
+            state.photo,
+            ReceiptLifecycle.EXTRACT_ITEMS,
+            ReceiptLifecycle.RECEIPT_ITEMS_EXTRACTED
+          );
+        break;
       default:
-        console.log('Not an interesting status...');
+        console.log('WTF, weird status happened..', state);
     }
   }, [state.status]);
 
@@ -147,18 +157,17 @@ const VerticalLinearStepper = props => {
     };
     const formData = new FormData();
     formData.append('photo', photo);
-    dispatch({
-      type: 'TOGGLE_LOADING',
-    });
     return await post(url, formData, config);
   };
 
   const handleFlowChange = async (photo, actionStage, postActionStage) => {
+    // console.log('dispatching actionStage : ', actionStage);
     dispatch({
       type: actionStage,
     });
     const ans = await sendPhoto(photo, actionStage.url);
     if (postActionStage != null) {
+      // console.log('dispatching postActionStage : ', postActionStage);
       dispatch({
         type: postActionStage,
         payload: ans.data,
