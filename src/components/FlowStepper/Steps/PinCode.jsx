@@ -16,6 +16,7 @@ function PinCode(classes) {
       <ReactShare
         url={`${window.location.href}itemsList/${state.pincode}`}
         whatsappClass="iconStyle"
+        whatsapp={true}
         iconSize={48}
         addClass="shareInline"
       />

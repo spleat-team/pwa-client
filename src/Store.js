@@ -148,7 +148,7 @@ function reducer(state, action) {
     case 'TIP_SELECTED':
       return { ...state, tip: action.tip };
     case 'SET_LOADING_MESSAGE':
-      return { ...state, loadingMessage: action.message };
+      return { ...state, loading: true, loadingMessage: action.message };
     case 'SET_ERROR_MESSAGE':
       return { ...state, errorMessage: action.message };
     default:

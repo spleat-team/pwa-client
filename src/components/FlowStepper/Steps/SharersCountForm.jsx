@@ -10,7 +10,8 @@ var classNames = require('classnames');
 
 function SharersCountForm(classes, backCallback, nextCallback) {
   const { state, dispatch } = React.useContext(Store);
-
+  const [isDone, setIsDone] = React.useState(false);
+  const [isReady, setIsReady] = React.useState(false);
   const sharersCount = state.sharersCount;
   const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
   const onSharersCountChange = sharersCount =>
@@ -19,10 +20,57 @@ function SharersCountForm(classes, backCallback, nextCallback) {
   // const [sharersCount, setSharersCount] = React.useState(0);
   // const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
 
+  React.useEffect(() => {
+    if (state.receiptItems && state.receiptItems.length) {
+      const items = state.receiptItems.map((item, index) => {
+        return {
+          _id: index,
+          image: item.dish,
+          price: item.price,
+          users: [],
+        };
+      });
+
+      // Generate pin code
+      const pincode = generatePinCode();
+      dispatch({ type: 'SET_PINCODE', payload: pincode });
+
+      // Save to firebase
+      receiptService
+        .createReceipt(
+          { pincode, items, numberOfPeople: sharersCount },
+          {
+            email: state.user.email,
+            name: state.user.displayName,
+            isFinished: false,
+          }
+        )
+        .then(data => {
+          setIsReady(true);
+        })
+        .catch(err => {
+          // Add error message
+        });
+    }
+  }, [state.receiptItems]);
+
+  React.useEffect(() => {
+    console.log("something happened, isReady: ", isReady, " isDone: ", isDone);
+    if (isDone && !isReady) {
+      dispatch({
+        type: 'SET_LOADING_MESSAGE',
+        message: 'רק עוד רגע..',
+      });
+    } else if (isReady && isDone) {
+      nextCallback();
+    }
+  }, [isDone, isReady]);
+
   let inputProps =
     sharersCount > 1
       ? { endAdornment: <InputAdornment position="end">סועדים</InputAdornment> }
       : {};
+
   let inputState = classNames({
     'classes.margin': true,
     'classes.textField': true,
@@ -43,35 +91,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
   const onFinished = e => {
     // Save on store
     dispatch({ type: 'SET_NUM_OF_PEOPLE', payload: sharersCount });
-    // Generate pin code
-    const pincode = generatePinCode();
-    dispatch({ type: 'SET_PINCODE', payload: pincode });
-
-    const items = state.receiptItems.map((item, index) => {
-      return {
-        _id: index,
-        image: item.dish,
-        price: item.price,
-        users: [],
-      };
-    });
-
-    // Save to firebase
-    receiptService
-      .createReceipt(
-        { pincode, items, numberOfPeople: sharersCount },
-        {
-          email: state.user.email,
-          name: state.user.displayName,
-          isFinished: false,
-        }
-      )
-      .then(data => {
-        nextCallback();
-      })
-      .catch(err => {
-        // Add error message
-      });
+    setIsDone(true);
   };
 
   return (
@@ -104,7 +124,6 @@ function SharersCountForm(classes, backCallback, nextCallback) {
         </Button>
         {sharersCountDirty && sharersCount > 0 && (
           <Button
-            disabled={state.status != ReceiptLifecycle.RECEIPT_ITEMS_EXTRACTED}
             color="primary"
             variant="contained"
             style={{ width: '90px', marginRight: '15px', marginTop: '10px' }}
