@@ -75,7 +75,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
   };
 
   return (
-    <form onSubmit={onFinished}>
+    <div>
       <TextField
         autoFocus
         style={{ marginTop: '15px' }}
@@ -110,12 +110,13 @@ function SharersCountForm(classes, backCallback, nextCallback) {
             style={{ width: '90px', marginRight: '15px', marginTop: '10px' }}
             type="submit"
             className={classes.button}
+            onClick={onFinished}
           >
             סיימתי!
           </Button>
         )}
       </div>
-    </form>
+    </div>
   );
 }
 

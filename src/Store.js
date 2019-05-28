@@ -11,7 +11,6 @@ const receiptInfoInitialState = {
   receiptItems: '',
   receiptNumOfPeople: '',
   preMessage: 'סה"כ 2 שלבים פשוטים וסיימתם!',
-  errorMessage: '',
   photo: null,
 };
 
@@ -32,10 +31,11 @@ const initialState = {
   checkedItems: [],
   paymentPerUser: [],
   ...receiptInfoInitialState,
+  errorMessage: '',
 };
 
 function reducer(state, action) {
-  console.log("reducer got : ", action.type);
+  console.log('reducer got : ', action.type);
   switch (action.type) {
     case 'TOGGLE_LOADING':
       return {
@@ -73,27 +73,31 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.CHECK_RECEIPT,
-        cropperMessage: 'בודק אם יש קבלה בתמונה..',
+        loading: true,
+        loadingMessage: 'בודק אם יש קבלה בתמונה..',
       };
     }
     case ReceiptLifecycle.RECEIPT_CHECKED: {
       let errorMessage =
-        action.payload === 1
-          ? ''
-          : 'לא מצאנו קבלה בתמונה, נסו להעלות תמונה טובה יותר או להתמקד על אזור המנות בקבלה בבקשה';
+        action.payload != 1 &&
+        (action.payload === 0
+          ? 'לא מצאנו קבלה בתמונה, נסו להעלות תמונה טובה יותר או להתמקד על אזור המנות בקבלה בבקשה'
+          : 'לא הצלחנו לשלוח את הקבלה לשרת, נסה שוב בבקשה');
       return {
         ...state,
         status: ReceiptLifecycle.RECEIPT_CHECKED,
         hasReceiptInPhoto: action.payload,
         errorMessage: errorMessage,
-        cropperMessage: '',
+        loading: false,
+        loadingMessage: '',
       };
     }
     case ReceiptLifecycle.FIND_EDGES:
       return {
         ...state,
         status: ReceiptLifecycle.FIND_EDGES,
-        cropperMessage: 'מחפש את הקבלה בתמונה..',
+        loading: true,
+        loadingMessage: 'מחפש את הקבלה בתמונה..',
         errorMessage: '',
       };
     case ReceiptLifecycle.EDGES_FOUND:
@@ -102,6 +106,7 @@ function reducer(state, action) {
         status: ReceiptLifecycle.EDGES_FOUND,
         crop: action.payload,
         errorMessage: '',
+        loading: false,
         cropperMessage:
           'כדי לעזור לנו למצוא טוב יותר את המנות, שפרו את סימון הקבלה',
       };
@@ -109,6 +114,7 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.EXTRACT_ITEMS,
+        loading: false,
       };
     case ReceiptLifecycle.RECEIPT_ITEMS_EXTRACTED:
       return {
@@ -118,6 +124,7 @@ function reducer(state, action) {
         errorMessage: !action.payload
           ? '...מתנצלים, לא הצלחנו למצוא פריטים בקבלה'
           : '',
+        loading: false,
       };
     case 'NEW_CROP':
       return { ...state, crop: action.payload };
@@ -140,6 +147,10 @@ function reducer(state, action) {
       return { ...state, paymentPerUser: action.paymentPerUser };
     case 'TIP_SELECTED':
       return { ...state, tip: action.tip };
+    case 'SET_LOADING_MESSAGE':
+      return { ...state, loadingMessage: action.message };
+    case 'SET_ERROR_MESSAGE':
+      return { ...state, errorMessage: action.message };
     default:
       return state;
   }

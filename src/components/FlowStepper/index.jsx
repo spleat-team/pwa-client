@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import { Store } from '../../Store';
 import ReceiptLifecycle from '../../ReceiptLifecycle';
 import { post } from 'axios';
-import { pink } from '@material-ui/core/colors';
 import ReceiptShootForm from './Steps/ReceiptShoot';
 import ReceiptCropper from './Steps/ReceiptCropper';
 import SharersCountForm from './Steps/SharersCountForm';
@@ -20,8 +19,13 @@ import { withStyles } from '@material-ui/core/styles';
 const VerticalLinearStepper = props => {
   const { state, dispatch } = React.useContext(Store);
   const [activeStep, setActiveStep] = React.useState(0);
+  const [error, setError] = React.useState('');
 
   useLogger('VerticalLinearStepper');
+
+  React.useEffect(() => {
+    console.log('Error changed!!!!', error);
+  }, [error]);
 
   // This controls the logic of when to send the photo and where
   React.useEffect(() => {
@@ -29,10 +33,7 @@ const VerticalLinearStepper = props => {
     switch (state.status) {
       case ReceiptLifecycle.FILE_LOADED:
         console.log('Changing to check...', state.photo);
-        if (state.doesLoadedImage) { 
-          dispatch({
-            type: 'TOGGLE_LOADING',
-          });
+        if (state.doesLoadedImage) {
           handleFlowChange(
             state.photo,
             ReceiptLifecycle.CHECK_RECEIPT,
@@ -41,7 +42,6 @@ const VerticalLinearStepper = props => {
         }
         break;
       case ReceiptLifecycle.RECEIPT_CHECKED:
-        console.log('Changing to find_edges...');
         state.hasReceiptInPhoto &&
           handleFlowChange(
             state.photo,
@@ -50,9 +50,6 @@ const VerticalLinearStepper = props => {
           );
         break;
       case ReceiptLifecycle.EDGES_FOUND:
-        dispatch({
-          type: 'TOGGLE_LOADING',
-        });
         state.doesLoadedImage &&
           state.hasReceiptInPhoto &&
           handleFlowChange(
@@ -165,7 +162,13 @@ const VerticalLinearStepper = props => {
     dispatch({
       type: actionStage,
     });
-    const ans = await sendPhoto(photo, actionStage.url);
+    let ans = '';
+    try {
+      ans = await sendPhoto(photo, actionStage.url);
+    } catch (err) {
+      handleBack();
+      console.log(`error when sending photo to : ${actionStage.url} - ${err}`);
+    }
     if (postActionStage != null) {
       // console.log('dispatching postActionStage : ', postActionStage);
       dispatch({
@@ -199,7 +202,7 @@ const VerticalLinearStepper = props => {
   })(StepLabel);
 
   return (
-    <div id="kaki" className={classes.root}>
+    <div className={classes.root}>
       <StyledStepper activeStep={activeStep} orientation="vertical">
         {stepsVector.map(({ title, func }, index) => (
           <Step key={title}>

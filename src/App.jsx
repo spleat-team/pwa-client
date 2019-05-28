@@ -16,12 +16,13 @@ import ItemsList from './ItemsList';
 import WaitingPage from './components/WaitingPage';
 import { Dialog, DialogTitle } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import Swal from 'sweetalert2';
 
 const override = css`
   display: block;
   margin: 30px auto;
   background: 'transparent';
-  backgroundColor: 'transparent';
+  backgroundcolor: 'transparent';
 `;
 
 const styles = {
@@ -38,6 +39,19 @@ const App = props => {
 
   useLogger('App');
 
+  React.useEffect(() => {
+    state.errorMessage &&
+      Swal.fire({
+        title: 'אופס..',
+        text: state.errorMessage,
+        type: 'error',
+        customClass: {
+          icon: 'swal2-arabic-question-mark',
+        },
+        confirmButtonText: 'אוקי',
+      });
+  }, [state.errorMessage]);
+
   return (
     <React.Fragment>
       <Router>
@@ -48,7 +62,7 @@ const App = props => {
               classes={{ paper: props.classes.dialogPaper }}
               open={state.loading}
             >
-            <DialogTitle>טוען...</DialogTitle>
+              <DialogTitle>{state.loadingMessage}</DialogTitle>
               <SyncLoader
                 css={override}
                 sizeUnit={'px'}
@@ -58,7 +72,6 @@ const App = props => {
               />
             </Dialog>
           </div>
-          <p style={{ color: 'red' }}>{errorMessage}</p>
           {
             <Switch>
               <PrivateRoute exact path="/" component={ScanPage} />
