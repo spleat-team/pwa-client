@@ -1,4 +1,4 @@
-const SERVER_URL = 'http://193.106.55.179:8888/';
+const SERVER_URL = 'https://193.106.55.179:8888/';
 // export default {
 //     0: {name: 'CHECK_RECEIPT', url:`${SERVER_URL}isReceipt`},
 //     1: {name: 'FIND_EDGES', url:`${SERVER_URL}detectReceipt`},
