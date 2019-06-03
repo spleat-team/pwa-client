@@ -107,7 +107,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
         InputProps={inputProps}
         onChange={event => {
           setSharersCountDirty(true);
-          onSharersCountChange(event.target.value);
+          onSharersCountChange(parseInt(event.target.value));
         }}
         value={sharersCountDirty ? sharersCount : ''}
         helperText={sharersCountDirty && sharersCount === 0 ? 'אחי.....' : ''}
