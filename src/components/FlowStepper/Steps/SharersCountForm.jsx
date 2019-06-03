@@ -49,13 +49,13 @@ function SharersCountForm(classes, backCallback, nextCallback) {
           setIsReady(true);
         })
         .catch(err => {
-          // Add error message
+          console.log('Error while creating the receipt in the server..', err);
         });
     }
   }, [state.receiptItems]);
 
   React.useEffect(() => {
-    console.log("something happened, isReady: ", isReady, " isDone: ", isDone);
+    console.log('something happened, isReady: ', isReady, ' isDone: ', isDone);
     if (isDone && !isReady) {
       dispatch({
         type: 'SET_LOADING_MESSAGE',
