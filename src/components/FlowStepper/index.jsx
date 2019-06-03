@@ -158,7 +158,7 @@ const VerticalLinearStepper = props => {
   };
 
   const handleFlowChange = async (photo, actionStage, postActionStage) => {
-    // console.log('dispatching actionStage : ', actionStage);
+    console.log('dispatching actionStage : ' ,actionStage, ' with photo : ', photo, ' and postActionStage as : ', postActionStage);
     dispatch({
       type: actionStage,
     });
@@ -170,11 +170,25 @@ const VerticalLinearStepper = props => {
       console.log(`error when sending photo to : ${actionStage.url} - ${err}`);
     }
     if (postActionStage != null) {
-      // console.log('dispatching postActionStage : ', postActionStage);
-      dispatch({
-        type: postActionStage,
-        payload: ans.data,
-      });
+      if (ans == '') {
+        dispatch({
+          type: 'SET_ERROR_MESSAGE',
+          payload: state.errorMessage
+            ? state.errorMessage
+            : 'מצטערים, לא מצאנו מנות בקבלה',
+        });
+      } else {
+        console.log(
+          'dispatching postActionStage : ',
+          postActionStage,
+          ' with data : ',
+          ans
+        );
+        dispatch({
+          type: postActionStage,
+          payload: ans.data,
+        });
+      }
     }
   };
 

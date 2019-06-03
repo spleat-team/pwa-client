@@ -121,9 +121,10 @@ function reducer(state, action) {
         ...state,
         status: ReceiptLifecycle.RECEIPT_ITEMS_EXTRACTED,
         receiptItems: action.payload,
-        errorMessage: !action.payload
-          ? '...מתנצלים, לא הצלחנו למצוא פריטים בקבלה'
-          : '',
+        errorMessage:
+          !action.payload || action.payload == ''
+            ? '...מתנצלים, לא הצלחנו למצוא פריטים בקבלה'
+            : '',
         loading: false,
       };
     case 'NEW_CROP':

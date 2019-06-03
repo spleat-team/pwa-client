@@ -36,8 +36,7 @@ function Pay () {
                 <DialogTitle id="payment-title" >{"רוצה לשלם?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="payment-description">
-                       המסך הזה בתהליך בנייה...
-                        בקרוב תוכל לשלם דרך האפליקציה
+                        בקרוב יהיה ניתן אפילו לשלם דרך האפליקציה!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions style={{justifyContent: 'center'}}>
