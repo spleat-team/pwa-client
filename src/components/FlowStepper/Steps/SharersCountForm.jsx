@@ -122,8 +122,9 @@ function SharersCountForm(classes, backCallback, nextCallback) {
         >
           חזרה
         </Button>
-        {sharersCountDirty && sharersCount > 0 && (
+        {
           <Button
+            disabled={!sharersCountDirty || sharersCount < 1 || state.errorMessage != ''}
             color="primary"
             variant="contained"
             style={{ width: '90px', marginRight: '15px', marginTop: '10px' }}
@@ -133,7 +134,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
           >
             סיימתי!
           </Button>
-        )}
+        }
       </div>
     </div>
   );

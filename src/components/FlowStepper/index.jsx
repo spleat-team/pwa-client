@@ -165,6 +165,7 @@ const VerticalLinearStepper = props => {
     let ans = '';
     try {
       ans = await sendPhoto(photo, actionStage.url);
+      console.log("returned from sendPhoto with ans : ", ans)
     } catch (err) {
       handleBack();
       console.log(`error when sending photo to : ${actionStage.url} - ${err}`);
