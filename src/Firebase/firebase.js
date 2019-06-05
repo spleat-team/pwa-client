@@ -11,10 +11,22 @@ const firebaseConfig = {
   appId: '1:761349823555:web:ba956c9f71eedae5',
 };
 
+// const requiredVars = ['apiKey', 'autoDomain', 'databaseURL', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
+
+// const { apiKey, authDomain, databaseURL, projectId, storageBucket, messagingSenderId, appId } = process.env;
+
+// const firebaseConfig = {
+//   apiKey, authDomain, databaseURL, projectId, storageBucket, messagingSenderId, appId
+// };
+
 var Firebase = {
   isInitialized: false,
   initialize() {
     if (!this.isInitialized) {
+      if (Object.values(firebaseConfig).indexOf('') == -1) {
+        throw "Firebase's environment variables were not initialized";
+      }
+
       this.isInitialized = true;
       firebase.initializeApp(firebaseConfig);
       firebase

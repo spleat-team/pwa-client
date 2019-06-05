@@ -2,7 +2,6 @@ import React from 'react';
 import { Firebase } from '../Firebase/firebase';
 
 const collectionName = 'receipts';
-// const firebase = React.useContext(FirebaseContext);
 const firebase = Firebase.initialize();
 var db = firebase.app.firestore();
 

@@ -12,8 +12,6 @@ import {
   MuiThemeProvider,
   createMuiTheme,
 } from '@material-ui/core/styles';
-import { blue, yellow } from '@material-ui/core/colors';
-
 import App from './App';
 import Firebase, { FirebaseContext } from './Firebase';
 
