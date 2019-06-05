@@ -241,19 +241,3 @@ const VerticalLinearStepper = props => {
 };
 
 export default VerticalLinearStepper;
-
-//style={{direction: 'rtl', marginLef: '0', marginRight: '18px', borderLeft: 'none', borderRight: '1px solid #bdbdbd'}}
-
-// const imageFlowHandler = {
-//     CHECK_RECEIPT: (img) => state.doesLoadedImage? handleFlowChange(img, ReceiptLifecycle.CHECK_RECEIPT): non,
-//     FIND_EDGES: (img) => state.hasReceiptInPhoto ? handleFlowChange(img, ReceiptLifecycle.FIND_EDGES):non,
-//     EXTRACT_ITEMS: (img) => state.doesLoadedImage && state.hasReceiptInPhoto? handleFlowChange(img, ReceiptLifecycle.EXTRACT_ITEMS): non,
-// }
-
-// console.log("status: ", state.status);
-// const nextStatus = state.status.shouldStartFlow? 0 : state.status.id? state.status.id + 1: '';
-// console.log("next status is : ", nextStatus);
-// if (nextStatus) {
-//     console.log("goind to state : ", Object.keys(imageFlowHandler)[nextStatus]);
-//     imageFlowHandler[Object.keys(imageFlowHandler)[nextStatus]](state.photo)
-// };

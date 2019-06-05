@@ -20,9 +20,10 @@ const initialState = {
   userLoggedIn: false,
   src: null,
   crop: {
-    width: 200,
-    x: 0,
-    y: 0,
+    height: 50,
+    width: 50,
+    x: 50,
+    y: 50,
   },
   status: ReceiptLifecycle.NO_FILE,
   sharersCount: 0,
@@ -104,7 +105,7 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.EDGES_FOUND,
-        crop: action.payload,
+        // crop: convertPointsArrayToCropObject(action.payload),
         errorMessage: '',
         loading: false,
         cropperMessage:
@@ -148,6 +149,8 @@ function reducer(state, action) {
       return { ...state, paymentPerUser: action.paymentPerUser };
     case 'TIP_SELECTED':
       return { ...state, tip: action.tip };
+    case 'STOP_LOADING':
+      return { ...state, loading: false, errorMessage: '' };
     case 'SET_LOADING_MESSAGE':
       return { ...state, loading: true, loadingMessage: action.message };
     case 'SET_ERROR_MESSAGE':
@@ -156,6 +159,17 @@ function reducer(state, action) {
       return state;
   }
 }
+
+const convertPointsArrayToCropObject = pointsArr => {
+  if (pointsArr.length != 4) return null;
+
+  return Object.assign(
+    {},
+    { y: pointsArr[0][0], x: pointsArr[0][1] },
+    { heigh: (pointsArr[2][1] - pointsArr[0][0]) },
+    { width: (pointsArr[3][0] - pointsArr[0][1]) }
+  );
+};
 
 export function StoreProvider(props) {
   const [state, dispatch] = React.useReducer(reducer, initialState);

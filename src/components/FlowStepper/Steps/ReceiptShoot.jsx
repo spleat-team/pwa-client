@@ -8,12 +8,6 @@ import { Store } from '../../../Store';
 function ReceiptShootForm(classes, nextCallback) {
   const { state, dispatch } = React.useContext(Store);
 
-  const onFormSubmit = e => {
-    // TODO : Navigate to sanduri's page with the router
-    console.log('onFormSubmit', e);
-    e.preventDefault();
-  };
-
   const onSelectFile = e => {
     nextCallback();
 
@@ -33,8 +27,9 @@ function ReceiptShootForm(classes, nextCallback) {
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
+    <div>
       <input
+        multiple={false}
         accept="image/*"
         className={classes.input}
         id="raised-button-file"
@@ -52,7 +47,7 @@ function ReceiptShootForm(classes, nextCallback) {
           <FontAwesomeIcon icon={faCamera} />
         </Fab>
       </label>
-    </form>
+    </div>
   );
 }
 

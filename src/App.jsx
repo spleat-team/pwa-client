@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Store } from './Store';
-import 'react-image-crop/dist/ReactCrop.css';
 import logo from './logo.png';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
