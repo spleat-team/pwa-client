@@ -112,7 +112,6 @@ function ItemsList(props) {
           var paymentPerUser = CalculateService(props).calculateBill(
             doc.data()
           );
-          console.log(paymentPerUser);
 
           // set the payment per user
           dispatch({

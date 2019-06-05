@@ -19,20 +19,14 @@ import { withStyles } from '@material-ui/core/styles';
 const VerticalLinearStepper = props => {
   const { state, dispatch } = React.useContext(Store);
   const [activeStep, setActiveStep] = React.useState(0);
-  const [error, setError] = React.useState('');
 
   useLogger('VerticalLinearStepper');
 
-  React.useEffect(() => {
-    console.log('Error changed!!!!', error);
-  }, [error]);
-
   // This controls the logic of when to send the photo and where
   React.useEffect(() => {
-    console.log('status changed, the new state is : ', state);
+    console.log("Flow's status changed, the new state is : ", state);
     switch (state.status) {
       case ReceiptLifecycle.FILE_LOADED:
-        console.log('Changing to check...', state.photo);
         if (state.doesLoadedImage) {
           handleFlowChange(
             state.photo,
@@ -59,7 +53,7 @@ const VerticalLinearStepper = props => {
           );
         break;
       default:
-        console.log('WTF, weird status happened..', state);
+        console.log('FlowStepper: unrelated status happened, state : ', state);
     }
   }, [state.status]);
 
@@ -158,17 +152,14 @@ const VerticalLinearStepper = props => {
   };
 
   const handleFlowChange = async (photo, actionStage, postActionStage) => {
-    console.log('dispatching actionStage : ' ,actionStage, ' with photo : ', photo, ' and postActionStage as : ', postActionStage);
     dispatch({
       type: actionStage,
     });
     let ans = '';
     try {
       ans = await sendPhoto(photo, actionStage.url);
-      console.log("returned from sendPhoto with ans : ", ans)
     } catch (err) {
       handleBack();
-      console.log(`error when sending photo to : ${actionStage.url} - ${err}`);
     }
     if (postActionStage != null) {
       if (ans == '') {
@@ -179,12 +170,6 @@ const VerticalLinearStepper = props => {
             : 'מצטערים, לא מצאנו מנות בקבלה',
         });
       } else {
-        console.log(
-          'dispatching postActionStage : ',
-          postActionStage,
-          ' with data : ',
-          ans
-        );
         dispatch({
           type: postActionStage,
           payload: ans.data,

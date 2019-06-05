@@ -9,13 +9,9 @@ function ReceiptCropper(classes, backCallback, nextCallback, message) {
   const { loading, crop, src, errorMessage, cropperMessage } = state;
 
   const onCropChange = crop => {
-    console.log('cropped something..... : ', crop);
+    console.log('cropped changed..... : ', crop);
     dispatch({ type: 'NEW_CROP', payload: crop });
   };
-
-  React.useEffect(() => {
-    console.log('Crop changed!!!!! the new crop is : ', crop);
-  }, [crop]);
 
   return (
     <form onSubmit={nextCallback}>
