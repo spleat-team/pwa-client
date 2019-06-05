@@ -101,11 +101,6 @@ const LoginPage = props => {
           <StyledFirebaseAuth
             uiConfig={uiConfig}
             firebaseAuth={firebase.app.auth()}
-            // .signInWithPopup(provider)
-            // .then(result => {
-            //   console.log(result);
-            // })
-            // .catch(error => console.log('kaki ', error))}
           />
         </div>
       </div>

@@ -11,54 +11,25 @@ var classNames = require('classnames');
 function SharersCountForm(classes, backCallback, nextCallback) {
   const { state, dispatch } = React.useContext(Store);
   const [isDone, setIsDone] = React.useState(false);
-  const [isReady, setIsReady] = React.useState(false);
   const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
-  const onSharersCountChange = newSharersCount =>
-    dispatch({ type: 'SHARERS_COUNT', sharersCount: newSharersCount });
+  const [sharersCount, setSharersCount] = React.useState(0);
 
-  // const [sharersCount, setSharersCount] = React.useState(0);
-  // const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
-
-  // TODO : This causes problem because sanduri needs the sharersCount and it may be still 0 here when being sent.
-  // React.useEffect(() => {
-  //   if (state.receiptItems && state.receiptItems.length) {
-  //     const items = state.receiptItems.map((item, index) => {
-  //       return {
-  //         _id: index,
-  //         image: item.dish,
-  //         price: item.price,
-  //         users: [],
-  //       };
-  //     });
-
-  //     // Generate pin code
-  //     const pincode = generatePinCode();
-  //     dispatch({ type: 'SET_PINCODE', payload: pincode });
-
-  //     // Save to firebase
-  //     receiptService
-  //       .createReceipt(
-  //         { pincode, items, numberOfPeople: state.sharersCount },
-  //         {
-  //           email: state.user.email,
-  //           name: state.user.displayName,
-  //           isFinished: false,
-  //         }
-  //       )
-  //       .then(data => {
-  //         setIsReady(true);
-  //       })
-  //       .catch(err => {
-  //         console.log('Error while creating the receipt in the server..', err);
-  //       });
-  //   }
-  // }, [state.receiptItems]);
+  React.useEffect(() => {
+    if (
+      isDone &&
+      state.receiptItems &&
+      state.receiptItems.length &&
+      sharersCount > 0
+    ) {
+      createReceipt();
+    }
+  }, [state.receiptItems, isDone]);
 
   const createReceipt = () => {
-    const { receiptItems, sharersCount, user } = state;
+    const { user } = state;
 
-    if (receiptItems && receiptItems.length && sharersCount > 0) {
-      const items = receiptItems.map((item, index) => {
+    if (state.receiptItems && state.receiptItems.length && sharersCount > 0) {
+      const items = state.receiptItems.map((item, index) => {
         return {
           _id: index,
           image: item.dish,
@@ -82,7 +53,6 @@ function SharersCountForm(classes, backCallback, nextCallback) {
           }
         )
         .then(data => {
-          console.log('created the receipt with data : ', data);
           dispatch({ type: 'STOP_LOADING' });
           nextCallback();
         })
@@ -93,7 +63,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
   };
 
   let inputProps =
-    state.sharersCount > 1
+    sharersCount > 1
       ? { endAdornment: <InputAdornment position="end">סועדים</InputAdornment> }
       : {};
 
@@ -115,25 +85,12 @@ function SharersCountForm(classes, backCallback, nextCallback) {
   };
 
   const onFinished = e => {
-    const sharersDispatch = {
-      type: 'SET_NUM_OF_PEOPLE',
-      payload: state.sharersCount,
-    };
-    const loadingDispatch = {
+    dispatch({
       type: 'SET_LOADING_MESSAGE',
       message: 'רק עוד רגע..',
-    };
-    [sharersDispatch, loadingDispatch].forEach(curr => {
-      console.log('dispatching curr : ', curr);
-      dispatch(curr);
     });
+    setIsDone(true);
   };
-
-  React.useEffect(() => {
-    if (state.sharersCount > 0) {
-      createReceipt();
-    }
-  }, [state.sharersCount]);
 
   return (
     <div>
@@ -148,13 +105,11 @@ function SharersCountForm(classes, backCallback, nextCallback) {
         InputProps={inputProps}
         onChange={event => {
           setSharersCountDirty(true);
-          onSharersCountChange(parseInt(event.target.value));
+          setSharersCount(parseInt(event.target.value));
         }}
-        value={sharersCountDirty ? state.sharersCount : ''}
-        helperText={
-          sharersCountDirty && state.sharersCount === 0 ? 'אחי.....' : ''
-        }
-        error={sharersCountDirty && state.sharersCount === 0}
+        value={sharersCountDirty ? sharersCount : ''}
+        helperText={sharersCountDirty && sharersCount === 0 ? 'אחי.....' : ''}
+        error={sharersCountDirty && sharersCount === 0}
       />
       <div>
         <Button
@@ -168,9 +123,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
         {
           <Button
             disabled={
-              !sharersCountDirty ||
-              state.sharersCount < 1 ||
-              state.errorMessage != ''
+              !sharersCountDirty || sharersCount < 1 || state.errorMessage != ''
             }
             color="primary"
             variant="contained"
