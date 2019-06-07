@@ -23,7 +23,7 @@ var Firebase = {
   isInitialized: false,
   initialize() {
     if (!this.isInitialized) {
-      if (Object.values(firebaseConfig).indexOf('') == -1) {
+      if (Object.values(firebaseConfig).indexOf('') != -1) {
         throw "Firebase's environment variables were not initialized";
       }
 
