@@ -127,7 +127,13 @@ const VerticalLinearStepper = props => {
     },
     {
       title: 'וידוא המנות',
-      func: () => ReceiptCropper(classes, handleBack, handleNext),
+      func: () => (
+        <ReceiptCropper
+          classes={classes}
+          backCallback={handleBack}
+          nextCallback={handleNext}
+        />
+      ),
     },
     {
       title: 'הכנסת פרטי שולחן',
