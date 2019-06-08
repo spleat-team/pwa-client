@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHandPointLeft } from '@fortawesome/free-solid-svg-icons';
 import CalculateService from '../../Services/calculate.service';
+import TextField from "@material-ui/core/TextField";
 
 function FinishedForm(props) {
   library.add(faHandPointLeft);
@@ -24,7 +25,7 @@ function FinishedForm(props) {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: '3%'}}>
       <Fab
         variant="extended"
         color="primary"
@@ -32,7 +33,7 @@ function FinishedForm(props) {
       >
         <FontAwesomeIcon
           icon="hand-point-left"
-          style={{ marginRight: 5 + 'px' }}
+          style={{ marginRight: "4%" }}
         />
         סיימתי
         {/*state.user.email*/}

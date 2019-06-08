@@ -10,11 +10,10 @@ function SelectTip() {
   const onTipSelected = tip => dispatch({ type: 'TIP_SELECTED', tip: tip });
 
   return (
-    <Grid container dir={'rtl'}>
-      <Grid item xs={5}>
+    <Grid container dir={'rtl'} justify={"center"}>
+      <Grid item xs={9}>
         <TextField
           autoFocus
-          style={{ marginTop: '15px', marginRight: '30px' }}
           id="tip"
           value={tip}
           //onChange={(event) => setTip(event.target.value)}

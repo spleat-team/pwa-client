@@ -18,6 +18,7 @@ const initialState = {
   loading: false,
   user: '',
   userLoggedIn: false,
+  pincode: '',
   src: null,
   crop: {
     height: 50,
