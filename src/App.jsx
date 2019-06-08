@@ -118,16 +118,3 @@ export default withStyles(styles)(App);
 //     }
 //   }
 // });
-
-// useEffect(() => {
-//   if (!state.userLoggedIn && shouldAuthenticate) {
-//     if (!window.location.href.includes('/login')) {
-//       console.log('going to /login...');
-//       setShouldAuthenticate(true);
-//     } else {
-//       console.log('already in /login...');
-//     }
-//   } else {
-//     console.log('user is already logged in...');
-//   }
-// }, [shouldAuthenticate, state.userLoggedIn]);
