@@ -1,40 +1,21 @@
 import React from 'react';
-import FacebookLoginWithButton from 'react-facebook-login';
 import { Store } from '../../Store';
 import useLogger from '../../Utils/useLogger';
 import useCookie from '../../Utils/useCookie';
 import '../../App.css';
 import logo from '../../logo.png';
 import { Redirect } from 'react-router-dom';
-import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { FirebaseContext } from '../../Firebase';
-
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyA4uCgHWUewD5XHo05GrRNmd5diYaUN9n4',
-//   authDomain: 'spleat-4629b.firebaseapp.com',
-//   databaseURL: 'https://spleat-4629b.firebaseio.com',
-//   projectId: 'spleat-4629b',
-//   storageBucket: 'spleat-4629b.appspot.com',
-//   messagingSenderId: '761349823555',
-//   appId: '1:761349823555:web:ba956c9f71eedae5',
-// };
-
-// firebase.initializeApp(firebaseConfig);
-// var provider = new firebase.auth.FacebookAuthProvider();
 
 const LoginPage = props => {
   const { state, dispatch } = React.useContext(Store);
   const firebase = React.useContext(FirebaseContext);
-
   const [usersCookie, setUsersCookie, removeUsersCookie] = useCookie(
     'spleat-user-details',
     ''
   );
   const [error, setError] = React.useState(false);
-  const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
-  const [isSignedIn, setIsSignedIn] = React.useState(false);
-
   const uiConfig = {
     signInOptions: [firebase.app.auth.FacebookAuthProvider.PROVIDER_ID],
     callbacks: {
@@ -48,7 +29,6 @@ const LoginPage = props => {
     //firebase.auth().signOut();
     firebase.app.auth().onAuthStateChanged(user => {
       if (user != null) {
-        setIsSignedIn(!!user);
         setUsersCookie(JSON.stringify(user), { expired: 7 }); // TODO : Take the expiry date from the response
         dispatch({
           type: 'USER_LOGIN',
@@ -74,14 +54,12 @@ const LoginPage = props => {
         type: 'USER_LOGIN',
         payload: response,
       });
-      setRedirectToReferrer(true); // Used to return the user to the wanted page before redirected to /login
+      // setRedirectToReferrer(true); // Used to return the user to the wanted page before redirected to /login
     } else {
       console.log('Error while retriving the user from facebook..');
       setError(true);
     }
   };
-
-  const componentClicked = () => console.log('clicked');
 
   let from =
     props.location && props.location.state
@@ -97,6 +75,7 @@ const LoginPage = props => {
       <img src={logo} className="App-logo" alt="Spleat Logo" />
       {error ? <p>אופס.. משהו השתבש, נסו שנית!</p> : null}
       <div style={{ marginTop: '30%' }}>
+        <br />
         <div style={{ marginTop: '30%' }}>
           <StyledFirebaseAuth
             uiConfig={uiConfig}

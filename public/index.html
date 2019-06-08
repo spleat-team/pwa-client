@@ -59,7 +59,8 @@
   <!-- Initialize Firebase -->
   <script src="/__/firebase/init.js"></script>
   <script>
-    // window.addEventListener ("touchmove", function (event) { event.preventDefault (); }, {passive: true});
+    // window.addEventListener ("touchmove", function (event) { event.preventDefault (); ev.stopImmediatePropagation(); }, {passive: false});
+    // window.addEventListener ("touchstart", function (event) { event.preventDefault (); ev.stopImmediatePropagation(); }, {passive: false});
   </script>
 </body>
 
