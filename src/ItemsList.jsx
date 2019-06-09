@@ -1,5 +1,6 @@
 import React from 'react';
 import SelectingItem from './components/SplitBill/SelectingItem';
+import GroupNumber from "./components/GroupNumber";
 import SelectTip from './components/SplitBill/Tip';
 import { Store } from './Store';
 import AlreadyFinishedStatus from './components/SplitBill/AlreadyFinishedStatus';
@@ -8,11 +9,18 @@ import Grid from '@material-ui/core/Grid';
 import CalculateService from './Services/calculate.service.js';
 import { Firebase } from './Firebase/firebase';
 import { Promise as reject } from 'q';
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
 
 function ItemsList(props) {
   const { state, dispatch } = React.useContext(Store);
   const { checkedItems } = state;
   const [items, setItems] = React.useState([]);
+  const [openDialog, setOpen] = React.useState(false);
 
   var handleToggle = {};
 
@@ -32,6 +40,7 @@ function ItemsList(props) {
   // Add the user to users array and reset his selections
   // If all users are finished - move to payment page
   const addUserIfDoesntExist = data => {
+    var isSomethingChanged = true;
     var usersInReceipt = data.users;
 
     var userToInsert = {
@@ -52,8 +61,16 @@ function ItemsList(props) {
         state.user.email
       ) == undefined
     ) {
-      // If the user exist or not, we need to reset his details
-      usersInReceipt.push(userToInsert);
+      // If the users amount is equal to number of people - all users are connected and the list is full
+      // Alert the user that we got the max number of people
+      if (data.numberOfPeople == usersInReceipt.length) {
+        isSomethingChanged = false;
+        setOpen(true);
+      }
+      else {
+        // Add the user to users list
+        usersInReceipt.push(userToInsert);
+      }
     }
     // The user is exist
     // The user came back from waiting page (he finished to select items, and than regret)
@@ -71,19 +88,21 @@ function ItemsList(props) {
       updateItems = resetUserSelection(state.user.email, data.items);
     }
 
-    // Update the user in receipt
-    db.collection(collectionName)
-      .doc(props.match.params.groupId)
-      .update({ users: usersInReceipt, items: updateItems })
-      .then(function() {
-        console.log('Users successfully updated!');
+    if (isSomethingChanged) {
+      // Update the user in receipt
+      db.collection(collectionName)
+          .doc(props.match.params.groupId)
+          .update({users: usersInReceipt, items: updateItems})
+          .then(function () {
+            console.log('Users successfully updated!');
 
-        onDocumentUpdated(props.match.params.groupId);
-      })
-      .catch(function(error) {
-        // The document probably doesn't exist.
-        console.error('Error updating document: ', error);
-      });
+            onDocumentUpdated(props.match.params.groupId);
+          })
+          .catch(function (error) {
+            // The document probably doesn't exist.
+            console.error('Error updating document: ', error);
+          });
+    }
 
     return { usersInReceipt };
   };
@@ -119,8 +138,6 @@ function ItemsList(props) {
             paymentPerUser: paymentPerUser,
           });
 
-          dispatch({ type: 'TOGGLE_LOADING' });
-
           // move to payment page
           props.history.push('/payment');
         }
@@ -144,6 +161,12 @@ function ItemsList(props) {
         dispatch({
           type: 'SHARERS_COUNT',
           sharersCount: doc.data().numberOfPeople,
+        });
+
+        // Set pincode of group
+        dispatch({
+            type: 'SET_PINCODE',
+            payload: props.match.params.groupId,
         });
 
         // Add the user to users array and reset his selections
@@ -193,7 +216,9 @@ function ItemsList(props) {
       {state.loading ? (
         <Grid> טוען את פרטי הקבלה</Grid>
       ) : (
+
         <Grid>
+          <GroupNumber/>
           בחר את הפריטים שהזמנת
           {items.map(currItem => (
             <SelectingItem
@@ -205,11 +230,37 @@ function ItemsList(props) {
               checked={checkedItems.indexOf(currItem._id.toString())}
             />
           ))}
-          <div>
+          <Grid container justify={"center"} alignItems={"center"} dir={"rtl"}>
+            <Grid item xs={6}>
             <SelectTip />
+            </Grid>
+            <Grid item xs={6}>
             <AlreadyFinishedStatus message={'מחכים לך'} />
-          </div>
+            </Grid>
+          </Grid>
           <FinishedForm props={props} />
+
+          <Dialog
+              disableBackdropClick
+              disableEscapeKeyDown
+              open={openDialog}
+              onClose={()=>setOpen(false)}
+              aria-labelledby="error-title"
+              aria-describedby="error-description"
+              style={{textAlign: 'center', direction: 'rtl'}}>
+            <DialogTitle id="error-title" >{"בעיית התחברות"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="error-description">
+                בקבלה זו נמצאת כמות מקסימלית של אנשים.
+                אנא הזן קוד חדש
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions style={{justifyContent: 'center'}}>
+              <Button onClick={()=> {setOpen(false); props.history.push(`/login`);}} color="primary" autoFocus>
+                קוד חדש
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Grid>
       )}
     </div>

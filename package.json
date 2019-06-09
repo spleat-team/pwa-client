@@ -30,7 +30,8 @@
     "react-spinners": "^0.5.4",
     "react-use": "^8.4.0",
     "react-with-firebase-auth": "^1.0.3",
-    "sweetalert2": "^8.11.6"
+    "sweetalert2": "^8.11.6",
+    "typeface-luckiest-guy": "0.0.72"
   },
   "scripts": {
     "start": "node server.js",

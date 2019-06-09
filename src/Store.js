@@ -19,17 +19,22 @@ const receiptFlowInitialState = {
   actualCrop: {},
   status: ReceiptLifecycle.NO_FILE,
   sharersCount: 0,
+};
+
+const paymentInitialState = {
   finishedCount: 0,
-  tip: 10,
   checkedItems: [],
   paymentPerUser: [],
+  pincode: '',
+  tip: 10,
 };
 
 const initialState = {
+  ...receiptFlowInitialState,
+  ...paymentInitialState,
   loading: false,
   user: '',
   userLoggedIn: false,
-  ...receiptFlowInitialState,
   errorMessage: '',
 };
 
