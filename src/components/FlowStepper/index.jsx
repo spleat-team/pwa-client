@@ -44,6 +44,7 @@ const VerticalLinearStepper = props => {
           );
         break;
       case ReceiptLifecycle.EDGES_FOUND:
+          'DAMMMMMMMMMMMMMMMM',
         state.doesLoadedImage &&
           state.hasReceiptInPhoto &&
           handleFlowChange(
