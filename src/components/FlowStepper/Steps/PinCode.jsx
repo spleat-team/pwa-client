@@ -25,6 +25,14 @@ function PinCode(classes) {
           יאללה לקבלה
         </Button>
       </Link>
+      <Button
+        variant="outlined"
+        onClick={backCallback}
+        style={{ width: '20px' }}
+        className={classes.backButton}
+      >
+        חזרה
+      </Button>
     </div>
   );
 }
