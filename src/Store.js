@@ -3,7 +3,7 @@ import ReceiptLifecycle from './ReceiptLifecycle';
 
 export const Store = React.createContext();
 
-const receiptInfoInitialState = {
+const receiptFlowInitialState = {
   doesLoadedImage: false,
   hasReceiptInPhoto: false,
   receiptCoordinates: [],
@@ -12,32 +12,34 @@ const receiptInfoInitialState = {
   receiptNumOfPeople: '',
   preMessage: 'סה"כ 2 שלבים פשוטים וסיימתם!',
   photo: null,
+  croppedPhoto: null,
+  src: null,
+  mlProposedCrop: {},
+  userEndedCropping: false,
+  actualCrop: {},
+  status: ReceiptLifecycle.NO_FILE,
+  sharersCount: 0,
+};
+
+const paymentInitialState = {
+  finishedCount: 0,
+  checkedItems: [],
+  paymentPerUser: [],
+  pincode: '',
+  tip: 10,
 };
 
 const initialState = {
+  ...receiptFlowInitialState,
+  ...paymentInitialState,
   loading: false,
   user: '',
   userLoggedIn: false,
-  pincode: '',
-  src: null,
-  crop: {
-    height: 50,
-    width: 50,
-    x: 50,
-    y: 50,
-  },
-  status: ReceiptLifecycle.NO_FILE,
-  sharersCount: 0,
-  finishedCount: 0,
-  tip: 10,
-  checkedItems: [],
-  paymentPerUser: [],
-  ...receiptInfoInitialState,
   errorMessage: '',
 };
 
 function reducer(state, action) {
-  console.log('reducer got : ', action.type);
+  console.log('reducer got : ', action.type, action);
   switch (action.type) {
     case 'TOGGLE_LOADING':
       return {
@@ -48,8 +50,7 @@ function reducer(state, action) {
     case ReceiptLifecycle.NO_FILE:
       return {
         ...state,
-        status: ReceiptLifecycle.NO_FILE,
-        ...receiptInfoInitialState,
+        ...receiptFlowInitialState,
         errorMessage: '',
         preMessage: 'סה"כ 2 שלבים פשוטים וסיימתם!',
       };
@@ -58,7 +59,7 @@ function reducer(state, action) {
         ...state,
         status: ReceiptLifecycle.FILE_CHOOSED,
         doesLoadedImage: true,
-        photo: action.payload,
+        photo: action.photo,
         errorMessage: '',
         preMessage: 'מאמת את הקבלה...',
         postMessage: '',
@@ -68,7 +69,7 @@ function reducer(state, action) {
         ...state,
         status: ReceiptLifecycle.FILE_LOADED,
         doesLoadedImage: true,
-        src: action.payload,
+        src: action.src,
         errorMessage: '',
       };
     case ReceiptLifecycle.CHECK_RECEIPT: {
@@ -106,7 +107,8 @@ function reducer(state, action) {
       return {
         ...state,
         status: ReceiptLifecycle.EDGES_FOUND,
-        // crop: convertPointsArrayToCropObject(action.payload),
+        mlProposedCrop: action.payload,
+        userEndedCropping: false, // TO ENSURE THAT THE USER VERIFIED THE NEW PROPOSED CROP
         errorMessage: '',
         loading: false,
         cropperMessage:
@@ -129,8 +131,20 @@ function reducer(state, action) {
             : '',
         loading: false,
       };
+    // case 'NEW_CROP_SHAPE':
+    //   return { ...state, cropImageShape: action.payload };
+    case 'USER_UNDO_CROP':
+      return {
+        ...state,
+        userEndedCropping: false,
+      };
     case 'NEW_CROP':
-      return { ...state, crop: action.payload };
+      return {
+        ...state,
+        actualCrop: action.actualCrop,
+        userEndedCropping: true,
+        croppedPhoto: action.croppedPhoto,
+      };
     case 'SET_NUM_OF_PEOPLE':
       return { ...state, receiptNumOfPeople: action.payload };
     case 'USER_LOGIN':
@@ -156,21 +170,12 @@ function reducer(state, action) {
       return { ...state, loading: true, loadingMessage: action.message };
     case 'SET_ERROR_MESSAGE':
       return { ...state, errorMessage: action.message };
-    default:
+    default: {
+      console.log('WTF? Default case achieved in the store..');
       return state;
+    }
   }
 }
-
-const convertPointsArrayToCropObject = pointsArr => {
-  if (pointsArr.length != 4) return null;
-
-  return Object.assign(
-    {},
-    { y: pointsArr[0][0], x: pointsArr[0][1] },
-    { heigh: (pointsArr[2][1] - pointsArr[0][0]) },
-    { width: (pointsArr[3][0] - pointsArr[0][1]) }
-  );
-};
 
 export function StoreProvider(props) {
   const [state, dispatch] = React.useReducer(reducer, initialState);

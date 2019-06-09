@@ -9,22 +9,28 @@ function ReceiptShootForm(classes, nextCallback) {
   const { state, dispatch } = React.useContext(Store);
 
   const onSelectFile = e => {
-    nextCallback();
-
     if (e.target.files && e.target.files.length > 0) {
       // dispatch({ type: ReceiptLifecycle.NO_FILE });
       const img = e.target.files[0];
-      dispatch({ type: ReceiptLifecycle.FILE_CHOOSED, payload: img });
+      dispatch({ type: ReceiptLifecycle.FILE_CHOOSED, photo: img });
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         dispatch({
           type: ReceiptLifecycle.FILE_LOADED,
-          payload: reader.result,
+          src: reader.result,
         });
       });
       reader.readAsDataURL(img);
     }
   };
+
+  // Moved the nextCallback back to the FlowStepper's index.
+  // Thats because only there we know if there is a receipt in the image and all these stuff...
+  // React.useEffect(() => {
+    // if (state.photo && state.src) {
+      // nextCallback(); 
+  //   }
+  // }, [state.photo, state.src]);
 
   return (
     <div>
