@@ -44,9 +44,17 @@ const VerticalLinearStepper = props => {
           );
         break;
       case ReceiptLifecycle.EDGES_FOUND:
+        handleNext();
+        console.log(
           'DAMMMMMMMMMMMMMMMM',
+          state.doesLoadedImage,
+          state.hasReceiptInPhoto,
+          state.userEndedCropping
+        );
+        // TODO : SEND THE CROPPED PHOTO INSTED THE NORMAL ONE
         state.doesLoadedImage &&
           state.hasReceiptInPhoto &&
+          state.userEndedCropping &&
           handleFlowChange(
             state.photo,
             ReceiptLifecycle.EXTRACT_ITEMS,
@@ -54,9 +62,9 @@ const VerticalLinearStepper = props => {
           );
         break;
       default:
-        console.log('FlowStepper: unrelated status happened, state : ', state);
+        break;
     }
-  }, [state.status]);
+  }, [state.status.type, state.userEndedCropping]);
 
   const classes = theme => ({
     root: {
