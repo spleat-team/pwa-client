@@ -22,9 +22,12 @@ const VerticalLinearStepper = props => {
 
   useLogger('VerticalLinearStepper');
 
+  React.useEffect(() => {
+    console.log('activeStep changed to :', activeStep);
+  }, [activeStep]);
+
   // This controls the logic of when to send the photo and where
   React.useEffect(() => {
-    console.log("Flow's status changed, the new state is : ", state);
     switch (state.status) {
       case ReceiptLifecycle.FILE_LOADED:
         if (state.doesLoadedImage) {
@@ -150,7 +153,7 @@ const VerticalLinearStepper = props => {
     },
     {
       title: 'שיתוף עם חברים',
-      func: () => SharePinCode(classes),
+      func: () => SharePinCode(classes, handleBack),
     },
   ];
 
@@ -174,13 +177,21 @@ const VerticalLinearStepper = props => {
     try {
       ans = await sendPhoto(photo, actionStage.url);
     } catch (err) {
-      handleBack();
+      if (activeStep > 0) {
+        handleBack();
+      }
+      dispatch({
+        type: 'SET_ERROR_MESSAGE',
+        message: 'לא הצלחנו לשלוח את הקבלה לשרתים שלנו.. חכו שנייה~2 ונסו שוב!',
+      });
+      dispatch({ type: 'TOGGLE_LOADING', loading: false });
+      return;
     }
     if (postActionStage != null) {
       if (ans == '') {
         dispatch({
           type: 'SET_ERROR_MESSAGE',
-          payload: state.errorMessage
+          message: state.errorMessage
             ? state.errorMessage
             : 'מצטערים, לא מצאנו מנות בקבלה',
         });
