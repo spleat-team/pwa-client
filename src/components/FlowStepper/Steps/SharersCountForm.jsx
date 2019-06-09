@@ -12,7 +12,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
   const { state, dispatch } = React.useContext(Store);
   const [isDone, setIsDone] = React.useState(false);
   const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
-  const [sharersCount, setSharersCount] = React.useState(0);
+  const [sharersCount, setSharersCount] = React.useState('');
 
   React.useEffect(() => {
     if (
@@ -105,11 +105,11 @@ function SharersCountForm(classes, backCallback, nextCallback) {
         InputProps={inputProps}
         onChange={event => {
           setSharersCountDirty(true);
-          setSharersCount(parseInt(event.target.value));
+          setSharersCount(event.target.value);
         }}
         value={sharersCountDirty ? sharersCount : ''}
-        helperText={sharersCountDirty && sharersCount === 0 ? 'אחי.....' : ''}
-        error={sharersCountDirty && sharersCount === 0}
+        helperText={sharersCountDirty && sharersCount == 0 ? 'אחי.....' : ''}
+        error={sharersCountDirty && sharersCount == 0}
       />
       <div>
         <Button
