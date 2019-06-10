@@ -171,6 +171,8 @@ function reducer(state, action) {
       return { ...state, loading: true, loadingMessage: action.message };
     case 'SET_ERROR_MESSAGE':
       return { ...state, errorMessage: action.message };
+    case 'RESET_FOR_NEW_SCAN':
+      return { ...state, ...receiptFlowInitialState, ...paymentInitialState,};
     default: {
       console.log('WTF? Default case achieved in the store..');
       return state;

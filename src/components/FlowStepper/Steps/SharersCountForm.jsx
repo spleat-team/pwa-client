@@ -13,8 +13,12 @@ function SharersCountForm(classes, backCallback, nextCallback) {
   const [isDone, setIsDone] = React.useState(false);
   const [sharersCountDirty, setSharersCountDirty] = React.useState(false);
   const [sharersCount, setSharersCount] = React.useState('');
-
+  
   React.useEffect(() => {
+    createReceiptWithValidations();
+  }, [state.receiptItems, isDone]);
+
+  const createReceiptWithValidations = () => {
     if (
       isDone &&
       state.receiptItems &&
@@ -23,7 +27,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
     ) {
       createReceipt();
     }
-  }, [state.receiptItems, isDone]);
+  }
 
   const createReceipt = () => {
     const { user } = state;
@@ -89,7 +93,13 @@ function SharersCountForm(classes, backCallback, nextCallback) {
       type: 'SET_LOADING_MESSAGE',
       message: 'רק עוד רגע..',
     });
-    setIsDone(true);
+    if (!isDone) {
+      console.log('isDone is : ', isDone)
+      setIsDone(true);
+    } else {
+      console.log('isDone is : ', isDone)
+      createReceiptWithValidations();
+    }
   };
 
   return (
