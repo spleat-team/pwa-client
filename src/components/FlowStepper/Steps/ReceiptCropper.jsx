@@ -24,19 +24,19 @@ const isEmpty = obj =>
 const convertPointsArrayToRelativeCropObject = (
   originalImageShape,
   actualImageShape,
-  pointsArr
+  pointsArr,
 ) => {
   if (pointsArr.length != 4) return null;
 
-  const relativeDiff = calcRelativeDiff(originalImageShape, actualImageShape);
+  const diff = calcRelativeDiff(originalImageShape, actualImageShape);
   const newCrop = Object.assign(
     {},
-    { x: pointsArr[0][1] / relativeDiff.height },
-    { y: pointsArr[0][0] / relativeDiff.width },
-    { width: (pointsArr[3][0] - pointsArr[0][1]) / relativeDiff.width },
-    { height: (pointsArr[2][1] - pointsArr[0][0]) / relativeDiff.height },
+    { x: pointsArr[0][1] / diff.height },
+    { y: pointsArr[0][0] / diff.width },
+    { width: (pointsArr[3][0] - pointsArr[0][1]) / diff.width },
+    { height: (pointsArr[2][1] - pointsArr[0][0]) / diff.height },
   );
-  return newCrop;
+  return { newCrop, diff };
 };
 
 function ReceiptCropper({ classes, backCallback, nextCallback, message }) {
@@ -47,6 +47,7 @@ function ReceiptCropper({ classes, backCallback, nextCallback, message }) {
   const [croppersImageShape, setCroppersImageShape] = React.useState({ height: 0, width: 0 });
   const [doesImageFullyLoaded, setDoesImageFullyLoaded] = React.useState(false);
   const [proposedReady, setProposedReady] = React.useState(false);
+  const [relativeDiff, setRelativeDiff] = React.useState(0);
 
   React.useEffect(() => {
     console.log("First time on ReceiptCropper, setting undo crop..");
@@ -59,9 +60,10 @@ function ReceiptCropper({ classes, backCallback, nextCallback, message }) {
         croppersImageShape,
         mlProposedCrop
       );
+      setRelativeDiff(relativeCrop.diff);
       console.log('Calculated new relative crop :', relativeCrop);
       setCrop({
-        ...relativeCrop,
+        ...relativeCrop.newCrop,
       });
       setProposedReady(true);
     }
@@ -100,8 +102,9 @@ function ReceiptCropper({ classes, backCallback, nextCallback, message }) {
       type: 'NEW_CROP',
       actualCrop: crop,
       // TODO : Used to see if the send photo is good or nor.. can be seen after pressing next and then back
-      croppedPhoto:
-        'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+      // croppedPhoto:
+      // 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+      diff: relativeDiff,
     });
   };
 

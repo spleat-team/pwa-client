@@ -143,7 +143,8 @@ function reducer(state, action) {
         ...state,
         actualCrop: action.actualCrop,
         userEndedCropping: true,
-        croppedPhoto: action.croppedPhoto,
+        // croppedPhoto: action.croppedPhoto,
+        relativeCropDiff: action.diff,
       };
     case 'SET_NUM_OF_PEOPLE':
       return { ...state, receiptNumOfPeople: action.payload };

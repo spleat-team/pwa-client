@@ -52,17 +52,30 @@ const VerticalLinearStepper = props => {
           'DAMMMMMMMMMMMMMMMM',
           state.doesLoadedImage,
           state.hasReceiptInPhoto,
-          state.userEndedCropping
+          state.userEndedCropping,
+          state.actualCrop,  " DIFF : ",
+          state.relativeCropDiff,
         );
-        // TODO : SEND THE CROPPED PHOTO INSTED THE NORMAL ONE
-        state.doesLoadedImage &&
-          state.hasReceiptInPhoto &&
-          state.userEndedCropping &&
+
+        if (state.doesLoadedImage && state.hasReceiptInPhoto && state.userEndedCropping) {
+          const crop = state.actualCrop;
+          const diff = state.relativeCropDiff;
+          const realCropSize = Object.assign(
+            {},
+            { x: crop.x * diff.height },
+            { y: crop.y * diff.width },
+            { width: crop.width * diff.width },
+            { height: crop.height * diff.height }
+          );
+          console.log('The real crop size is : ', realCropSize);
+          // TODO : SEND THE CROPPED PHOTO INSTED THE NORMAL ONE
           handleFlowChange(
             state.photo,
             ReceiptLifecycle.EXTRACT_ITEMS,
-            ReceiptLifecycle.RECEIPT_ITEMS_EXTRACTED
+            ReceiptLifecycle.RECEIPT_ITEMS_EXTRACTED,
+            { crop: realCropSize }
           );
+        }
         break;
       default:
         break;
@@ -157,7 +170,7 @@ const VerticalLinearStepper = props => {
     },
   ];
 
-  const sendPhoto = async (photo, url) => {
+  const sendPhoto = async (photo, url, extraData) => {
     const config = {
       headers: {
         'content-type': 'multipart/form-data',
@@ -166,16 +179,28 @@ const VerticalLinearStepper = props => {
     };
     const formData = new FormData();
     formData.append('photo', photo);
-    return await post(url, formData, config);
+    // console.log("appended extraData to the form :", extraData);
+    // formData.append('extraData', extraData);
+    
+    if (!extraData) return await post(url, formData, config);
+    else {
+      let extraDataAsString = '';
+      try {
+        extraDataAsString = '?crop=' + parseInt(extraData.crop.x) + ',' + parseInt(extraData.crop.y) + ',' + parseInt(extraData.crop.width) + ',' + parseInt(extraData.crop.height);
+      } catch (err) {
+        console.log(err);
+      }
+      return await post(url + extraDataAsString, formData, config);
+    }
   };
 
-  const handleFlowChange = async (photo, actionStage, postActionStage) => {
+  const handleFlowChange = async (photo, actionStage, postActionStage, extraData = '') => {
     dispatch({
       type: actionStage,
     });
     let ans = '';
     try {
-      ans = await sendPhoto(photo, actionStage.url);
+      ans = await sendPhoto(photo, actionStage.url, extraData);
     } catch (err) {
       if (activeStep > 0) {
         handleBack();
