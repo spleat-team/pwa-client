@@ -2,7 +2,12 @@
   overflow: scroll;
   height: 58vh;
   text-align: center;
-  background-image: url('background.jpg');
+  /* background-image: url('background.jpg'); */
+  background-image: linear-gradient(
+    to bottom,
+    rgb(225, 245, 254),
+    rgb(144, 202, 249)
+  );
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
