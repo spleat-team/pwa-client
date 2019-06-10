@@ -31,10 +31,10 @@ const convertPointsArrayToRelativeCropObject = (
   const diff = calcRelativeDiff(originalImageShape, actualImageShape);
   const newCrop = Object.assign(
     {},
-    { x: pointsArr[0][1] / diff.height },
-    { y: pointsArr[0][0] / diff.width },
-    { width: (pointsArr[3][0] - pointsArr[0][1]) / diff.width },
-    { height: (pointsArr[2][1] - pointsArr[0][0]) / diff.height },
+    { x: pointsArr[0][0] / diff.height },
+    { y: pointsArr[0][1] / diff.width },
+    { width: (pointsArr[2][0] - pointsArr[3][0]) / diff.width },
+    { height: (pointsArr[2][1] - pointsArr[1][1]) / diff.height },
   );
   return { newCrop, diff };
 };
