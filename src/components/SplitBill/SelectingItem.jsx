@@ -32,7 +32,7 @@ function SelectingItem(props) {
         </ListItemAvatar>
         <ListItemText>
           {props.item.price}
-          <ListItemIcon style={{ marginRight: 7 + 'px' }}>
+          <ListItemIcon style={{ marginRight: '10%' }}>
             <FontAwesomeIcon icon="shekel-sign" />
           </ListItemIcon>
         </ListItemText>
