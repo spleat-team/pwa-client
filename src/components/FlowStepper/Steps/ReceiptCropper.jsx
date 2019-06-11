@@ -5,10 +5,12 @@ import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
 const calcRelativeDiff = (originalShape, actualShape) => {
-  return {
+  const diff = {
     width: originalShape.width / actualShape.width,
     height: originalShape.height / actualShape.height,
   };
+  console.log(diff);
+  return diff;
 };
 
 const getShapeFromSrc = src => {
@@ -31,8 +33,8 @@ const convertPointsArrayToRelativeCropObject = (
   const diff = calcRelativeDiff(originalImageShape, actualImageShape);
   const newCrop = Object.assign(
     {},
-    { x: pointsArr[0][0] / diff.height },
-    { y: pointsArr[0][1] / diff.width },
+    { x: pointsArr[0][0] / diff.width },
+    { y: pointsArr[0][1] / diff.height },
     { width: Math.abs(pointsArr[2][0] - pointsArr[3][0]) / diff.width },
     { height: Math.abs(pointsArr[2][1] - pointsArr[1][1]) / diff.height },
   );
@@ -41,7 +43,7 @@ const convertPointsArrayToRelativeCropObject = (
 
 function ReceiptCropper({ classes, backCallback, nextCallback, message }) {
   const { state, dispatch } = React.useContext(Store);
-  const { loading, mlProposedCrop, src, errorMessage, cropperMessage, croppedPhoto, } = state;
+  const { loading, mlProposedCrop, src, errorMessage, cropperMessage, croppedPhoto, actualCrop } = state;
 
   const [crop, setCrop] = React.useState({});
   const [croppersImageShape, setCroppersImageShape] = React.useState({ height: 0, width: 0 });

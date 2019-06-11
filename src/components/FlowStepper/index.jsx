@@ -62,8 +62,8 @@ const VerticalLinearStepper = props => {
           const diff = state.relativeCropDiff;
           const realCropSize = Object.assign(
             {},
-            { x: crop.x * diff.height },
-            { y: crop.y * diff.width },
+            { x: crop.x * diff.width },
+            { y: crop.y * diff.height },
             { width: crop.width * diff.width },
             { height: crop.height * diff.height }
           );

@@ -27,7 +27,7 @@ function SharersCountForm(classes, backCallback, nextCallback) {
     ) {
       createReceipt();
     }
-  }
+  };
 
   const createReceipt = () => {
     const { user } = state;
