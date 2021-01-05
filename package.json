@@ -9,7 +9,7 @@
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "@reach/router": "^1.2.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "express": "^4.16.4",
     "express-favicon": "^2.0.1",
