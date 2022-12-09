@@ -11,7 +11,7 @@
     "@reach/router": "^1.2.1",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-favicon": "^2.0.1",
     "firebase": "^6.0.2",
     "js-cookie": "^2.2.0",
